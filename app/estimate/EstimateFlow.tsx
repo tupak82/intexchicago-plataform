@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { site } from "@/lib/site";
 
 type LeadDraft = {
   service: string;
@@ -87,7 +88,7 @@ export default function EstimateFlow() {
         <p className="estimateEyebrow">Request received</p>
         <h2>Thanks, {lead.name.split(" ")[0] || "there"}.</h2>
         <p>Your request was delivered to Intex. For an active emergency, call now rather than waiting for an online response.</p>
-        <a className="estimatePrimary" href="tel:+17738225892">Call 773-822-5892</a>
+        <a className="estimatePrimary" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
       </section>
     );
   }
@@ -131,7 +132,7 @@ export default function EstimateFlow() {
               </label>
             ))}
           </div>
-          {lead.emergency.startsWith("Yes") && <div className="estimateEmergency">For active leaks, fire, storm openings, or unsafe conditions: <a href="tel:+17738225892">call 773-822-5892 now</a>.</div>}
+          {lead.emergency.startsWith("Yes") && <div className="estimateEmergency">For active leaks, fire, storm openings, or unsafe conditions: <a href={`tel:${site.phone}`}>call {site.phoneDisplay} now</a>.</div>}
         </fieldset>
       )}
 
@@ -182,11 +183,11 @@ export default function EstimateFlow() {
           </div>
           <label className="estimateConsent">
             <input type="checkbox" checked={lead.consent} onChange={(e) => update("consent", e.target.checked)} />
-            <span>I agree that Intex may contact me about this request using the information I provided.</span>
+            <span>I agree that Intex may contact me about this request using the information I provided. See the <a href="/privacy/" target="_blank" rel="noreferrer">Privacy Policy</a>.</span>
           </label>
           {status === "error" && (
             <div className="estimateEmergency" role="alert">
-              We could not send this request online. Please call <a href="tel:+17738225892">773-822-5892</a> instead.
+              We could not send this request online. Please call <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> instead.
             </div>
           )}
         </fieldset>
