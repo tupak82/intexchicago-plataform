@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-const defaultLogoSrc = "/brand/intex-chicago-logo.png";
-
 export function BrandLogo({
   href = "/",
   label = "Intex Chicago home",
@@ -14,11 +12,12 @@ export function BrandLogo({
   className?: string;
 }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const logoSrc = process.env.NEXT_PUBLIC_INTEX_LOGO_URL || defaultLogoSrc;
+  const logoSrc = process.env.NEXT_PUBLIC_INTEX_LOGO_URL?.trim();
+  const showImage = Boolean(logoSrc) && !imageFailed;
 
   return (
     <a className={`brand brandOfficial ${className}`.trim()} href={href} aria-label={label}>
-      {!imageFailed ? (
+      {showImage ? (
         <img
           className="brandLogoImage"
           src={logoSrc}
@@ -27,8 +26,11 @@ export function BrandLogo({
         />
       ) : (
         <span className="brandFallback" aria-hidden="true">
-          <strong>INTEX</strong>
-          <small>CHICAGO</small>
+          <span className="brandFallbackMark">I</span>
+          <span className="brandFallbackWords">
+            <strong>INTEX</strong>
+            <small>CHICAGO</small>
+          </span>
         </span>
       )}
     </a>
