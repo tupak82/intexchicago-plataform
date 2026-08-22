@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AnimatedProcessSteps } from "@/components/AnimatedProcessSteps";
 import { site } from "@/lib/site";
 import { serviceBySlug, servicePages } from "@/lib/services";
 
@@ -75,14 +76,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="serviceProcess">
           <p className="kicker dark"><span /> A clearer recovery process</p>
           <h2>What happens next</h2>
-          <div className="processGrid">
-            {service.process.map((step, index) => (
-              <article className="processStep" key={step}>
-                <strong>0{index + 1}</strong>
-                <h3>{step}</h3>
-              </article>
-            ))}
-          </div>
+          <AnimatedProcessSteps steps={service.process} ariaLabel={`${service.name} process`} />
         </div>
 
         <div className="relatedServices">
