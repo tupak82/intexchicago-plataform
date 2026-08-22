@@ -42,8 +42,9 @@
   animation: intexHeroWeatherLight 8.5s cubic-bezier(.2,.7,.2,1) infinite;
 }
 
+/* Preserve each hero child's own positioning. Forcing position: relative here
+   broke desktop grid heroes by turning absolute backdrops into grid items. */
 [data-intex-hero-motion] > * {
-  position: relative;
   z-index: 1;
 }
 
