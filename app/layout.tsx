@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { site } from "@/lib/site";
 import "./globals.css";
+import "./roofing-home.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
@@ -15,10 +16,19 @@ const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Intex Restoration | Chicago Restoration & Roofing",
-    template: "%s | Intex Restoration",
+    default: "Chicago Roofing Contractor | Intex Chicago Roofing",
+    template: "%s | Intex Chicago Roofing",
   },
   description: site.description,
+  keywords: [
+    "Chicago roofing contractor",
+    "roof repair Chicago",
+    "roof replacement Chicago",
+    "storm damage roofing Chicago",
+    "commercial roofing Chicago",
+    "flat roofing Chicago",
+    "roofing company Chicagoland",
+  ],
   alternates: { canonical: "/" },
   verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
   robots: {
@@ -31,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: "Intex Restoration | Chicago Restoration & Roofing",
+    title: "Chicago Roofing Contractor | Intex Chicago Roofing",
     description: site.description,
   },
 };

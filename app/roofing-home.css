@@ -1,0 +1,98 @@
+.roofingHome { background: #f4f1ea; }
+
+.roofHero { min-height: 880px; position: relative; overflow: hidden; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(36px, 5vw, 90px); align-items: center; padding: 150px clamp(24px, 5vw, 76px) 92px; background: #07111f; color: #fff; }
+.roofHeroBackdrop { position: absolute; inset: 0; background: radial-gradient(circle at 72% 28%, rgba(23,105,255,.22), transparent 29%), linear-gradient(120deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: auto, 46px 46px; mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); }
+.roofHeroContent, .roofHeroPanel { position: relative; z-index: 2; }
+.roofEyebrow { margin: 0; font-size: 10px; font-weight: 800; letter-spacing: .19em; text-transform: uppercase; color: #8eacd0; }
+.roofEyebrow.dark { color: #556476; }
+.roofHero h1 { max-width: 900px; margin: 22px 0 30px; font: 700 clamp(58px, 6.7vw, 102px)/.91 "Manrope", sans-serif; letter-spacing: -.066em; }
+.roofHero h1 em { display: block; font-style: normal; color: #7e9fc5; }
+.roofHeroLead { max-width: 710px; margin: 0; color: #a6b4c3; font-size: clamp(17px, 1.35vw, 21px); line-height: 1.65; }
+.roofTrustStrip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
+.roofTrustStrip span { padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #9fb0c2; font-size: 10px; font-weight: 700; }
+
+.roofHeroPanel { min-height: 590px; align-self: stretch; border: 1px solid rgba(126,159,197,.2); background: linear-gradient(160deg, rgba(19,41,66,.9), rgba(7,17,31,.66)); box-shadow: 0 45px 110px rgba(0,0,0,.35); overflow: hidden; }
+.roofPanelTop, .roofPanelBottom { position: absolute; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 20px; align-items: center; font-size: 9px; letter-spacing: .15em; color: #66809d; }
+.roofPanelTop { top: 25px; }
+.roofPanelTop b { color: #fff; }
+.roofPanelBottom { bottom: 27px; align-items: flex-end; }
+.roofPanelBottom strong { color: #fff; font: 600 18px "Manrope", sans-serif; letter-spacing: -.02em; }
+.roofPanelBottom span { letter-spacing: .05em; text-align: right; }
+.roofDiagram { position: absolute; inset: 80px 26px 82px; border: 1px solid rgba(100,137,180,.13); background-image: linear-gradient(rgba(96,137,181,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(96,137,181,.09) 1px, transparent 1px); background-size: 28px 28px; }
+.roofLine { position: absolute; height: 2px; background: linear-gradient(90deg, rgba(23,105,255,.15), #3180ff, rgba(23,105,255,.1)); transform-origin: left center; box-shadow: 0 0 24px rgba(49,128,255,.35); }
+.roofLineOne { width: 72%; left: 13%; top: 61%; transform: rotate(-31deg); }
+.roofLineTwo { width: 58%; left: 40%; top: 22%; transform: rotate(31deg); }
+.roofLineThree { width: 64%; left: 18%; top: 67%; transform: rotate(0deg); opacity: .62; }
+.roofNode { position: absolute; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #3180ff; background: #0d1b2d; color: #86b3ff; border-radius: 50%; font-size: 9px; font-weight: 800; box-shadow: 0 0 25px rgba(49,128,255,.2); }
+.roofNodeOne { left: 13%; top: 59%; }
+.roofNodeTwo { left: 51%; top: 22%; }
+.roofNodeThree { right: 13%; top: 58%; }
+
+.roofProofBar { display: flex; justify-content: space-between; gap: 30px; align-items: center; padding: 22px clamp(24px, 5vw, 76px); background: #fff; border-bottom: 1px solid #dedbd4; }
+.roofProofBar p { margin: 0; font-weight: 700; font-size: 12px; }
+.roofProofBar div { display: flex; flex-wrap: wrap; gap: 26px; color: #718092; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+
+.roofServices { max-width: 1540px; margin: auto; padding: 118px clamp(24px, 5vw, 76px); }
+.roofSectionHeading { display: grid; grid-template-columns: 1.18fr .82fr; gap: 70px; align-items: end; margin-bottom: 58px; }
+.roofSectionHeading h2 { max-width: 900px; margin: 17px 0 0; font: 700 clamp(45px, 5.3vw, 78px)/.98 "Manrope", sans-serif; letter-spacing: -.06em; }
+.roofSectionHeading > p { max-width: 570px; margin: 0; color: #657284; line-height: 1.75; }
+.roofServiceGrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.roofServiceCard { min-height: 390px; padding: 28px; display: flex; flex-direction: column; background: #fff; border: 1px solid #ddd9d1; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.roofServiceCard:hover { transform: translateY(-5px); border-color: #b9c7d8; box-shadow: 0 28px 60px rgba(26,33,43,.09); }
+.roofServiceMeta { display: flex; justify-content: space-between; gap: 18px; color: #8693a2; }
+.roofServiceMeta span { font-size: 10px; font-weight: 800; }
+.roofServiceMeta small { color: #1769ff; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; text-align: right; }
+.roofServiceCard h3 { margin: 92px 0 16px; font: 700 34px/1.05 "Manrope", sans-serif; letter-spacing: -.045em; }
+.roofServiceCard p { margin: 0; color: #697788; line-height: 1.7; font-size: 14px; }
+.roofServiceCard b { margin-top: auto; padding-top: 28px; color: #1769ff; font-size: 11px; }
+
+.roofChicagoSection { display: grid; grid-template-columns: .95fr 1.05fr; gap: 80px; align-items: center; padding: 118px clamp(24px, 5vw, 76px); background: #e7e4dc; }
+.roofChicagoCopy h2 { max-width: 760px; margin: 18px 0 25px; font: 700 clamp(44px, 5vw, 74px)/1 "Manrope", sans-serif; letter-spacing: -.058em; }
+.roofChicagoCopy > p:last-of-type { max-width: 700px; color: #657284; line-height: 1.8; }
+.roofChicagoCopy a { display: inline-block; margin-top: 27px; color: #1769ff; font-size: 12px; font-weight: 800; }
+.roofClimateGrid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border: 1px solid #cac6bc; }
+.roofClimateGrid article { min-height: 220px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid #cac6bc; border-bottom: 1px solid #cac6bc; background: rgba(255,255,255,.25); }
+.roofClimateGrid article:nth-child(2n) { border-right: 0; }
+.roofClimateGrid article:nth-child(n+3) { border-bottom: 0; }
+.roofClimateGrid strong { font: 800 34px "Manrope", sans-serif; letter-spacing: -.04em; }
+.roofClimateGrid span { max-width: 210px; color: #667485; font-size: 12px; line-height: 1.6; }
+
+.roofProcessSection { padding: 118px clamp(24px, 5vw, 76px); background: #07111f; color: #fff; }
+.roofSectionHeading.lightText > p { color: #8497ac; }
+.roofProcessGrid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid rgba(255,255,255,.12); border-left: 1px solid rgba(255,255,255,.12); }
+.roofProcessGrid article { min-height: 300px; padding: 28px; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); background: #0a1726; }
+.roofProcessGrid span { color: #4f6d8e; font-size: 10px; font-weight: 800; }
+.roofProcessGrid h3 { margin: 88px 0 15px; font: 700 30px "Manrope", sans-serif; letter-spacing: -.04em; }
+.roofProcessGrid p { margin: 0; color: #8395a9; font-size: 13px; line-height: 1.7; }
+
+.roofEstimateSection { display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: center; padding: 90px clamp(24px, 5vw, 76px); background: #1769ff; color: #fff; }
+.roofEstimateSection h2 { max-width: 850px; margin: 18px 0 15px; font: 700 clamp(42px, 4.8vw, 70px)/1 "Manrope", sans-serif; letter-spacing: -.056em; }
+.roofEstimateSection p { max-width: 720px; color: #d4e1ff; line-height: 1.7; }
+.roofEstimateSection .primaryButton { background: #fff; color: #07111f; }
+.roofPhoneLink { font-size: 12px; font-weight: 800; }
+
+@media (max-width: 1100px) {
+  .roofHero { grid-template-columns: 1fr; }
+  .roofHeroPanel { min-height: 500px; }
+  .roofSectionHeading, .roofChicagoSection, .roofEstimateSection { grid-template-columns: 1fr; gap: 34px; }
+  .roofServiceGrid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .roofProcessGrid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 760px) {
+  .roofHero { min-height: auto; padding: 122px 20px 60px; }
+  .roofHero h1 { font-size: clamp(52px, 15vw, 75px); }
+  .roofHeroPanel { min-height: 390px; }
+  .roofPanelBottom { flex-direction: column; align-items: flex-start; }
+  .roofPanelBottom span { text-align: left; }
+  .roofProofBar { align-items: flex-start; flex-direction: column; padding: 20px; }
+  .roofProofBar div { gap: 14px 20px; }
+  .roofServices, .roofChicagoSection, .roofProcessSection, .roofEstimateSection { padding: 78px 20px; }
+  .roofSectionHeading h2, .roofChicagoCopy h2 { font-size: 46px; }
+  .roofServiceGrid, .roofProcessGrid, .roofClimateGrid { grid-template-columns: 1fr; }
+  .roofServiceCard { min-height: 330px; }
+  .roofClimateGrid article, .roofClimateGrid article:nth-child(2n), .roofClimateGrid article:nth-child(n+3) { border-right: 0; border-bottom: 1px solid #cac6bc; }
+  .roofClimateGrid article:last-child { border-bottom: 0; }
+  .roofProcessGrid article { min-height: 250px; }
+  .roofProcessGrid h3 { margin-top: 58px; }
+}
