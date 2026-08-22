@@ -11,22 +11,86 @@
 .roofTrustStrip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
 .roofTrustStrip span { padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #9fb0c2; font-size: 10px; font-weight: 700; }
 
-.roofHeroPanel { min-height: 590px; align-self: stretch; border: 1px solid rgba(126,159,197,.2); background: linear-gradient(160deg, rgba(19,41,66,.9), rgba(7,17,31,.66)); box-shadow: 0 45px 110px rgba(0,0,0,.35); overflow: hidden; }
-.roofPanelTop, .roofPanelBottom { position: absolute; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 20px; align-items: center; font-size: 9px; letter-spacing: .15em; color: #66809d; }
+.roofHeroPanel { min-height: 590px; align-self: stretch; border: 1px solid rgba(126,159,197,.2); background: linear-gradient(160deg, rgba(19,41,66,.95), rgba(7,17,31,.72)); box-shadow: 0 45px 110px rgba(0,0,0,.35); overflow: hidden; }
+.roofPanelTop, .roofPanelBottom { position: absolute; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 20px; align-items: center; font-size: 9px; letter-spacing: .15em; color: #66809d; z-index: 8; }
 .roofPanelTop { top: 25px; }
 .roofPanelTop b { color: #fff; }
 .roofPanelBottom { bottom: 27px; align-items: flex-end; }
 .roofPanelBottom strong { color: #fff; font: 600 18px "Manrope", sans-serif; letter-spacing: -.02em; }
 .roofPanelBottom span { letter-spacing: .05em; text-align: right; }
-.roofDiagram { position: absolute; inset: 80px 26px 82px; border: 1px solid rgba(100,137,180,.13); background-image: linear-gradient(rgba(96,137,181,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(96,137,181,.09) 1px, transparent 1px); background-size: 28px 28px; }
-.roofLine { position: absolute; height: 2px; background: linear-gradient(90deg, rgba(23,105,255,.15), #3180ff, rgba(23,105,255,.1)); transform-origin: left center; box-shadow: 0 0 24px rgba(49,128,255,.35); }
-.roofLineOne { width: 72%; left: 13%; top: 61%; transform: rotate(-31deg); }
-.roofLineTwo { width: 58%; left: 40%; top: 22%; transform: rotate(31deg); }
-.roofLineThree { width: 64%; left: 18%; top: 67%; transform: rotate(0deg); opacity: .62; }
-.roofNode { position: absolute; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #3180ff; background: #0d1b2d; color: #86b3ff; border-radius: 50%; font-size: 9px; font-weight: 800; box-shadow: 0 0 25px rgba(49,128,255,.2); }
-.roofNodeOne { left: 13%; top: 59%; }
-.roofNodeTwo { left: 51%; top: 22%; }
-.roofNodeThree { right: 13%; top: 58%; }
+
+.stormStory::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,10,22,.12), rgba(1,10,22,.4)), radial-gradient(circle at 65% 30%, rgba(74,141,255,.12), transparent 38%); pointer-events: none; z-index: 2; }
+.stormScene { position: absolute; inset: 72px 24px 78px; overflow: hidden; border: 1px solid rgba(100,137,180,.15); background: linear-gradient(180deg, #10243d 0%, #132a43 46%, #102238 47%, #0d1b2d 100%); }
+.stormScene::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(96,137,181,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(96,137,181,.06) 1px, transparent 1px); background-size: 28px 28px; opacity: .55; }
+.stormScene::after { content: ""; position: absolute; left: -20%; right: -20%; bottom: 0; height: 34%; background: linear-gradient(180deg, rgba(6,16,28,0), rgba(5,13,23,.8) 20%, #091522 100%); }
+
+.stormCloud { position: absolute; top: 5%; width: 42%; height: 15%; border-radius: 999px; background: rgba(66,83,104,.7); filter: blur(1px); z-index: 3; animation: stormCloudDrift 7s ease-in-out infinite; }
+.stormCloud::before, .stormCloud::after { content: ""; position: absolute; border-radius: 50%; background: inherit; }
+.stormCloud::before { width: 38%; aspect-ratio: 1; left: 16%; top: -44%; }
+.stormCloud::after { width: 46%; aspect-ratio: 1; right: 13%; top: -60%; }
+.stormCloudOne { left: 8%; }
+.stormCloudTwo { right: 7%; top: 9%; transform: scale(.82); opacity: .66; animation-delay: -2s; }
+.lightning { position: absolute; left: 70%; top: 17%; width: 3px; height: 68px; background: linear-gradient(#d8efff, #4fb9ff, transparent); transform: rotate(16deg) skewX(-18deg); box-shadow: 0 0 18px rgba(99,198,255,.8); opacity: 0; z-index: 4; animation: lightningFlash 8s infinite; }
+
+.hail { position: absolute; top: -8%; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #a9dbff 45%, #4d83aa 100%); box-shadow: 0 0 10px rgba(194,232,255,.8); z-index: 5; opacity: 0; animation: hailFall 7s linear infinite; }
+.hail1 { left: 12%; animation-delay: .2s; }
+.hail2 { left: 22%; animation-delay: .55s; width: 13px; height: 13px; }
+.hail3 { left: 33%; animation-delay: .1s; }
+.hail4 { left: 44%; animation-delay: .85s; width: 14px; height: 14px; }
+.hail5 { left: 56%; animation-delay: .35s; }
+.hail6 { left: 67%; animation-delay: 1.05s; width: 12px; height: 12px; }
+.hail7 { left: 76%; animation-delay: .66s; }
+.hail8 { left: 86%; animation-delay: .15s; width: 15px; height: 15px; }
+.hail9 { left: 49%; animation-delay: 1.25s; width: 9px; height: 9px; }
+.hail10 { left: 27%; animation-delay: 1.45s; width: 11px; height: 11px; }
+
+.house { position: absolute; left: 15%; right: 15%; bottom: 10%; height: 48%; z-index: 4; }
+.houseBody { position: absolute; left: 16%; right: 16%; bottom: 0; height: 56%; background: linear-gradient(90deg, #293d52, #304a64 50%, #26394e); border: 1px solid rgba(159,199,232,.12); box-shadow: inset 0 0 40px rgba(0,0,0,.22); }
+.roofShell { position: absolute; left: 3%; right: 3%; top: 4%; height: 46%; clip-path: polygon(50% 0, 100% 76%, 91% 76%, 91% 100%, 9% 100%, 9% 76%, 0 76%); background: #1a2a3b; filter: drop-shadow(0 14px 18px rgba(0,0,0,.34)); }
+.roofDamaged, .roofRestored { position: absolute; inset: 0; clip-path: polygon(50% 0, 100% 76%, 91% 76%, 91% 100%, 9% 100%, 9% 76%, 0 76%); }
+.roofDamaged { background: repeating-linear-gradient(168deg, #24384d 0 13px, #1b2c3e 13px 25px); animation: damagedRoofFade 7s ease-in-out infinite; }
+.roofRestored { background: repeating-linear-gradient(168deg, #315d85 0 12px, #244967 12px 24px); transform: translateX(-105%); animation: restoredRoofSweep 7s cubic-bezier(.68,.01,.24,1) infinite; }
+.roofCrack { position: absolute; height: 2px; background: #07111f; transform-origin: left; box-shadow: 0 0 6px rgba(0,0,0,.75); opacity: 0; z-index: 3; animation: crackSequence 7s ease-in-out infinite; }
+.crackOne { width: 26%; left: 23%; top: 46%; transform: rotate(18deg); }
+.crackTwo { width: 22%; left: 55%; top: 39%; transform: rotate(-24deg); animation-delay: .18s; }
+.crackThree { width: 18%; left: 39%; top: 62%; transform: rotate(-5deg); animation-delay: .34s; }
+.chimney { position: absolute; right: 24%; top: 4%; width: 9%; height: 27%; background: #22384d; z-index: 2; border-top: 3px solid #3d5c76; }
+.window { position: absolute; left: 18%; bottom: 24%; width: 22%; height: 36%; border: 3px solid #172536; background: linear-gradient(135deg, rgba(64,145,214,.35), rgba(10,28,45,.75)); box-shadow: inset 0 0 0 2px rgba(255,255,255,.03); }
+.window::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #172536; }
+.window::after { content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #172536; }
+.door { position: absolute; right: 19%; bottom: 0; width: 19%; height: 58%; background: #182b3d; border: 2px solid #0f1c2a; }
+
+.impact { position: absolute; width: 34px; height: 34px; border: 1px solid #8bd4ff; border-radius: 50%; opacity: 0; z-index: 6; animation: impactPulse 7s ease-out infinite; }
+.impact::before, .impact::after { content: ""; position: absolute; left: 50%; top: 50%; width: 48px; height: 1px; background: linear-gradient(90deg, transparent, #70c8ff, transparent); transform: translate(-50%,-50%); }
+.impact::after { transform: translate(-50%,-50%) rotate(90deg); }
+.impactOne { left: 31%; top: 44%; animation-delay: .65s; }
+.impactTwo { left: 57%; top: 39%; animation-delay: 1.15s; }
+.impactThree { left: 46%; top: 51%; animation-delay: 1.6s; }
+
+.intexRepair { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
+.repairBadge { position: absolute; left: 50%; top: 13%; transform: translate(-50%,-8px); padding: 8px 12px; border: 1px solid rgba(80,166,255,.65); background: rgba(9,28,49,.85); color: #a9d4ff; font: 800 9px "Manrope", sans-serif; letter-spacing: .18em; opacity: 0; box-shadow: 0 0 28px rgba(47,139,255,.28); animation: repairBadgeIn 7s ease-in-out infinite; }
+.repairBeam { position: absolute; left: 50%; top: 25%; width: 1px; height: 50%; background: linear-gradient(transparent, #49a8ff, transparent); opacity: 0; transform-origin: top center; animation: repairBeam 7s ease-in-out infinite; }
+.beamOne { transform: rotate(18deg); }
+.beamTwo { transform: rotate(-18deg); }
+.beamThree { transform: rotate(0); }
+.repairSweep { position: absolute; left: 17%; right: 17%; top: 48%; height: 4px; background: linear-gradient(90deg, transparent, #67bbff, #fff, #67bbff, transparent); box-shadow: 0 0 22px rgba(92,184,255,.8); opacity: 0; transform: translateY(-40px); animation: repairSweep 7s cubic-bezier(.45,.02,.2,1) infinite; }
+
+.sceneCaption { position: absolute; bottom: 4%; font: 800 8px "Manrope", sans-serif; letter-spacing: .17em; color: #6f8daa; z-index: 8; }
+.captionStorm { left: 4%; animation: captionStorm 7s ease-in-out infinite; }
+.captionRepair { right: 4%; color: #7dbbff; opacity: 0; animation: captionRepair 7s ease-in-out infinite; }
+
+@keyframes stormCloudDrift { 0%,100% { transform: translateX(-2%); } 50% { transform: translateX(5%); } }
+@keyframes lightningFlash { 0%,13%,100% { opacity: 0; } 14% { opacity: 1; } 14.7% { opacity: 0; } 15.3% { opacity: .85; } 16% { opacity: 0; } }
+@keyframes hailFall { 0%,4% { transform: translate3d(0,-30px,0); opacity: 0; } 8% { opacity: 1; } 38% { transform: translate3d(-20px,390px,0); opacity: .95; } 40%,100% { transform: translate3d(-24px,415px,0); opacity: 0; } }
+@keyframes impactPulse { 0%,14%,100% { opacity: 0; transform: scale(.3); } 18% { opacity: 1; transform: scale(.5); } 23% { opacity: .35; transform: scale(1.8); } 27%,100% { opacity: 0; transform: scale(2.2); } }
+@keyframes crackSequence { 0%,14% { opacity: 0; transform: scaleX(.1) rotate(18deg); } 25%,54% { opacity: 1; } 64%,100% { opacity: 0; } }
+@keyframes damagedRoofFade { 0%,50% { filter: saturate(.72) brightness(.9); opacity: 1; } 72%,100% { filter: saturate(1) brightness(1); opacity: .18; } }
+@keyframes restoredRoofSweep { 0%,48% { transform: translateX(-105%); opacity: 0; } 54% { opacity: 1; } 72%,94% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-105%); opacity: 0; } }
+@keyframes repairBadgeIn { 0%,45% { opacity: 0; transform: translate(-50%,-10px); } 52%,89% { opacity: 1; transform: translate(-50%,0); } 97%,100% { opacity: 0; } }
+@keyframes repairBeam { 0%,48% { opacity: 0; } 53%,70% { opacity: .7; } 76%,100% { opacity: 0; } }
+@keyframes repairSweep { 0%,50% { opacity: 0; transform: translateY(-54px); } 55% { opacity: 1; } 72% { opacity: .9; transform: translateY(58px); } 78%,100% { opacity: 0; transform: translateY(70px); } }
+@keyframes captionStorm { 0%,43% { opacity: 1; } 55%,100% { opacity: .18; } }
+@keyframes captionRepair { 0%,47% { opacity: 0; } 58%,91% { opacity: 1; } 100% { opacity: 0; } }
 
 .roofProofBar { display: flex; justify-content: space-between; gap: 30px; align-items: center; padding: 22px clamp(24px, 5vw, 76px); background: #fff; border-bottom: 1px solid #dedbd4; }
 .roofProofBar p { margin: 0; font-weight: 700; font-size: 12px; }
@@ -71,6 +135,13 @@
 .roofEstimateSection .primaryButton { background: #fff; color: #07111f; }
 .roofPhoneLink { font-size: 12px; font-weight: 800; }
 
+@media (prefers-reduced-motion: reduce) {
+  .stormScene *, .stormScene *::before, .stormScene *::after { animation: none !important; }
+  .roofRestored { transform: translateX(0); opacity: 1; }
+  .roofDamaged, .roofCrack, .hail, .impact, .repairBeam, .repairSweep, .lightning, .captionStorm { display: none; }
+  .repairBadge, .captionRepair { opacity: 1; }
+}
+
 @media (max-width: 1100px) {
   .roofHero { grid-template-columns: 1fr; }
   .roofHeroPanel { min-height: 500px; }
@@ -83,6 +154,8 @@
   .roofHero { min-height: auto; padding: 122px 20px 60px; }
   .roofHero h1 { font-size: clamp(52px, 15vw, 75px); }
   .roofHeroPanel { min-height: 390px; }
+  .stormScene { inset: 62px 14px 82px; }
+  .house { left: 7%; right: 7%; bottom: 8%; height: 47%; }
   .roofPanelBottom { flex-direction: column; align-items: flex-start; }
   .roofPanelBottom span { text-align: left; }
   .roofProofBar { align-items: flex-start; flex-direction: column; padding: 20px; }
