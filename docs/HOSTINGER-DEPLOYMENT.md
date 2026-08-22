@@ -14,6 +14,7 @@ Required before production:
 - Hostinger MySQL is created and `db/schema.sql` has been applied.
 - Database credentials are configured as private environment variables.
 - Lead success and failure paths are tested end to end.
+- Admin login, lead CRM, project CMS, and review CMS are tested against the production database.
 - `INTEX_ADMIN_PASSWORD` and `INTEX_ADMIN_SESSION_SECRET` are strong production secrets if admin is enabled.
 - Legacy 301 redirects are verified.
 - Current WordPress files and database are backed up.
@@ -37,8 +38,8 @@ Required before production:
 Create a private MySQL database in Hostinger and apply `db/schema.sql`. The schema creates:
 
 - `intex_leads` — private customer requests and workflow status.
-- `intex_projects` — future project / before-after records.
-- `intex_reviews` — verification-first review records.
+- `intex_projects` — project / before-after records and draft/publish state.
+- `intex_reviews` — review source, verification, display permission, and publish state.
 - `intex_content` — generic CMS content collection storage.
 
 Use a dedicated database user with only the permissions required by this application. Do not reuse WordPress database credentials.
@@ -78,6 +79,13 @@ Admin should remain disabled until authentication and database access have been 
 4. If MySQL fails but the approved webhook succeeds, the request can still be accepted through that fallback.
 5. If neither destination succeeds, the form receives an error and tells the customer to call instead of displaying a false confirmation.
 
+## CMS publication rules
+
+- Projects may remain drafts with incomplete media, but publishing is rejected server-side unless before and after image URLs are present and valid.
+- Reviews may remain drafts or verified internal records, but public publishing is rejected unless both source verification and permission to display are explicitly enabled.
+- The public Reviews page is `noindex` while it has no publishable reviews, and the sitemap omits it until eligible review records exist.
+- The homepage only renders reviews returned by the same verified public repository. It never fabricates aggregate ratings.
+
 ## Preview validation before domain mapping
 
 Validate the Hostinger preview URL before touching DNS/domain routing:
@@ -94,6 +102,7 @@ Validate the Hostinger preview URL before touching DNS/domain routing:
 - `/service-areas/chicago/`
 - `/projects/`
 - `/resources/`
+- `/reviews/` (should be noindex/empty until a verified permitted review exists)
 - `/about/`
 - `/contact/`
 - `/privacy/`
@@ -106,6 +115,11 @@ When admin is enabled and authenticated, also validate:
 - `/admin/leads/`
 - a real `/admin/leads/{id}/` record after a test submission
 - lead status and internal note updates
+- `/admin/projects/` create/edit/draft/publish workflow
+- a published project at `/projects/{slug}/`
+- `/admin/reviews/` create/edit/verification/permission workflow
+- confirm an unverified review cannot be published
+- confirm an eligible published review appears at `/reviews/` and conditionally on the homepage
 
 Also test every verified legacy redirect in `lib/legacy-redirects.ts`, including the `?page_id=12534` conditional redirect.
 
@@ -116,12 +130,14 @@ Also test every verified legacy redirect in `lib/legacy-redirects.ts`, including
 3. Confirm the Hostinger preview deployment is healthy.
 4. Submit a test lead and confirm it appears in MySQL and `/admin/leads/`.
 5. Confirm lead failure behavior by temporarily testing an unavailable destination in a controlled preview environment.
-6. Confirm verified redirects on the preview/deployment host where possible.
-7. Map `intexchicago.com` to the Node.js application.
-8. Verify HTTPS and canonical host behavior.
-9. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, and redirects.
-10. Submit/refresh sitemap in Search Console.
-11. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
+6. Create one draft project, confirm draft is not public, then validate publication with approved test media.
+7. Create one review test record and confirm the verification/permission publication gate.
+8. Confirm verified redirects on the preview/deployment host where possible.
+9. Map `intexchicago.com` to the Node.js application.
+10. Verify HTTPS and canonical host behavior.
+11. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, CMS, and redirects.
+12. Submit/refresh sitemap in Search Console.
+13. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
 
 ## Important
 
