@@ -1,22 +1,38 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { servicePages } from "@/lib/services";
+import { serviceAreas } from "@/lib/service-areas";
+import { publishedProjects } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const services = servicePages.map((service) => ({
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: site.url, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: `${site.url}/service-areas/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/projects/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+  ];
+
+  const services: MetadataRoute.Sitemap = servicePages.map((service) => ({
     url: `${site.url}/${service.slug}/`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
+    changeFrequency: "monthly",
     priority: service.slug === "roofing-chicago" ? 0.9 : 0.8,
   }));
 
-  return [
-    {
-      url: site.url,
+  const areas: MetadataRoute.Sitemap = serviceAreas
+    .filter((area) => area.indexable)
+    .map((area) => ({
+      url: `${site.url}/service-areas/${area.slug}/`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    ...services,
-  ];
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }));
+
+  const projects: MetadataRoute.Sitemap = publishedProjects.map((project) => ({
+    url: `${site.url}/projects/${project.slug}/`,
+    lastModified: project.completedAt ? new Date(project.completedAt) : new Date(),
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...services, ...areas, ...projects];
 }
