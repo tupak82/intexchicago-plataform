@@ -23,6 +23,8 @@ Before production, verify each claim against business records and current licens
 - [x] Canonical phone and email centralized in platform config
 - [x] Document verification status in `docs/CLAIMS-VERIFICATION.md`
 - [x] Prevent BBB accreditation wording; public BBB profile states Intex is not accredited
+- [x] Enforce review source verification + display permission before publication
+- [x] Prevent homepage AggregateRating schema unless separately approved evidence is added later
 
 ## URL and SEO migration
 
@@ -35,7 +37,8 @@ Before production, verify each claim against business records and current licens
 - [x] Preserve `/contact/` as a stable canonical route
 - [x] Replace `/why-us/` with `/about/` and 301 the legacy URL
 - [x] Add canonical metadata patterns to new service/location/project/resource/privacy routes
-- [x] Expand sitemap for services, published service areas, projects, resources, About, Contact, and Privacy
+- [x] Drive published project sitemap routes from the CMS repository
+- [x] Add `/reviews/` to sitemap only when verified permitted reviews exist
 - [x] Keep admin/API surfaces out of crawl
 - [x] Add useful custom 404 recovery page
 - [x] Add environment-driven Search Console verification hook
@@ -63,49 +66,64 @@ See `docs/LEGACY-URL-INVENTORY.md` for verified mappings.
 - [x] Contact replacement
 - [x] Privacy Policy
 - [x] Step-by-step estimate/emergency request UX
-- [x] Lead intake API with validation and configurable backend adapter
+- [x] Lead intake API with validation and dual database/webhook delivery strategy
+- [x] Owned MySQL schema for leads, projects, reviews, and generic CMS content
+- [x] Protected lead CRM inbox
+- [x] Lead detail, workflow statuses, and private notes
 - [x] Projects data model and public case-study architecture
 - [x] Accessible before/after comparison component
+- [x] Database-backed public project rendering
+- [x] Visual project CMS: list, create, edit, draft/publish
+- [x] Server-side guardrail requiring before/after images for published projects
 - [x] Service areas architecture and Chicago page
 - [x] Resource/article hub
 - [x] Three initial educational SEO guides
 - [x] Verification-first reviews/testimonials data model
-- [x] CMS collection registry
-- [x] Migration Control Center
+- [x] Visual reviews CMS: list, create, edit, verify/permission/publish workflow
+- [x] Database-backed public reviews page
+- [x] Conditional verified-review section on homepage
+- [x] Migration Control Center connected to Leads, Projects, and Reviews
 - [x] Password-protected signed admin session flow
-- [ ] Configure production lead persistence destination
+- [ ] Configure actual Hostinger MySQL credentials and apply `db/schema.sql`
 - [ ] Migrate and verify real project photos/details before publishing case studies
-- [ ] Build full visual CRUD editing for CMS collections
+- [ ] Add first verified review records only after source/display permission review
+- [ ] Add direct media upload/storage workflow; project editor currently accepts verified image URLs
+- [ ] Move remaining static resource/service content into visual CMS only if operationally useful
 
 ## Lead and privacy readiness
 
-The estimate flow posts to `/api/leads`. Production delivery is intentionally blocked until an approved private persistence destination is configured.
+The estimate flow posts to `/api/leads`. Production delivery is intentionally blocked until an approved private persistence destination is actually reachable.
 
 - [x] Create server-side lead payload validation
 - [x] Add honeypot spam trap
 - [x] Add payload-size protection
 - [x] Add best-effort application rate limiting
 - [x] Fail safely when no production lead backend is configured
-- [x] Support bearer secret for webhook delivery
+- [x] Add owned MySQL persistence adapter
+- [x] Keep optional authenticated webhook as notification/fallback
+- [x] Accept success only if at least one approved destination actually succeeds
 - [x] Add Privacy Policy and connect consent language from the estimate flow
 - [x] Describe retention/deletion principles in the Privacy Policy
-- [ ] Configure production database/CRM destination
+- [x] Build private admin lead workflow UI
+- [ ] Create/configure Hostinger production database and dedicated least-privilege DB user
+- [ ] Apply `db/schema.sql` to production database
+- [ ] Test real lead storage/read/update end to end
 - [ ] Add infrastructure/CDN-level rate limiting
-- [ ] Store leads privately with least-privilege access
 - [ ] Approve concrete retention/deletion operating period
 - [ ] Test email/SMS/CRM notifications if enabled
 - [ ] Test emergency-call fallback on mobile
 
 ## Platform operations and security
 
-- [x] Add `/api/health` readiness endpoint
+- [x] Add `/api/health` readiness endpoint with live DB reachability status
 - [x] Disable admin surface by default unless explicitly configured
 - [x] Add admin password + signed HTTP-only session authentication
 - [x] Add admin logout flow
+- [x] Add same-origin checks on state-changing admin endpoints
 - [x] Keep admin page `noindex` and disallow `/admin/` + `/api/` in robots
 - [x] Remove `X-Powered-By`
 - [x] Add baseline `nosniff`, frame, referrer, and permissions-policy headers
-- [x] Add Hostinger Next.js deployment runbook
+- [x] Add Hostinger Next.js + MySQL deployment runbook
 - [x] Add production rollback procedure
 - [ ] Final penetration/security review
 
@@ -113,6 +131,7 @@ The estimate flow posts to `/api/leads`. Production delivery is intentionally bl
 
 - [x] Add custom migration/SEO validator to repository
 - [x] Enforce typecheck + migration validator + production build in CI workflow
+- [x] Validator now protects redirects, CRM, DB schema, project CMS, review CMS, publication guardrails, and unverified-claim rules
 - [ ] Typecheck passes — latest push run is not observable from the current connector
 - [ ] Production build passes — latest push run is not observable from the current connector
 - [ ] Automated CI passes on main
@@ -121,7 +140,7 @@ The estimate flow posts to `/api/leads`. Production delivery is intentionally bl
 - [ ] Keyboard accessibility QA
 - [ ] Reduced-motion QA
 - [ ] Core Web Vitals / Lighthouse review
-- [ ] Forms and phone links tested against production backend
+- [ ] Forms and phone links tested against production database/backend
 - [ ] Structured-data validation
 - [x] Redirect validation rules added to CI
 - [ ] Full redirect inventory/test set completed from legacy export/Search Console
