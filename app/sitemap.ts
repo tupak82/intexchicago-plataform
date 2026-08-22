@@ -3,12 +3,16 @@ import { site } from "@/lib/site";
 import { servicePages } from "@/lib/services";
 import { serviceAreas } from "@/lib/service-areas";
 import { publishedProjects } from "@/lib/projects";
+import { publishedResources } from "@/lib/resources";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: site.url, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: `${site.url}/about/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
+    { url: `${site.url}/contact/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
     { url: `${site.url}/service-areas/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/projects/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/resources/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 
   const services: MetadataRoute.Sitemap = servicePages.map((service) => ({
@@ -34,5 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...services, ...areas, ...projects];
+  const resources: MetadataRoute.Sitemap = publishedResources.map((article) => ({
+    url: `${site.url}/resources/${article.slug}/`,
+    lastModified: new Date(article.updatedAt),
+    changeFrequency: "yearly",
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...services, ...areas, ...projects, ...resources];
 }
