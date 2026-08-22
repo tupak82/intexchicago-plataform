@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 import "./globals.css";
 import "./brand.css";
 import "./roofing-home.css";
+import "./climate-animations.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
