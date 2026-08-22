@@ -4,6 +4,7 @@ export const site = {
   url: "https://intexchicago.com",
   phone: "+17738225892",
   phoneDisplay: "(773) 822-5892",
+  email: "info@intexchicago.com",
   description:
     "Restoration and roofing services for residential and commercial properties throughout Chicagoland.",
   services: [
