@@ -9,6 +9,7 @@ import { publishableReviews } from "@/lib/reviews";
 import { legacyQueryRedirects, legacyRedirects } from "@/lib/legacy-redirects";
 import { cmsCollections } from "@/lib/cms";
 import { ADMIN_COOKIE, adminConfigured, validAdminSession } from "@/lib/admin-auth";
+import { databasePing } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +24,9 @@ export default async function AdminPage() {
   const cookieStore = await cookies();
   if (!validAdminSession(cookieStore.get(ADMIN_COOKIE)?.value)) redirect("/admin/login/");
 
-  const leadBackendReady = Boolean(process.env.INTEX_LEADS_WEBHOOK_URL);
+  const database = await databasePing();
+  const webhookConfigured = Boolean(process.env.INTEX_LEADS_WEBHOOK_URL);
+  const leadBackendReady = database.reachable || webhookConfigured;
   const publishedAreas = serviceAreas.filter((area) => area.indexable);
   const redirectCount = legacyRedirects.length + legacyQueryRedirects.length;
 
@@ -36,6 +39,7 @@ export default async function AdminPage() {
           <p>Operational readiness for the WordPress-to-platform migration.</p>
         </div>
         <div className="adminHeaderActions">
+          <a href="/admin/leads/">Lead inbox</a>
           <a href="/">View website →</a>
           <form action="/api/admin/logout/" method="post"><button type="submit">Sign out</button></form>
         </div>
@@ -48,8 +52,8 @@ export default async function AdminPage() {
         <article><span>Resources</span><strong>{publishedResources.length}</strong><small>Published educational guides</small></article>
         <article><span>Verified reviews</span><strong>{publishableReviews.length}</strong><small>No fabricated review content</small></article>
         <article><span>301 redirects</span><strong>{redirectCount}</strong><small>Verified WordPress routes mapped</small></article>
-        <article><span>CMS collections</span><strong>{cmsCollections.length}</strong><small>Platform data domains defined</small></article>
-        <article><span>Lead backend</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>INTEX_LEADS_WEBHOOK_URL</small></article>
+        <article><span>MySQL</span><strong>{database.reachable ? "Online" : database.configured ? "Offline" : "Needs config"}</strong><small>Owned lead + CMS data store</small></article>
+        <article><span>Lead intake</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>{database.reachable ? "Stored in MySQL" : webhookConfigured ? "Webhook fallback" : "No destination"}</small></article>
       </section>
 
       <section className="adminPanel">
@@ -58,7 +62,8 @@ export default async function AdminPage() {
           <h2>Do not switch the domain until these are green.</h2>
         </div>
         <ul>
-          <li className={leadBackendReady ? "ready" : "pending"}>Lead persistence and notification destination</li>
+          <li className={database.reachable ? "ready" : "pending"}>Owned MySQL persistence and admin lead inbox</li>
+          <li className={leadBackendReady ? "ready" : "pending"}>Lead intake destination available</li>
           <li className={redirectCount > 0 ? "ready" : "pending"}>First verified WordPress 301 redirect set</li>
           <li className="pending">Full WordPress URL export and Search Console cross-check</li>
           <li className="pending">Claims, licensing, review rating and guarantee verification</li>
