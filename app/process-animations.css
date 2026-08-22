@@ -1,0 +1,272 @@
+.roofProcessGrid article {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform .28s ease, background .28s ease, box-shadow .28s ease;
+}
+
+.roofProcessGrid article:hover {
+  transform: translateY(-5px);
+  background: rgba(14,39,66,.96);
+  box-shadow: 0 26px 70px rgba(0,0,0,.22);
+  z-index: 2;
+}
+
+.roofProcessGrid article > span,
+.roofProcessGrid article > h3,
+.roofProcessGrid article > p {
+  position: relative;
+  z-index: 4;
+}
+
+.processMotion {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .9;
+}
+
+.processMotion::before,
+.processMotion::after,
+.processMotion i,
+.processMotion b {
+  content: "";
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+/* 01 INSPECT — scanning beam sweeps across a roof and reveals problem points. */
+.processInspect::before {
+  right: 24px;
+  bottom: 24px;
+  width: 150px;
+  height: 76px;
+  border-top: 6px solid rgba(145,190,230,.58);
+  border-right: 2px solid rgba(145,190,230,.24);
+  transform: skewX(-25deg);
+  box-shadow: 0 -12px 0 rgba(42,120,190,.14), 0 -24px 0 rgba(42,120,190,.08);
+}
+.processInspect::after {
+  width: 190px;
+  height: 5px;
+  right: -22px;
+  bottom: 95px;
+  background: linear-gradient(90deg, transparent, rgba(67,167,255,.9), rgba(179,226,255,.98), transparent);
+  box-shadow: 0 0 16px rgba(67,167,255,.85), 0 0 40px rgba(67,167,255,.32);
+  transform: rotate(-14deg) translateX(-130%);
+  animation: processScan 4.8s cubic-bezier(.5,.04,.27,.96) infinite;
+}
+.processInspect i {
+  right: 58px;
+  bottom: 55px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #ff6570;
+  box-shadow: 0 0 0 7px rgba(255,74,87,.10), 0 0 26px rgba(255,74,87,.6);
+  animation: processIssuePulse 4.8s ease-in-out infinite;
+}
+.processInspect b {
+  right: 112px;
+  bottom: 78px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff6f77;
+  box-shadow: 0 0 18px rgba(255,92,102,.8);
+  animation: processIssuePulse 4.8s .25s ease-in-out infinite;
+}
+
+/* 02 EXPLAIN — damage becomes a clear plan with staged scope lines. */
+.processExplain::before {
+  right: 24px;
+  bottom: 28px;
+  width: 156px;
+  height: 100px;
+  border: 1px solid rgba(125,174,220,.22);
+  background: linear-gradient(180deg, rgba(18,47,77,.82), rgba(8,26,45,.45));
+  box-shadow: 0 16px 40px rgba(0,0,0,.16);
+}
+.processExplain::after {
+  right: 44px;
+  bottom: 102px;
+  width: 112px;
+  height: 4px;
+  background: #53b2ff;
+  box-shadow: 0 0 18px rgba(83,178,255,.5), 0 24px 0 rgba(111,145,177,.42), 0 48px 0 rgba(111,145,177,.27);
+  transform-origin: left;
+  animation: processPlanLines 5s ease-in-out infinite;
+}
+.processExplain i {
+  right: 148px;
+  bottom: 49px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(86,190,255,.78);
+  animation: processCheckPulse 5s 1.1s ease-in-out infinite;
+}
+.processExplain i::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid #8fd3ff;
+  border-bottom: 2px solid #8fd3ff;
+  transform: rotate(42deg);
+}
+
+/* 03 BUILD — shingles install in sequence and a blue completion sweep seals the roof. */
+.processBuild::before {
+  right: 18px;
+  bottom: 22px;
+  width: 176px;
+  height: 104px;
+  clip-path: polygon(10% 100%, 44% 12%, 88% 12%, 100% 100%);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 17px, rgba(151,182,207,.22) 18px 20px),
+    repeating-linear-gradient(90deg, transparent 0 34px, rgba(151,182,207,.18) 35px 37px),
+    linear-gradient(155deg,#1a3a58,#10253b);
+  border-bottom: 4px solid rgba(122,174,216,.42);
+  transform: translateY(14px);
+  animation: processRoofBuild 5.4s ease-in-out infinite;
+}
+.processBuild::after {
+  right: 28px;
+  bottom: 25px;
+  width: 150px;
+  height: 7px;
+  background: linear-gradient(90deg, transparent, #4cb5ff, #b8e4ff, transparent);
+  box-shadow: 0 0 24px rgba(76,181,255,.75), 0 0 55px rgba(76,181,255,.28);
+  transform: translateX(-125%);
+  animation: processSealSweep 5.4s ease-in-out infinite;
+}
+.processBuild i {
+  right: 58px;
+  bottom: 109px;
+  width: 54px;
+  height: 22px;
+  border: 2px solid rgba(101,187,255,.5);
+  background: rgba(11,41,68,.8);
+  transform: rotate(-8deg);
+  animation: processToolTap 5.4s ease-in-out infinite;
+}
+
+/* 04 VERIFY — final inspection ring resolves into a protected check mark. */
+.processVerify::before {
+  right: 42px;
+  bottom: 34px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 2px solid rgba(74,174,255,.45);
+  box-shadow: 0 0 0 16px rgba(48,133,211,.06), inset 0 0 32px rgba(66,166,248,.08);
+  animation: processVerifyRing 4.9s ease-in-out infinite;
+}
+.processVerify::after {
+  right: 77px;
+  bottom: 72px;
+  width: 39px;
+  height: 20px;
+  border-left: 7px solid #70c8ff;
+  border-bottom: 7px solid #70c8ff;
+  filter: drop-shadow(0 0 9px rgba(112,200,255,.7));
+  transform: rotate(-45deg) scale(.15);
+  opacity: 0;
+  animation: processVerifyCheck 4.9s ease-in-out infinite;
+}
+.processVerify i {
+  right: 96px;
+  bottom: 86px;
+  width: 4px;
+  height: 150px;
+  background: linear-gradient(transparent, rgba(100,192,255,.95), transparent);
+  box-shadow: 0 0 18px rgba(100,192,255,.7);
+  transform-origin: 50% 75px;
+  animation: processRadar 4.9s linear infinite;
+}
+.processVerify b {
+  right: 28px;
+  bottom: 26px;
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  border: 1px dashed rgba(122,187,236,.18);
+  animation: processOrbit 8s linear infinite;
+}
+
+@keyframes processScan {
+  0%,10% { transform: rotate(-14deg) translateX(-130%); opacity: 0; }
+  18% { opacity: 1; }
+  62% { transform: rotate(-14deg) translateX(42%); opacity: 1; }
+  74%,100% { transform: rotate(-14deg) translateX(62%); opacity: 0; }
+}
+@keyframes processIssuePulse {
+  0%,32%,100% { opacity: .15; transform: scale(.55); }
+  46%,67% { opacity: 1; transform: scale(1); }
+  78% { opacity: .3; transform: scale(1.35); }
+}
+@keyframes processPlanLines {
+  0%,12% { transform: scaleX(.08); opacity: .18; }
+  36%,74% { transform: scaleX(1); opacity: 1; }
+  92%,100% { transform: scaleX(.2); opacity: .15; }
+}
+@keyframes processCheckPulse {
+  0%,35%,100% { transform: scale(.45); opacity: .1; }
+  52%,76% { transform: scale(1); opacity: 1; }
+}
+@keyframes processRoofBuild {
+  0%,12% { transform: translateY(72px); opacity: .15; filter: brightness(.75); }
+  42%,72% { transform: translateY(14px); opacity: 1; filter: brightness(1); }
+  88%,100% { transform: translateY(8px); opacity: .45; }
+}
+@keyframes processSealSweep {
+  0%,50% { transform: translateX(-125%); opacity: 0; }
+  58% { opacity: 1; }
+  78% { transform: translateX(45%); opacity: 1; }
+  90%,100% { transform: translateX(65%); opacity: 0; }
+}
+@keyframes processToolTap {
+  0%,18%,100% { transform: rotate(-8deg) translateY(-18px); opacity: 0; }
+  34% { opacity: .8; transform: rotate(-8deg) translateY(0); }
+  40% { transform: rotate(-18deg) translateY(5px); }
+  46% { transform: rotate(-6deg) translateY(-4px); }
+  58%,70% { opacity: .8; transform: rotate(-8deg) translateY(0); }
+  84% { opacity: 0; transform: rotate(-8deg) translateY(-12px); }
+}
+@keyframes processVerifyRing {
+  0%,15%,100% { transform: scale(.55); opacity: .18; }
+  44%,78% { transform: scale(1); opacity: .9; }
+  88% { transform: scale(1.08); opacity: .35; }
+}
+@keyframes processVerifyCheck {
+  0%,48%,100% { transform: rotate(-45deg) scale(.15); opacity: 0; }
+  62%,82% { transform: rotate(-45deg) scale(1); opacity: 1; }
+  92% { transform: rotate(-45deg) scale(1.12); opacity: .2; }
+}
+@keyframes processRadar {
+  0% { transform: rotate(0deg); opacity: 0; }
+  12%,72% { opacity: .8; }
+  86%,100% { transform: rotate(360deg); opacity: 0; }
+}
+@keyframes processOrbit { to { transform: rotate(360deg); } }
+
+@media (max-width: 760px) {
+  .processMotion { opacity: .72; }
+  .processInspect::before,
+  .processExplain::before,
+  .processBuild::before { transform: scale(.8); transform-origin: right bottom; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofProcessGrid article:hover { transform: none; }
+  .processMotion::before,
+  .processMotion::after,
+  .processMotion i,
+  .processMotion b { animation: none !important; }
+  .processVerify::after { opacity: 1; transform: rotate(-45deg) scale(1); }
+}
