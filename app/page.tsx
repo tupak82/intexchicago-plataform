@@ -142,10 +142,22 @@ export default async function Home() {
           <p>Leading roofing companies win trust by making the process understandable. Intex should do the same—from the first inspection through the final walkthrough.</p>
         </div>
         <div className="roofProcessGrid">
-          <article><span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p></article>
-          <article><span>02</span><h3>Explain</h3><p>Separate what needs repair now from what can wait or be planned.</p></article>
-          <article><span>03</span><h3>Build</h3><p>Complete the roofing scope with clear communication and documentation.</p></article>
-          <article><span>04</span><h3>Verify</h3><p>Review the completed work and leave the property protected.</p></article>
+          <article>
+            <div className="processMotion processInspect" aria-hidden="true"><i /><b /></div>
+            <span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p>
+          </article>
+          <article>
+            <div className="processMotion processExplain" aria-hidden="true"><i /></div>
+            <span>02</span><h3>Explain</h3><p>Separate what needs repair now from what can wait or be planned.</p>
+          </article>
+          <article>
+            <div className="processMotion processBuild" aria-hidden="true"><i /></div>
+            <span>03</span><h3>Build</h3><p>Complete the roofing scope with clear communication and documentation.</p>
+          </article>
+          <article>
+            <div className="processMotion processVerify" aria-hidden="true"><i /><b /></div>
+            <span>04</span><h3>Verify</h3><p>Review the completed work and leave the property protected.</p>
+          </article>
         </div>
       </section>
 
