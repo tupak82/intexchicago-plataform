@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import SiteMotion from "@/components/SiteMotion";
 import { site } from "@/lib/site";
 import "./globals.css";
 import "./brand.css";
@@ -11,6 +12,7 @@ import "./premium-interactions.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
+import "./site-motion.css";
 import "./reviews/reviews.css";
 import "./admin/admin.css";
 import "./estimate/estimate.css";
@@ -55,6 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <SiteMotion />
         {children}
         {googleAnalyticsId ? (
           <>
