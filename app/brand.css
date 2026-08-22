@@ -1,11 +1,15 @@
 .brandOfficial { min-width: 0; }
 .brandLogoImage { display: block; width: auto; max-width: min(220px, 38vw); height: 52px; object-fit: contain; object-position: left center; }
-.brandFallback { display: flex; flex-direction: column; line-height: 1; }
-.brandFallback strong { font: 800 22px "Manrope", sans-serif; letter-spacing: .07em; }
-.brandFallback small { margin-top: 5px; color: #8290a1; font-size: 9px; font-weight: 700; letter-spacing: .28em; }
+.brandFallback { display: inline-flex; align-items: center; gap: 10px; line-height: 1; }
+.brandFallbackMark { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid rgba(102, 199, 255, .42); border-radius: 10px; background: linear-gradient(145deg, rgba(69, 184, 255, .22), rgba(69, 184, 255, .06)); box-shadow: inset 0 0 18px rgba(73, 187, 255, .08); color: #72c7ff; font: 900 21px "Manrope", sans-serif; letter-spacing: -.06em; }
+.brandFallbackWords { display: flex; flex-direction: column; }
+.brandFallback strong { color: #f6f8fb; font: 800 21px "Manrope", sans-serif; letter-spacing: .08em; }
+.brandFallback small { margin-top: 5px; color: #72c7ff; font-size: 8px; font-weight: 800; letter-spacing: .3em; }
 .footerBrand.brandOfficial .brandLogoImage { height: 46px; }
 
 @media (max-width: 760px) {
   .brandLogoImage { height: 42px; max-width: 180px; }
+  .brandFallbackMark { width: 32px; height: 32px; border-radius: 9px; font-size: 19px; }
+  .brandFallback strong { font-size: 18px; }
   .footerBrand.brandOfficial .brandLogoImage { height: 40px; }
 }
