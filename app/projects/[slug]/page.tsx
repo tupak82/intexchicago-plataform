@@ -1,30 +1,45 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BeforeAfter from "../BeforeAfter";
-import { projectBySlug, publishedProjects } from "@/lib/projects";
+import { getPublicProjectBySlug } from "@/lib/project-store";
 
-export function generateStaticParams() {
-  return publishedProjects.map(({ slug }) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = projectBySlug[slug];
+  const project = await getPublicProjectBySlug(slug);
   if (!project) return {};
   return {
     title: project.title,
     description: project.summary,
     alternates: { canonical: `/projects/${project.slug}/` },
+    openGraph: {
+      title: project.title,
+      description: project.summary,
+      url: `/projects/${project.slug}/`,
+      type: "article",
+    },
   };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = projectBySlug[slug];
+  const project = await getPublicProjectBySlug(slug);
   if (!project) notFound();
+
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.summary,
+    about: project.service,
+    spatialCoverage: project.location,
+    ...(project.completedAt ? { dateCreated: project.completedAt } : {}),
+  };
 
   return (
     <main className="platformPage">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }} />
       <section className="platformHero compact">
         <div className="platformBreadcrumbs"><a href="/">Home</a> / <a href="/projects/">Projects</a> / {project.title}</div>
         <p className="kicker"><span /> {project.service} · {project.location}</p>
