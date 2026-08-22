@@ -1,0 +1,261 @@
+/* Cinematic scroll pass for Intex Chicago.
+   The page should communicate a progression: exposure -> inspection -> repair -> protection. */
+
+/* Shared section depth: subtle top/bottom atmosphere without decorative clutter. */
+.roofServices,
+.roofChicagoSection,
+.roofProcessSection,
+.homeReviewsSection,
+.roofEstimateSection {
+  overflow: hidden;
+}
+
+.roofServices::after,
+.roofChicagoSection::after,
+.roofProcessSection::after,
+.homeReviewsSection::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -90px;
+  width: min(760px, 72vw);
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(23,105,255,.07), transparent 68%);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Service cards reveal as a staggered roofing-system catalogue. */
+@supports (animation-timeline: view()) {
+  .roofServiceCard {
+    animation: intexCardReveal both linear;
+    animation-timeline: view();
+    animation-range: entry 4% cover 26%;
+  }
+
+  .roofServiceCard:nth-child(2),
+  .roofServiceCard:nth-child(5) { animation-range: entry 8% cover 29%; }
+  .roofServiceCard:nth-child(3),
+  .roofServiceCard:nth-child(6) { animation-range: entry 12% cover 32%; }
+
+  .roofClimateGrid article {
+    animation: intexClimateReveal both linear;
+    animation-timeline: view();
+    animation-range: entry 8% cover 28%;
+  }
+
+  .roofProcessGrid article {
+    animation: intexProcessReveal both linear;
+    animation-timeline: view();
+    animation-range: entry 5% cover 27%;
+  }
+}
+
+/* The service metadata behaves like a live scope marker. */
+.roofServiceMeta span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 25px;
+  height: 25px;
+  border: 1px solid rgba(23,105,255,.12);
+  border-radius: 999px;
+  transition: border-color .28s ease, background .28s ease, color .28s ease, transform .28s ease;
+}
+
+.roofServiceCard:hover .roofServiceMeta span,
+.roofServiceCard:focus-visible .roofServiceMeta span {
+  border-color: rgba(23,105,255,.34);
+  background: rgba(23,105,255,.06);
+  color: #1769ff;
+  transform: scale(1.06);
+}
+
+/* A restrained scanning line crosses a card only when someone engages with it. */
+.roofServiceCard .serviceMotion::before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  top: -8px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(23,105,255,.3), #fff, rgba(23,105,255,.3), transparent);
+  box-shadow: 0 0 14px rgba(23,105,255,.22);
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.roofServiceCard:hover .serviceMotion::before,
+.roofServiceCard:focus-visible .serviceMotion::before {
+  animation: intexInteractiveScan 1.25s cubic-bezier(.3,.02,.2,1) 1;
+}
+
+/* Chicago climate grid gets a connecting crosshair: one system, four threats. */
+.roofClimateGrid {
+  position: relative;
+  isolation: isolate;
+}
+
+.roofClimateGrid::before,
+.roofClimateGrid::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .16;
+}
+
+.roofClimateGrid::before {
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(transparent, #1769ff 25%, #1769ff 75%, transparent);
+}
+
+.roofClimateGrid::after {
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1769ff 25%, #1769ff 75%, transparent);
+}
+
+/* Process step number visibly activates with its own stage. */
+.roofProcessGrid article > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roofProcessGrid article > span::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: #4e9dff;
+  transform: scaleX(.22);
+  transform-origin: left;
+  opacity: .25;
+  animation: intexStepMarker 8s ease-in-out infinite;
+}
+
+.roofProcessGrid article:nth-child(2) > span::after { animation-delay: 1.5s; }
+.roofProcessGrid article:nth-child(3) > span::after { animation-delay: 3s; }
+.roofProcessGrid article:nth-child(4) > span::after { animation-delay: 4.5s; }
+
+/* Reviews receive a small verified-source accent without inventing ratings or badges. */
+.reviewCardTop > span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.reviewCardTop > span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1769ff;
+  box-shadow: 0 0 0 4px rgba(23,105,255,.07);
+  animation: intexSourceSignal 6.8s ease-in-out infinite;
+}
+
+/* Final CTA: protection line closes over the content like a roof ridge. */
+.roofEstimateSection > div:first-child {
+  position: relative;
+}
+
+.roofEstimateSection > div:first-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -25px;
+  width: min(420px, 70%);
+  height: 36px;
+  border-top: 2px solid rgba(255,255,255,.32);
+  transform: skewX(-38deg) scaleX(.16);
+  transform-origin: left;
+  opacity: .2;
+  animation: intexRoofRidgeClose 7.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Focus states remain visually premium and keyboard-visible. */
+.roofServiceCard:focus-visible,
+.roofChicagoCopy a:focus-visible,
+.homeReviewsLink:focus-visible,
+.roofPhoneLink:focus-visible {
+  outline: 2px solid #1769ff;
+  outline-offset: 4px;
+}
+
+.roofProcessSection a:focus-visible,
+.roofEstimateSection a:focus-visible,
+.roofHero a:focus-visible,
+.siteHeader a:focus-visible {
+  outline: 2px solid #8fc0ff;
+  outline-offset: 4px;
+}
+
+@keyframes intexCardReveal {
+  from { opacity: .48; transform: translateY(30px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes intexClimateReveal {
+  from { opacity: .4; filter: saturate(.75); }
+  to { opacity: 1; filter: saturate(1); }
+}
+
+@keyframes intexProcessReveal {
+  from { opacity: .45; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intexInteractiveScan {
+  0% { top: -8px; opacity: 0; }
+  14% { opacity: .95; }
+  82% { opacity: .7; }
+  100% { top: calc(100% + 8px); opacity: 0; }
+}
+
+@keyframes intexStepMarker {
+  0%, 10%, 100% { transform: scaleX(.22); opacity: .22; }
+  18%, 31% { transform: scaleX(1); opacity: .9; }
+  41% { transform: scaleX(.22); opacity: .22; }
+}
+
+@keyframes intexSourceSignal {
+  0%, 68%, 100% { transform: scale(.8); opacity: .52; box-shadow: 0 0 0 4px rgba(23,105,255,.06); }
+  76% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 8px rgba(23,105,255,.04); }
+  86% { transform: scale(.8); opacity: .52; box-shadow: 0 0 0 4px rgba(23,105,255,.06); }
+}
+
+@keyframes intexRoofRidgeClose {
+  0%, 55%, 100% { transform: skewX(-38deg) scaleX(.16); opacity: .18; }
+  69%, 86% { transform: skewX(-38deg) scaleX(1); opacity: .5; }
+}
+
+@media (max-width: 760px) {
+  .roofClimateGrid::before,
+  .roofClimateGrid::after { opacity: .08; }
+
+  .roofServiceCard .serviceMotion::before { display: none; }
+  .roofEstimateSection > div:first-child::after { width: 58%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofServiceCard,
+  .roofClimateGrid article,
+  .roofProcessGrid article,
+  .roofProcessGrid article > span::after,
+  .reviewCardTop > span::before,
+  .roofEstimateSection > div:first-child::after {
+    animation: none !important;
+  }
+
+  .roofServiceCard .serviceMotion::before { display: none !important; }
+}
