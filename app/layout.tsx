@@ -16,6 +16,7 @@ import "./platform-pages.css";
 import "./resource-pages.css";
 import "./site-motion.css";
 import "./mobile-premium.css";
+import "./desktop-premium.css";
 import "./reviews/reviews.css";
 import "./admin/admin.css";
 import "./estimate/estimate.css";
