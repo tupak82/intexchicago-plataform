@@ -1,0 +1,199 @@
+.roofClimateGrid article {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background .28s ease, transform .28s ease, box-shadow .28s ease;
+}
+
+.roofClimateGrid article > strong,
+.roofClimateGrid article > span {
+  position: relative;
+  z-index: 4;
+}
+
+.roofClimateGrid article::before,
+.roofClimateGrid article::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.roofClimateGrid article:hover {
+  background: rgba(255,255,255,.58);
+  transform: translateY(-3px);
+  box-shadow: 0 22px 55px rgba(7,17,31,.10);
+  z-index: 2;
+}
+
+/* WIND — gusts sweep across the roof surface and expose edge lift. */
+.roofClimateGrid article:nth-child(1)::before {
+  left: -28%;
+  right: -28%;
+  top: 45%;
+  height: 74px;
+  opacity: .64;
+  background:
+    linear-gradient(172deg, transparent 0 27%, rgba(23,105,255,.10) 28% 31%, transparent 32% 45%, rgba(23,105,255,.22) 46% 49%, transparent 50% 64%, rgba(23,105,255,.12) 65% 68%, transparent 69%),
+    repeating-linear-gradient(90deg, transparent 0 28px, rgba(7,17,31,.08) 29px 31px, transparent 32px 58px);
+  transform: skewX(-18deg) translateX(-12%);
+  animation: climateWindSweep 4.8s cubic-bezier(.45,.03,.28,.98) infinite;
+}
+
+.roofClimateGrid article:nth-child(1)::after {
+  right: 20px;
+  bottom: 28px;
+  width: 104px;
+  height: 42px;
+  border-top: 5px solid rgba(7,17,31,.76);
+  border-right: 2px solid rgba(7,17,31,.38);
+  transform: skewX(-24deg) rotate(-3deg);
+  transform-origin: right bottom;
+  box-shadow: 0 -7px 0 rgba(23,105,255,.13), 0 -14px 0 rgba(7,17,31,.08);
+  animation: climateWindLift 4.8s ease-in-out infinite;
+}
+
+/* HAIL — visible stones fall first, then a short impact flash. */
+.roofClimateGrid article:nth-child(2)::before {
+  inset: -70px 0 0 0;
+  opacity: .8;
+  background:
+    radial-gradient(circle at 13% 8%, #fff 0 4px, #b8d8ee 5px 7px, transparent 8px),
+    radial-gradient(circle at 31% 22%, #fff 0 5px, #a9cde7 6px 8px, transparent 9px),
+    radial-gradient(circle at 49% 2%, #fff 0 4px, #b7d8ee 5px 7px, transparent 8px),
+    radial-gradient(circle at 64% 18%, #fff 0 6px, #9fc7e3 7px 9px, transparent 10px),
+    radial-gradient(circle at 79% 5%, #fff 0 4px, #b8d8ee 5px 7px, transparent 8px),
+    radial-gradient(circle at 91% 28%, #fff 0 5px, #a7cee8 6px 8px, transparent 9px),
+    radial-gradient(circle at 22% 42%, #fff 0 4px, #b8d8ee 5px 7px, transparent 8px),
+    radial-gradient(circle at 56% 38%, #fff 0 5px, #a7cee8 6px 8px, transparent 9px),
+    radial-gradient(circle at 84% 51%, #fff 0 4px, #b8d8ee 5px 7px, transparent 8px);
+  filter: drop-shadow(0 4px 5px rgba(20,83,130,.24));
+  animation: climateHailFall 3.2s linear infinite;
+}
+
+.roofClimateGrid article:nth-child(2)::after {
+  right: 46px;
+  bottom: 46px;
+  width: 46px;
+  height: 46px;
+  border: 2px solid rgba(23,105,255,.42);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 0 10px rgba(23,105,255,.08), 0 0 32px rgba(23,105,255,.18);
+  animation: climateHailImpact 3.2s ease-out infinite;
+}
+
+/* SNOW — flakes build into a soft load line at the bottom of the card. */
+.roofClimateGrid article:nth-child(3)::before {
+  inset: -58px 0 0;
+  opacity: .74;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255,255,255,.96) 0 2px, transparent 3px),
+    radial-gradient(circle at 21% 32%, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 35% 5%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 25%, rgba(255,255,255,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 63% 12%, rgba(255,255,255,.96) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 38%, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 92% 8%, rgba(255,255,255,.96) 0 2px, transparent 3px),
+    radial-gradient(circle at 13% 54%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 57% 58%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 86% 66%, rgba(255,255,255,.9) 0 3px, transparent 4px);
+  animation: climateSnowFall 5.7s linear infinite;
+}
+
+.roofClimateGrid article:nth-child(3)::after {
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  height: 34px;
+  border-radius: 55% 45% 10px 12px / 75% 70% 10px 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.93), rgba(205,222,235,.76));
+  box-shadow: 0 -8px 22px rgba(255,255,255,.42), inset 0 -5px 11px rgba(92,125,151,.12);
+  transform-origin: bottom;
+  animation: climateSnowLoad 5.7s ease-in-out infinite;
+}
+
+/* FREEZE — frost spreads across the surface while a freeze/thaw crack opens. */
+.roofClimateGrid article:nth-child(4)::before {
+  inset: 0;
+  opacity: .48;
+  background:
+    linear-gradient(118deg, transparent 0 44%, rgba(111,184,232,.34) 45% 46%, transparent 47%),
+    linear-gradient(62deg, transparent 0 55%, rgba(111,184,232,.26) 56% 57%, transparent 58%),
+    radial-gradient(circle at 86% 78%, rgba(192,232,255,.48), transparent 32%);
+  clip-path: polygon(100% 100%, 28% 100%, 52% 72%, 37% 58%, 62% 45%, 53% 22%, 100% 0);
+  transform-origin: 100% 100%;
+  animation: climateFrostSpread 5.2s ease-in-out infinite;
+}
+
+.roofClimateGrid article:nth-child(4)::after {
+  left: 38%;
+  top: 29%;
+  width: 4px;
+  height: 116px;
+  background: linear-gradient(#07111f 0 18%, transparent 19% 25%, #07111f 26% 52%, transparent 53% 61%, #07111f 62% 100%);
+  box-shadow: 15px 28px 0 -1px rgba(7,17,31,.65), -12px 56px 0 -1px rgba(7,17,31,.5), 8px 84px 0 -1px rgba(7,17,31,.46);
+  transform: rotate(34deg) scaleY(.18);
+  transform-origin: top;
+  opacity: 0;
+  animation: climateFreezeCrack 5.2s ease-in-out infinite;
+}
+
+@keyframes climateWindSweep {
+  0%, 8% { transform: skewX(-18deg) translateX(-22%); opacity: .12; }
+  38%, 60% { opacity: .72; }
+  78%, 100% { transform: skewX(-18deg) translateX(28%); opacity: .08; }
+}
+
+@keyframes climateWindLift {
+  0%, 22%, 100% { transform: skewX(-24deg) rotate(-3deg) translateY(0); }
+  42% { transform: skewX(-24deg) rotate(-8deg) translateY(-8px); }
+  57% { transform: skewX(-24deg) rotate(-1deg) translateY(2px); }
+  72% { transform: skewX(-24deg) rotate(-5deg) translateY(-4px); }
+}
+
+@keyframes climateHailFall {
+  0% { transform: translate3d(14px,-88px,0); opacity: 0; }
+  9% { opacity: .82; }
+  72% { opacity: .88; }
+  100% { transform: translate3d(-20px,260px,0); opacity: 0; }
+}
+
+@keyframes climateHailImpact {
+  0%, 62%, 100% { opacity: 0; transform: scale(.25); }
+  69% { opacity: .9; transform: scale(.45); }
+  82% { opacity: .22; transform: scale(1.55); }
+}
+
+@keyframes climateSnowFall {
+  0% { transform: translate3d(-5px,-70px,0); }
+  48% { transform: translate3d(10px,75px,0); }
+  100% { transform: translate3d(-7px,220px,0); }
+}
+
+@keyframes climateSnowLoad {
+  0%, 10%, 100% { transform: scaleY(.45) scaleX(.92); opacity: .38; }
+  58%, 82% { transform: scaleY(1) scaleX(1); opacity: .9; }
+}
+
+@keyframes climateFrostSpread {
+  0%, 8% { transform: scale(.25); opacity: .06; filter: blur(4px); }
+  48%, 74% { transform: scale(1); opacity: .58; filter: blur(0); }
+  100% { transform: scale(.35); opacity: .08; filter: blur(3px); }
+}
+
+@keyframes climateFreezeCrack {
+  0%, 30%, 100% { opacity: 0; transform: rotate(34deg) scaleY(.08); }
+  48%, 73% { opacity: .76; transform: rotate(34deg) scaleY(1); }
+  86% { opacity: .18; transform: rotate(34deg) scaleY(.6); }
+}
+
+@media (max-width: 760px) {
+  .roofClimateGrid article { min-height: 190px; }
+  .roofClimateGrid article:nth-child(2)::before { animation-duration: 3.8s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofClimateGrid article::before,
+  .roofClimateGrid article::after { animation: none !important; }
+  .roofClimateGrid article:hover { transform: none; }
+}
