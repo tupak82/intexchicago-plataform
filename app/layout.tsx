@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { site } from "@/lib/site";
 import "./globals.css";
+import "./brand.css";
 import "./roofing-home.css";
 import "./service-pages.css";
 import "./platform-pages.css";
