@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { listPublicReviews } from "@/lib/review-store";
 
 const serviceCards = [
   { title: "Water Damage", eyebrow: "Emergency response", href: "/water-damage-restoration-chicago/", description: "Fast mitigation and restoration when leaks, flooding, or failed plumbing threatens your property." },
@@ -20,7 +21,12 @@ const localBusinessSchema = {
   description: site.description,
 };
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const reviews = await listPublicReviews();
+  const featuredReviews = reviews.slice(0, 3);
+
   return (
     <main>
       <script
@@ -38,6 +44,7 @@ export default function Home() {
           <a href="/roofing-chicago/">Roofing</a>
           <a href="/projects/">Projects</a>
           <a href="/resources/">Resources</a>
+          {featuredReviews.length ? <a href="/reviews/">Reviews</a> : null}
           <a href="/service-areas/">Service Areas</a>
           <a className="navCall" href={`tel:${site.phone}`}>Call now</a>
         </nav>
@@ -101,6 +108,28 @@ export default function Home() {
         </div>
       </section>
 
+      {featuredReviews.length ? (
+        <section className="homeReviewsSection" aria-labelledby="homeReviewsTitle">
+          <div className="sectionHeading">
+            <div>
+              <p className="kicker dark"><span /> Verified customer feedback</p>
+              <h2 id="homeReviewsTitle">What customers have said.</h2>
+            </div>
+            <p>Only reviews with a verified source and confirmed permission to display are shown on the Intex platform.</p>
+          </div>
+          <div className="reviewGrid">
+            {featuredReviews.map((review) => (
+              <article className="reviewCard" key={review.id}>
+                <div className="reviewCardTop"><span>{review.source}</span>{review.rating > 0 ? <strong>{review.rating.toFixed(1)} / 5</strong> : null}</div>
+                <blockquote>“{review.text}”</blockquote>
+                <footer><b>{review.reviewerName}</b>{review.publishedAt ? <time dateTime={review.publishedAt}>{review.publishedAt}</time> : null}</footer>
+              </article>
+            ))}
+          </div>
+          <a className="homeReviewsLink" href="/reviews/">View verified reviews →</a>
+        </section>
+      ) : null}
+
       <section className="estimateSection" id="estimate">
         <div>
           <p className="kicker dark"><span /> Start here</p>
@@ -115,7 +144,7 @@ export default function Home() {
 
       <footer>
         <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>RESTORATION</small></span></div>
-        <p><a href="/about/">About</a> · <a href="/projects/">Projects</a> · <a href="/resources/">Resources</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a></p>
+        <p><a href="/about/">About</a> · <a href="/projects/">Projects</a> · <a href="/resources/">Resources</a>{featuredReviews.length ? <> · <a href="/reviews/">Reviews</a></> : null} · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p>
         <p>© {new Date().getFullYear()} Intex Restoration</p>
       </footer>
     </main>
