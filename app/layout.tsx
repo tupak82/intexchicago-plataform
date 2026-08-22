@@ -4,6 +4,7 @@ import "./globals.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
+import "./admin/admin.css";
 import "./estimate/estimate.css";
 
 export const metadata: Metadata = {
