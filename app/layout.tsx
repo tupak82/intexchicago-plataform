@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import SiteMotion from "@/components/SiteMotion";
+import MobileActionBar from "@/components/MobileActionBar";
 import { site } from "@/lib/site";
 import "./globals.css";
 import "./brand.css";
@@ -13,6 +14,7 @@ import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
 import "./site-motion.css";
+import "./mobile-premium.css";
 import "./reviews/reviews.css";
 import "./admin/admin.css";
 import "./estimate/estimate.css";
@@ -59,6 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <SiteMotion />
         {children}
+        <MobileActionBar />
         {googleAnalyticsId ? (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`} strategy="afterInteractive" />
