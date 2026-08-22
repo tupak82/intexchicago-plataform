@@ -49,6 +49,32 @@
 .adminLeadQuickActions { display: grid; gap: 8px; margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); }
 .adminLeadQuickActions a { border: 1px solid rgba(255,255,255,.12); padding: 11px 13px; text-align: center; font-size: 12px; }
 
+.adminContentList { margin-top: 34px; border-top: 1px solid rgba(255,255,255,.1); }
+.adminContentRow { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 23px 4px; border-bottom: 1px solid rgba(255,255,255,.1); transition: padding .18s ease, background .18s ease; }
+.adminContentRow:hover { padding-left: 16px; padding-right: 16px; background: rgba(255,255,255,.035); }
+.adminContentRow > div { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 7px 12px; }
+.adminContentRow strong { font: 700 19px "Manrope", sans-serif; }
+.adminContentRow small { grid-column: 2; color: #7c90a5; }
+.adminContentRow > span { color: #8ca0b6; font-size: 12px; }
+.adminEditorShell { max-width: 1040px; margin: 34px auto 0; }
+.adminEditorForm { display: grid; gap: 22px; padding: 34px; background: #0b1726; border: 1px solid rgba(255,255,255,.08); }
+.adminEditorGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.adminEditorForm label { display: grid; gap: 9px; color: #91a3b6; font-size: 12px; }
+.adminEditorForm input, .adminEditorForm select, .adminEditorForm textarea { width: 100%; border: 1px solid rgba(255,255,255,.13); background: #07111f; color: white; padding: 12px 13px; font: inherit; }
+.adminEditorForm input, .adminEditorForm select { min-height: 48px; }
+.adminEditorForm textarea { resize: vertical; line-height: 1.55; }
+.adminPublishToggle { grid-template-columns: auto 1fr !important; align-items: start; padding: 18px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.025); }
+.adminPublishToggle input { width: 18px; min-height: 18px; margin: 2px 0 0; }
+.adminPublishToggle span { display: grid; gap: 5px; }
+.adminPublishToggle strong { color: white; font-size: 13px; }
+.adminPublishToggle small { color: #7c90a5; line-height: 1.5; }
+.adminEditorActions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 6px; }
+.adminEditorActions a, .adminEditorActions button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 18px; border: 1px solid rgba(255,255,255,.13); background: transparent; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.adminEditorActions button { background: #1e67ff; border-color: #1e67ff; }
+.adminNotice { max-width: 1040px; margin: 24px auto 0; padding: 14px 16px; border: 1px solid rgba(255,255,255,.12); font-size: 13px; }
+.adminNotice.success { background: rgba(81,217,148,.1); border-color: rgba(81,217,148,.3); color: #8be6b5; }
+.adminNotice.error { background: rgba(255,100,100,.08); border-color: rgba(255,100,100,.25); color: #ffaaaa; }
+
 @media (max-width: 900px) {
   .adminLeadDetail { grid-template-columns: 1fr; }
   .adminLeadWorkflow { position: static; }
@@ -63,4 +89,9 @@
   .adminLeadMeta { text-align: left; padding-left: 88px; }
   .adminLeadCard, .adminLeadWorkflow { padding: 24px 20px; }
   .adminLeadCard dl > div { grid-template-columns: 1fr; gap: 5px; }
+  .adminContentRow { align-items: flex-start; flex-direction: column; }
+  .adminEditorGrid { grid-template-columns: 1fr; }
+  .adminEditorForm { padding: 24px 18px; }
+  .adminEditorActions { flex-direction: column-reverse; }
+  .adminEditorActions a, .adminEditorActions button { width: 100%; }
 }
