@@ -1,0 +1,42 @@
+import type { Metadata } from "next";
+import { publishedProjects } from "@/lib/projects";
+
+export const metadata: Metadata = {
+  title: "Restoration & Roofing Projects",
+  description: "Browse verified Intex Restoration roofing and property restoration case studies from Chicago and Chicagoland.",
+  alternates: { canonical: "/projects/" },
+};
+
+export default function ProjectsPage() {
+  return (
+    <main className="platformPage">
+      <section className="platformHero">
+        <div className="platformBreadcrumbs"><a href="/">Home</a> / Projects</div>
+        <p className="kicker"><span /> Real work, documented</p>
+        <h1>Project case studies built for proof, not stock-photo marketing.</h1>
+        <p>Each published project will document the original problem, scope, solution, outcome, location, and verified before/after imagery.</p>
+      </section>
+
+      <section className="platformSection">
+        {publishedProjects.length ? (
+          <div className="platformGrid">
+            {publishedProjects.map((project) => (
+              <a className="platformCard" href={`/projects/${project.slug}/`} key={project.slug}>
+                <span>{project.service} · {project.location}</span>
+                <h2>{project.title}</h2>
+                <p>{project.summary}</p>
+                <b>View case study →</b>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div className="platformEmpty">
+            <span>Migration status</span>
+            <h2>The project system is ready. Legacy projects are being verified before publication.</h2>
+            <p>We are not filling this section with fabricated projects. Photos, job details, locations, and permissions must be matched before a case study becomes public.</p>
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
