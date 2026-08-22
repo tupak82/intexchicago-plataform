@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
 
@@ -32,10 +33,7 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <header className="siteHeader">
-        <a className="brand" href="#top" aria-label="Intex Chicago Roofing home">
-          <span className="brandMark">IX</span>
-          <span><strong>INTEX</strong><small>CHICAGO ROOFING</small></span>
-        </a>
+        <BrandLogo href="#top" label="Intex Chicago Roofing home" />
         <nav aria-label="Primary navigation">
           <a href="#roofing-services">Roofing</a>
           <a href="/storm-damage-restoration-chicago/">Storm Damage</a>
@@ -169,7 +167,7 @@ export default async function Home() {
       </section>
 
       <footer>
-        <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>CHICAGO ROOFING</small></span></div>
+        <BrandLogo href="/" label="Intex Chicago Roofing home" className="footerBrand" />
         <p><a href="/roof-repair-chicago/">Roof Repair</a> · <a href="/roof-replacement-chicago/">Roof Replacement</a> · <a href="/flat-roofing-chicago/">Flat Roofing</a> · <a href="/commercial-roofing-chicago/">Commercial Roofing</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a></p>
         <p><a href={`mailto:${site.email}`}>{site.email}</a> · <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
       </footer>
