@@ -2,13 +2,14 @@
 
 Last verified: 2026-08-22
 
-This inventory records WordPress routes observed directly from the live `intexchicago.com` navigation. It is a migration source of truth, not a guessed URL list.
+This inventory records WordPress routes observed directly from the live `intexchicago.com` navigation or confirmed in the public search index. It is a migration source of truth, not a guessed URL list.
 
 | Legacy WordPress route | New platform route | Migration action |
 | --- | --- | --- |
 | `/side-navigation/stormdamage/` | `/storm-damage-restoration-chicago/` | 301 |
 | `/side-navigation/waterdamage/` | `/water-damage-restoration-chicago/` | 301 |
 | `/trauma-cleaning-biohazard-removal/` | `/trauma-biohazard-cleaning-chicago/` | 301 |
+| `/?page_id=12534` | `/trauma-biohazard-cleaning-chicago/` | 301 with query match |
 | `/side-navigation/firedamage/` | `/fire-damage-restoration-chicago/` | 301 |
 | `/mold-cleanup-remediation/` | `/mold-remediation-chicago/` | 301 |
 | `/side-navigation/insuranceclaim/` | `/insurance-claims/` | 301 |
