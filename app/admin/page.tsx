@@ -58,7 +58,7 @@ export default async function AdminPage() {
         <article><span>Reviews</span><strong>{publicReviews.length}</strong><small>Verified + permitted + published</small></article>
         <article><span>301 redirects</span><strong>{redirectCount}</strong><small>Verified WordPress routes mapped</small></article>
         <article><span>MySQL</span><strong>{database.reachable ? "Online" : database.configured ? "Offline" : "Needs config"}</strong><small>Owned lead + CMS data store</small></article>
-        <article><span>Lead intake</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>{database.reachable ? "Stored in MySQL" : webhookConfigured ? "Webhook fallback" : "No destination"}</small></article>
+        <article><span>Lead intake</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>{database.reachable ? "Stored in MySQL" : webhookConfigured ? "Webhook fallback only" : "No destination"}</small></article>
       </section>
 
       <section className="adminPanel">
@@ -80,7 +80,8 @@ export default async function AdminPage() {
         </div>
         <ul>
           <li className={database.reachable ? "ready" : "pending"}>Owned MySQL persistence and private admin tools</li>
-          <li className={leadBackendReady ? "ready" : "pending"}>Lead intake destination available</li>
+          <li className={leadBackendReady ? "ready" : "pending"}>At least one lead intake destination available</li>
+          <li className={database.reachable ? "ready" : "pending"}>Primary lead persistence in owned MySQL</li>
           <li className={redirectCount > 0 ? "ready" : "pending"}>First verified WordPress 301 redirect set</li>
           <li className="pending">Full WordPress URL export and Search Console cross-check</li>
           <li className="pending">Authoritative licensing / insurance and remaining marketing-claim verification</li>
