@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AnimatedProcessSteps } from "@/components/AnimatedProcessSteps";
 import { isLocalRoofingPage, localRoofingCopy, localRoofingPages } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
 
@@ -82,27 +83,13 @@ export default async function LocalRoofingServicePage({ params }: { params: Prom
           <p className="kicker dark"><span /> When this service makes sense</p>
           <h2>Start with condition and urgency.</h2>
           <p>{copy.decision}</p>
-          <div className="processGrid">
-            {page.service.problems.slice(0, 4).map((problem, index) => (
-              <article className="processStep" key={problem}>
-                <strong>0{index + 1}</strong>
-                <h3>{problem}</h3>
-              </article>
-            ))}
-          </div>
+          <AnimatedProcessSteps steps={page.service.problems.slice(0, 4)} ariaLabel={`${page.service.name} warning signs`} />
         </div>
 
         <div className="serviceProcess">
           <p className="kicker dark"><span /> What happens next</p>
           <h2>A clear roofing process.</h2>
-          <div className="processGrid">
-            {page.service.process.map((step, index) => (
-              <article className="processStep" key={step}>
-                <strong>0{index + 1}</strong>
-                <h3>{step}</h3>
-              </article>
-            ))}
-          </div>
+          <AnimatedProcessSteps steps={page.service.process} ariaLabel={`${page.service.name} process`} />
         </div>
 
         <div className="serviceCta">
