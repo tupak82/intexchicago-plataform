@@ -13,6 +13,7 @@ type LeadDraft = {
   description: string;
   preferredContact: string;
   consent: boolean;
+  website: string;
 };
 
 const initialLead: LeadDraft = {
@@ -26,6 +27,7 @@ const initialLead: LeadDraft = {
   description: "",
   preferredContact: "phone",
   consent: false,
+  website: "",
 };
 
 const serviceOptions = [
@@ -42,7 +44,7 @@ const serviceOptions = [
 export default function EstimateFlow() {
   const [step, setStep] = useState(0);
   const [lead, setLead] = useState<LeadDraft>(initialLead);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const totalSteps = 6;
   const progress = useMemo(() => `${Math.min(step + 1, totalSteps)} / ${totalSteps}`, [step]);
@@ -54,27 +56,37 @@ export default function EstimateFlow() {
   const canContinue = () => {
     if (step === 0) return Boolean(lead.service);
     if (step === 1) return Boolean(lead.emergency);
-    if (step === 2) return Boolean(lead.propertyType && lead.zip.trim().length >= 5);
+    if (step === 2) return Boolean(lead.propertyType && /^\d{5}(-\d{4})?$/.test(lead.zip.trim()));
     if (step === 3) return Boolean(lead.name.trim() && lead.phone.trim());
     if (step === 4) return Boolean(lead.description.trim());
     if (step === 5) return lead.consent;
     return false;
   };
 
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!canContinue()) return;
-    // Backend persistence is intentionally not enabled until the production
-    // data store and privacy/consent policy are configured.
-    setSubmitted(true);
+    if (!canContinue() || status === "submitting") return;
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...lead, sourcePage: window.location.pathname }),
+      });
+      if (!response.ok) throw new Error("Lead submission failed");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
-  if (submitted) {
+  if (status === "success") {
     return (
       <section className="estimateCard estimateSuccess" aria-live="polite">
-        <p className="estimateEyebrow">Request prepared</p>
+        <p className="estimateEyebrow">Request received</p>
         <h2>Thanks, {lead.name.split(" ")[0] || "there"}.</h2>
-        <p>Your request is ready for the next integration phase. For an active emergency, call Intex now rather than waiting for an online response.</p>
+        <p>Your request was delivered to Intex. For an active emergency, call now rather than waiting for an online response.</p>
         <a className="estimatePrimary" href="tel:+17738225892">Call 773-822-5892</a>
       </section>
     );
@@ -87,6 +99,10 @@ export default function EstimateFlow() {
         <span>{progress}</span>
       </div>
       <div className="estimateProgress"><span style={{ width: `${((step + 1) / totalSteps) * 100}%` }} /></div>
+
+      <div className="estimateHoneypot" aria-hidden="true">
+        <label>Website<input tabIndex={-1} autoComplete="off" value={lead.website} onChange={(e) => update("website", e.target.value)} /></label>
+      </div>
 
       {step === 0 && (
         <fieldset>
@@ -168,15 +184,20 @@ export default function EstimateFlow() {
             <input type="checkbox" checked={lead.consent} onChange={(e) => update("consent", e.target.checked)} />
             <span>I agree that Intex may contact me about this request using the information I provided.</span>
           </label>
+          {status === "error" && (
+            <div className="estimateEmergency" role="alert">
+              We could not send this request online. Please call <a href="tel:+17738225892">773-822-5892</a> instead.
+            </div>
+          )}
         </fieldset>
       )}
 
       <div className="estimateNav">
-        <button type="button" className="estimateBack" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0}>Back</button>
+        <button type="button" className="estimateBack" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0 || status === "submitting"}>Back</button>
         {step < totalSteps - 1 ? (
           <button type="button" className="estimatePrimary" disabled={!canContinue()} onClick={() => setStep((current) => Math.min(totalSteps - 1, current + 1))}>Continue</button>
         ) : (
-          <button type="submit" className="estimatePrimary" disabled={!canContinue()}>Prepare request</button>
+          <button type="submit" className="estimatePrimary" disabled={!canContinue() || status === "submitting"}>{status === "submitting" ? "Sending…" : "Send request"}</button>
         )}
       </div>
     </form>
