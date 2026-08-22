@@ -1,0 +1,142 @@
+.stormStory { isolation: isolate; }
+.stormStory::after { content: ""; position: absolute; inset: 0; z-index: 7; pointer-events: none; background: radial-gradient(circle at 50% 46%, rgba(255,255,255,.15), transparent 16%); opacity: 0; animation: stormShockFlash 7s linear infinite; }
+
+.stormScene { animation: stormSceneShake 7s ease-in-out infinite; }
+.stormCloud { background: rgba(48,58,73,.88); box-shadow: 0 20px 48px rgba(0,0,0,.28); }
+.lightning { width: 4px; height: 94px; box-shadow: 0 0 28px rgba(142,221,255,.95), 0 0 70px rgba(83,166,255,.55); }
+
+.hail { width: 15px; height: 15px; box-shadow: 0 0 14px rgba(214,242,255,.95); animation-duration: 7s; }
+.hail2, .hail4, .hail8 { width: 22px; height: 22px; }
+.hail6, .hail10 { width: 18px; height: 18px; }
+.hail1 { animation-delay: .05s; }
+.hail2 { animation-delay: .18s; }
+.hail3 { animation-delay: .33s; }
+.hail4 { animation-delay: .48s; }
+.hail5 { animation-delay: .62s; }
+.hail6 { animation-delay: .78s; }
+.hail7 { animation-delay: .92s; }
+.hail8 { animation-delay: 1.08s; }
+.hail9 { animation-delay: 1.22s; }
+.hail10 { animation-delay: 1.36s; }
+
+.house { animation: houseImpact 7s ease-in-out infinite; transform-origin: 50% 100%; }
+.roofShell { overflow: visible; animation: roofImpact 7s ease-in-out infinite; }
+.roofDamaged { animation: damagedRoofFadeAggressive 7s ease-in-out infinite; }
+.roofCrack { height: 4px; background: #02070d; box-shadow: 0 0 8px rgba(0,0,0,.9); }
+.crackOne { width: 38%; }
+.crackTwo { width: 34%; }
+.crackThree { width: 29%; }
+.chimney { animation: chimneyHit 7s ease-in-out infinite; transform-origin: 50% 100%; }
+.window { animation: windowDamage 7s ease-in-out infinite; }
+.window::after { box-shadow: 0 0 0 0 rgba(196,228,255,0); }
+
+.roofHole { position: absolute; left: 55%; top: 42%; width: 22%; height: 19%; z-index: 4; clip-path: polygon(8% 32%, 33% 5%, 70% 10%, 95% 38%, 82% 78%, 54% 96%, 18% 82%, 0 56%); background: radial-gradient(circle at 50% 45%, #02070d 0 44%, #09111a 45% 64%, transparent 65%); opacity: 0; transform: scale(.2) rotate(-8deg); animation: roofHole 7s ease-in-out infinite; }
+.roofHole::before { content: ""; position: absolute; inset: -8px; border: 2px solid rgba(0,0,0,.8); clip-path: inherit; }
+
+.roofDebris { position: absolute; left: 56%; top: 43%; width: 28px; height: 11px; z-index: 7; background: linear-gradient(180deg,#334b62,#152535); box-shadow: 0 0 9px rgba(0,0,0,.35); opacity: 0; animation: debrisFly 7s cubic-bezier(.2,.65,.25,1) infinite; }
+.debris1 { --dx: -118px; --dy: -92px; --rot: -310deg; }
+.debris2 { --dx: 102px; --dy: -118px; --rot: 420deg; animation-delay: .07s; }
+.debris3 { --dx: 138px; --dy: -48px; --rot: 260deg; animation-delay: .12s; }
+.debris4 { --dx: -84px; --dy: -146px; --rot: -480deg; animation-delay: .18s; width: 20px; }
+.debris5 { --dx: 66px; --dy: -168px; --rot: 350deg; animation-delay: .22s; width: 23px; }
+.debris6 { --dx: -145px; --dy: -34px; --rot: -220deg; animation-delay: .27s; width: 18px; }
+
+.impact { width: 48px; height: 48px; border-width: 2px; box-shadow: 0 0 28px rgba(102,199,255,.5); }
+.impact::before, .impact::after { width: 74px; }
+
+.waterLeak { position: absolute; left: 60%; top: 60%; width: 3px; height: 75px; z-index: 5; background: linear-gradient(#76c9ff,rgba(67,160,221,.65),transparent); filter: drop-shadow(0 0 4px #58b7f8); opacity: 0; animation: leakSequence 7s ease-in-out infinite; }
+.waterLeak::after { content: ""; position: absolute; left: -5px; bottom: -2px; width: 12px; height: 8px; border-radius: 50%; background: rgba(91,184,246,.55); }
+
+.damageAlert { position: absolute; left: 4%; top: 4%; z-index: 9; padding: 7px 10px; border: 1px solid rgba(255,99,99,.6); background: rgba(63,13,17,.76); color: #ffb1b1; font: 800 8px "Manrope",sans-serif; letter-spacing: .16em; opacity: 0; transform: translateY(-8px); animation: damageAlert 7s ease-in-out infinite; }
+
+.intexRepair::after { content: "PROTECTED"; position: absolute; right: 4%; top: 4%; padding: 7px 10px; border: 1px solid rgba(77,175,255,.6); background: rgba(7,35,58,.82); color: #9fd4ff; font: 800 8px "Manrope",sans-serif; letter-spacing: .16em; opacity: 0; animation: protectedStatus 7s ease-in-out infinite; }
+.repairBadge { font-size: 10px; padding: 10px 15px; border-color: rgba(87,181,255,.85); box-shadow: 0 0 36px rgba(47,139,255,.42); }
+.repairSweep { height: 7px; box-shadow: 0 0 34px rgba(92,184,255,1), 0 0 72px rgba(92,184,255,.45); }
+.repairBeam { width: 2px; }
+.roofRestored { filter: brightness(1.12) saturate(1.14); }
+
+@keyframes stormShockFlash {
+  0%,11%,100% { opacity: 0; }
+  12% { opacity: .75; }
+  13.5% { opacity: 0; }
+  17% { opacity: .38; }
+  18% { opacity: 0; }
+}
+@keyframes stormSceneShake {
+  0%,10%,32%,100% { transform: translate3d(0,0,0); }
+  12% { transform: translate3d(-3px,1px,0); }
+  14% { transform: translate3d(4px,-2px,0); }
+  16% { transform: translate3d(-5px,2px,0); }
+  18% { transform: translate3d(3px,0,0); }
+  20% { transform: translate3d(-2px,-1px,0); }
+}
+@keyframes houseImpact {
+  0%,11%,100% { transform: rotate(0deg); }
+  13% { transform: rotate(-1.6deg) translateY(2px); }
+  15% { transform: rotate(1.2deg) translateY(4px); }
+  18%,52% { transform: rotate(-.55deg) translateY(5px); }
+  69%,100% { transform: rotate(0) translateY(0); }
+}
+@keyframes roofImpact {
+  0%,10%,100% { transform: translateY(0) rotate(0); filter: drop-shadow(0 14px 18px rgba(0,0,0,.34)); }
+  13% { transform: translateY(5px) rotate(-1.1deg); }
+  16% { transform: translateY(9px) rotate(.8deg); }
+  20%,52% { transform: translateY(7px) rotate(-.35deg); filter: drop-shadow(0 20px 20px rgba(0,0,0,.52)); }
+  70%,100% { transform: translateY(0) rotate(0); }
+}
+@keyframes chimneyHit {
+  0%,12%,100% { transform: rotate(0) translate(0,0); }
+  16%,50% { transform: rotate(8deg) translate(3px,5px); }
+  69%,100% { transform: rotate(0) translate(0,0); }
+}
+@keyframes windowDamage {
+  0%,15%,100% { filter: none; opacity: 1; }
+  18%,52% { filter: brightness(.55) contrast(1.45); opacity: .78; }
+  70%,100% { filter: none; opacity: 1; }
+}
+@keyframes roofHole {
+  0%,13% { opacity: 0; transform: scale(.2) rotate(-8deg); }
+  18%,53% { opacity: 1; transform: scale(1) rotate(-8deg); }
+  57% { opacity: .9; transform: scale(.86) rotate(-5deg); }
+  70%,100% { opacity: 0; transform: scale(.2) rotate(0); }
+}
+@keyframes debrisFly {
+  0%,12% { opacity: 0; transform: translate(0,0) rotate(0) scale(.55); }
+  15% { opacity: 1; }
+  31% { opacity: .95; transform: translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1); }
+  38%,100% { opacity: 0; transform: translate(calc(var(--dx) * 1.2),calc(var(--dy) * 1.4)) rotate(var(--rot)) scale(.8); }
+}
+@keyframes leakSequence {
+  0%,20% { opacity: 0; transform: scaleY(.1); transform-origin: top; }
+  26%,51% { opacity: .9; transform: scaleY(1); }
+  58%,100% { opacity: 0; transform: scaleY(.2); }
+}
+@keyframes damageAlert {
+  0%,13%,100% { opacity: 0; transform: translateY(-8px); }
+  18%,49% { opacity: 1; transform: translateY(0); }
+  57%,100% { opacity: 0; transform: translateY(4px); }
+}
+@keyframes protectedStatus {
+  0%,63% { opacity: 0; transform: translateY(-5px); }
+  72%,92% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; }
+}
+@keyframes damagedRoofFadeAggressive {
+  0%,12% { filter: saturate(.85) brightness(.92); opacity: 1; }
+  18%,50% { filter: saturate(.38) brightness(.54) contrast(1.28); opacity: 1; }
+  67% { filter: saturate(.65) brightness(.75); opacity: .52; }
+  76%,100% { filter: saturate(1) brightness(1); opacity: .08; }
+}
+
+@media (max-width: 760px) {
+  .roofDebris { transform: scale(.8); }
+  .hail { width: 12px; height: 12px; }
+  .hail2, .hail4, .hail8 { width: 17px; height: 17px; }
+  .damageAlert, .intexRepair::after { font-size: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stormScene, .house, .roofShell, .chimney, .window, .roofHole, .roofDebris, .waterLeak, .damageAlert, .stormStory::after, .intexRepair::after { animation: none !important; }
+  .roofHole, .roofDebris, .waterLeak, .damageAlert { opacity: 0 !important; }
+  .intexRepair::after { opacity: 1 !important; }
+}
