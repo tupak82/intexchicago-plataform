@@ -1,12 +1,12 @@
 import { site } from "@/lib/site";
 
 const serviceCards = [
-  { title: "Water Damage", eyebrow: "Emergency response", description: "Fast mitigation and restoration when leaks, flooding, or failed plumbing threatens your property." },
-  { title: "Fire Damage", eyebrow: "Restore with confidence", description: "Coordinated cleanup and restoration for homes and commercial spaces after fire and smoke damage." },
-  { title: "Roof Repair", eyebrow: "Protect what matters", description: "Roof repair and restoration built for Chicago weather and long-term performance." },
-  { title: "Storm Damage", eyebrow: "Chicago weather ready", description: "Assessment and restoration after wind, hail, and severe weather damage." },
-  { title: "Mold Cleanup", eyebrow: "Healthy spaces", description: "Professional mold cleanup and remediation designed to address the source, not just the surface." },
-  { title: "Commercial", eyebrow: "Keep business moving", description: "A single restoration partner for commercial properties, emergencies, and complex recovery work." },
+  { title: "Water Damage", eyebrow: "Emergency response", href: "/water-damage-restoration-chicago/", description: "Fast mitigation and restoration when leaks, flooding, or failed plumbing threatens your property." },
+  { title: "Fire Damage", eyebrow: "Restore with confidence", href: "/fire-damage-restoration-chicago/", description: "Coordinated cleanup and restoration for homes and commercial spaces after fire and smoke damage." },
+  { title: "Roofing", eyebrow: "Protect what matters", href: "/roofing-chicago/", description: "Roof repair and restoration built for Chicago weather and long-term performance." },
+  { title: "Storm Damage", eyebrow: "Chicago weather ready", href: "/storm-damage-restoration-chicago/", description: "Assessment and restoration after wind, hail, and severe weather damage." },
+  { title: "Mold Cleanup", eyebrow: "Healthy spaces", href: "/mold-remediation-chicago/", description: "Professional mold cleanup and remediation designed to address the source, not just the surface." },
+  { title: "Commercial", eyebrow: "Keep business moving", href: "/commercial-restoration-chicago/", description: "A single restoration partner for commercial properties, emergencies, and complex recovery work." },
 ];
 
 const localBusinessSchema = {
@@ -17,7 +17,6 @@ const localBusinessSchema = {
   telephone: site.phone,
   areaServed: "Chicagoland",
   description: site.description,
-  openingHours: "Mo-Su 00:00-23:59",
 };
 
 export default function Home() {
@@ -35,8 +34,9 @@ export default function Home() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#services">Services</a>
+          <a href="/roofing-chicago/">Roofing</a>
           <a href="#why-intex">Why Intex</a>
-          <a className="navCall" href={`tel:${site.phone}`}>Call 24/7</a>
+          <a className="navCall" href={`tel:${site.phone}`}>Call now</a>
         </nav>
       </header>
 
@@ -46,22 +46,22 @@ export default function Home() {
         <div className="heroContent">
           <p className="kicker"><span /> Chicago restoration + roofing</p>
           <h1>When your property needs help, <em>every minute matters.</em></h1>
-          <p className="heroLead">24/7 restoration and roofing for homes and businesses throughout Chicagoland. One experienced team from emergency response through the final detail.</p>
+          <p className="heroLead">Restoration and roofing for homes and businesses throughout Chicagoland. One experienced team from the first assessment through the final detail.</p>
           <div className="heroActions">
             <a className="primaryButton" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
             <a className="secondaryButton" href="#estimate">Get a free estimate <span>↗</span></a>
           </div>
           <div className="trustRow" aria-label="Service highlights">
-            <span><b>24/7</b> emergency response</span>
-            <span><b>Since 2009</b> serving Chicagoland</span>
-            <span><b>Licensed</b> & insured</span>
+            <span><b>Chicago</b> + Chicagoland</span>
+            <span><b>Roofing</b> + restoration</span>
+            <span><b>Residential</b> + commercial</span>
           </div>
         </div>
         <div className="heroVisual" aria-hidden="true">
           <div className="gridPlane" />
           <div className="building buildingBack" />
           <div className="building buildingFront"><span>INTEX</span></div>
-          <div className="statusCard"><i /> Emergency team available <strong>24/7</strong></div>
+          <div className="statusCard"><i /> Property help <strong>one call away</strong></div>
         </div>
       </section>
 
@@ -69,9 +69,9 @@ export default function Home() {
         <div className="sectionHeading">
           <div>
             <p className="kicker dark"><span /> What we restore</p>
-            <h2>One team. Six ways to get your property back.</h2>
+            <h2>One team. Multiple ways to get your property back.</h2>
           </div>
-          <p>Residential and commercial restoration built around a simple promise: respond quickly, communicate clearly, and do the work right.</p>
+          <p>Residential and commercial restoration built around a simple promise: respond clearly, communicate well, and focus on the work your property actually needs.</p>
         </div>
         <div className="serviceGrid">
           {serviceCards.map((service, index) => (
@@ -80,7 +80,7 @@ export default function Home() {
               <p>{service.eyebrow}</p>
               <h3>{service.title}</h3>
               <span>{service.description}</span>
-              <a href="#estimate" aria-label={`Get an estimate for ${service.title}`}>Explore service <b>↗</b></a>
+              <a href={service.href} aria-label={`Explore ${service.title}`}>Explore service <b>↗</b></a>
             </article>
           ))}
         </div>
@@ -92,9 +92,9 @@ export default function Home() {
           <h2>Restoration should feel controlled, even when the situation isn&apos;t.</h2>
         </div>
         <div className="proofGrid">
-          <article><strong>01</strong><h3>Rapid response</h3><p>Around-the-clock availability when water, fire, storms, or property damage can&apos;t wait.</p></article>
-          <article><strong>02</strong><h3>One accountable team</h3><p>Residential and commercial restoration coordinated through one experienced contractor.</p></article>
-          <article><strong>03</strong><h3>Long-term workmanship</h3><p>Solutions focused on restoring the property correctly, not simply covering the visible damage.</p></article>
+          <article><strong>01</strong><h3>Clear first response</h3><p>Start by explaining what happened, where the property is, and what needs immediate attention.</p></article>
+          <article><strong>02</strong><h3>One accountable team</h3><p>Residential and commercial restoration coordinated through one contractor instead of a maze of disconnected pages.</p></article>
+          <article><strong>03</strong><h3>Built around the property</h3><p>The new platform guides customers to the right service, whether the issue is roofing, water, fire, storm, mold, or commercial restoration.</p></article>
         </div>
       </section>
 
@@ -102,7 +102,7 @@ export default function Home() {
         <div>
           <p className="kicker dark"><span /> Start here</p>
           <h2>Tell us what happened. We&apos;ll help you plan the next move.</h2>
-          <p>For emergencies, call now. For planned roofing or restoration work, request a free estimate.</p>
+          <p>For active property damage, call now. For planned roofing or restoration work, request an estimate.</p>
         </div>
         <div className="estimateActions">
           <a className="primaryButton light" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
@@ -112,7 +112,7 @@ export default function Home() {
 
       <footer>
         <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>RESTORATION</small></span></div>
-        <p>Chicago restoration, roofing, and emergency property services.</p>
+        <p>Chicago restoration, roofing, and property services.</p>
         <p>© {new Date().getFullYear()} Intex Restoration</p>
       </footer>
     </main>
