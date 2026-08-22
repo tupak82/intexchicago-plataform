@@ -1,9 +1,20 @@
 import { NextResponse } from "next/server";
 import { normalizeLead, type LeadPayload, validateLead } from "@/lib/leads";
+import { allowLeadRequest } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
+function requestKey(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  return forwardedFor || realIp || "unknown";
+}
+
 export async function POST(request: Request) {
+  if (!allowLeadRequest(requestKey(request))) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
   const contentLength = Number(request.headers.get("content-length") || "0");
   if (contentLength > 25_000) {
     return NextResponse.json({ ok: false, error: "payload_too_large" }, { status: 413 });
