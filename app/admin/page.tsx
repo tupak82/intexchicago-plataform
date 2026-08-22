@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import { publishedProjects } from "@/lib/projects";
 import { serviceAreas } from "@/lib/service-areas";
 import { servicePages } from "@/lib/services";
 import { publishedResources } from "@/lib/resources";
 import { publishableReviews } from "@/lib/reviews";
-import { legacyRedirects } from "@/lib/legacy-redirects";
+import { legacyQueryRedirects, legacyRedirects } from "@/lib/legacy-redirects";
 import { cmsCollections } from "@/lib/cms";
+import { ADMIN_COOKIE, adminConfigured, validAdminSession } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +17,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AdminPage() {
-  if (process.env.INTEX_ADMIN_ENABLED !== "true") notFound();
+export default async function AdminPage() {
+  if (!adminConfigured()) notFound();
+
+  const cookieStore = await cookies();
+  if (!validAdminSession(cookieStore.get(ADMIN_COOKIE)?.value)) redirect("/admin/login/");
 
   const leadBackendReady = Boolean(process.env.INTEX_LEADS_WEBHOOK_URL);
   const publishedAreas = serviceAreas.filter((area) => area.indexable);
+  const redirectCount = legacyRedirects.length + legacyQueryRedirects.length;
 
   return (
     <main className="adminPage">
@@ -29,7 +35,10 @@ export default function AdminPage() {
           <h1>Migration Control Center</h1>
           <p>Operational readiness for the WordPress-to-platform migration.</p>
         </div>
-        <a href="/">View website →</a>
+        <div className="adminHeaderActions">
+          <a href="/">View website →</a>
+          <form action="/api/admin/logout/" method="post"><button type="submit">Sign out</button></form>
+        </div>
       </section>
 
       <section className="adminStats">
@@ -38,7 +47,7 @@ export default function AdminPage() {
         <article><span>Projects</span><strong>{publishedProjects.length}</strong><small>Verified public case studies</small></article>
         <article><span>Resources</span><strong>{publishedResources.length}</strong><small>Published educational guides</small></article>
         <article><span>Verified reviews</span><strong>{publishableReviews.length}</strong><small>No fabricated review content</small></article>
-        <article><span>301 redirects</span><strong>{legacyRedirects.length}</strong><small>Verified WordPress routes mapped</small></article>
+        <article><span>301 redirects</span><strong>{redirectCount}</strong><small>Verified WordPress routes mapped</small></article>
         <article><span>CMS collections</span><strong>{cmsCollections.length}</strong><small>Platform data domains defined</small></article>
         <article><span>Lead backend</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>INTEX_LEADS_WEBHOOK_URL</small></article>
       </section>
@@ -50,7 +59,7 @@ export default function AdminPage() {
         </div>
         <ul>
           <li className={leadBackendReady ? "ready" : "pending"}>Lead persistence and notification destination</li>
-          <li className={legacyRedirects.length > 0 ? "ready" : "pending"}>First verified WordPress 301 redirect set</li>
+          <li className={redirectCount > 0 ? "ready" : "pending"}>First verified WordPress 301 redirect set</li>
           <li className="pending">Full WordPress URL export and Search Console cross-check</li>
           <li className="pending">Claims, licensing, review rating and guarantee verification</li>
           <li className="pending">Project photo migration and permissions review</li>
