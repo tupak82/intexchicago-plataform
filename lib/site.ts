@@ -1,18 +1,18 @@
 export const site = {
-  name: "Intex Restoration",
+  name: "Intex Chicago Roofing",
   shortName: "Intex Chicago",
   url: "https://intexchicago.com",
   phone: "+17738225892",
   phoneDisplay: "(773) 822-5892",
   email: "info@intexchicago.com",
   description:
-    "Restoration and roofing services for residential and commercial properties throughout Chicagoland.",
+    "Chicago roofing contractor specializing in roof repair, roof replacement, storm damage, flat roofing and commercial roofing throughout Chicagoland.",
   services: [
-    "Water Damage",
-    "Fire Damage",
-    "Roofing",
-    "Storm Damage",
-    "Mold Cleanup",
-    "Commercial Restoration",
+    "Roof Repair",
+    "Roof Replacement",
+    "Storm Damage Roofing",
+    "Flat Roofing",
+    "Commercial Roofing",
+    "Roof Inspections",
   ],
 } as const;
