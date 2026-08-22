@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { publishedProjects } from "@/lib/projects";
+import { listPublicProjects } from "@/lib/project-store";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Restoration & Roofing Projects",
@@ -7,14 +9,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projects/" },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const publishedProjects = await listPublicProjects();
+
   return (
     <main className="platformPage">
       <section className="platformHero">
         <div className="platformBreadcrumbs"><a href="/">Home</a> / Projects</div>
         <p className="kicker"><span /> Real work, documented</p>
         <h1>Project case studies built for proof, not stock-photo marketing.</h1>
-        <p>Each published project will document the original problem, scope, solution, outcome, location, and verified before/after imagery.</p>
+        <p>Each published project documents the original problem, scope, solution, outcome, location, and verified before/after imagery.</p>
       </section>
 
       <section className="platformSection">
