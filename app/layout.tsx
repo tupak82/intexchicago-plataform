@@ -6,6 +6,7 @@ import "./brand.css";
 import "./roofing-home.css";
 import "./climate-animations.css";
 import "./process-animations.css";
+import "./home-experience-animations.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
