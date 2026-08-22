@@ -1,0 +1,20 @@
+.adminHeaderActions { display: flex; gap: 10px; align-items: center; }
+.adminHeaderActions > a,
+.adminHeaderActions button { border: 1px solid rgba(255,255,255,.15); background: transparent; color: white; padding: 12px 16px; border-radius: 999px; font: inherit; font-size: 12px; cursor: pointer; }
+.adminHeaderActions form { margin: 0; }
+
+.adminLoginCard { width: min(520px, 100%); margin: 9vh auto 0; padding: 42px; background: #0b1726; border: 1px solid rgba(255,255,255,.1); }
+.adminLoginCard > span { color: #6f89a5; text-transform: uppercase; letter-spacing: .14em; font-size: 10px; }
+.adminLoginCard h1 { margin: 14px 0 22px; font: 700 clamp(38px, 6vw, 62px)/1 "Manrope", sans-serif; letter-spacing: -.05em; }
+.adminLoginCard p { color: #8ca0b6; line-height: 1.65; }
+.adminLoginCard label { display: grid; gap: 9px; color: #a9b7c5; font-size: 13px; }
+.adminLoginCard input { width: 100%; min-height: 50px; border: 1px solid rgba(255,255,255,.15); background: #07111f; color: white; padding: 0 14px; font: inherit; }
+.adminLoginCard button { width: 100%; min-height: 50px; margin-top: 18px; border: 0; background: #1e67ff; color: white; font-weight: 700; cursor: pointer; }
+.adminLoginError { color: #ff9a9a !important; margin-bottom: 0; font-size: 13px; }
+
+@media (max-width: 620px) {
+  .adminHeaderActions { align-items: stretch; flex-direction: column; width: 100%; }
+  .adminHeaderActions > a,
+  .adminHeaderActions button { width: 100%; text-align: center; }
+  .adminLoginCard { margin-top: 4vh; padding: 30px 22px; }
+}
