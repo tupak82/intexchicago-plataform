@@ -2,12 +2,12 @@ import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
 
 const roofingServices = [
-  { title: "Roof Repair", eyebrow: "Leaks + damage", href: "/roofing-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
-  { title: "Roof Replacement", eyebrow: "Built for the next decade", href: "/roofing-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
+  { title: "Roof Repair", eyebrow: "Leaks + damage", href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
+  { title: "Roof Replacement", eyebrow: "Built for the next decade", href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
   { title: "Storm Damage", eyebrow: "Wind + hail response", href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
-  { title: "Flat Roofing", eyebrow: "Chicago property specialty", href: "/roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
-  { title: "Commercial Roofing", eyebrow: "Protect operations", href: "/commercial-restoration-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
-  { title: "Roof Inspections", eyebrow: "Know before you spend", href: "/estimate/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
+  { title: "Flat Roofing", eyebrow: "Chicago property specialty", href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
+  { title: "Commercial Roofing", eyebrow: "Protect operations", href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
+  { title: "Roof Inspections", eyebrow: "Know before you spend", href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
 ];
 
 const localBusinessSchema = {
@@ -150,7 +150,7 @@ export default async function Home() {
 
       <footer>
         <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>CHICAGO ROOFING</small></span></div>
-        <p><a href="/roofing-chicago/">Roofing</a> · <a href="/storm-damage-restoration-chicago/">Storm Damage</a> · <a href="/projects/">Projects</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></p>
+        <p><a href="/roof-repair-chicago/">Roof Repair</a> · <a href="/roof-replacement-chicago/">Roof Replacement</a> · <a href="/flat-roofing-chicago/">Flat Roofing</a> · <a href="/commercial-roofing-chicago/">Commercial Roofing</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a></p>
         <p><a href={`mailto:${site.email}`}>{site.email}</a> · <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
       </footer>
     </main>
