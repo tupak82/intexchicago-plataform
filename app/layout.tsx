@@ -10,6 +10,7 @@ import "./climate-animations.css";
 import "./process-animations.css";
 import "./home-experience-animations.css";
 import "./premium-interactions.css";
+import "./cinematic-scroll.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
