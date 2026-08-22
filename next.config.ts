@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { legacyRedirects } from "./lib/legacy-redirects";
+import { legacyQueryRedirects, legacyRedirects } from "./lib/legacy-redirects";
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -12,11 +12,19 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   async redirects() {
-    return legacyRedirects.map(({ source, destination, permanent }) => ({
-      source,
-      destination,
-      permanent,
-    }));
+    return [
+      ...legacyRedirects.map(({ source, destination, permanent }) => ({
+        source,
+        destination,
+        permanent,
+      })),
+      ...legacyQueryRedirects.map(({ source, destination, permanent, queryKey, queryValue }) => ({
+        source,
+        destination,
+        permanent,
+        has: [{ type: "query" as const, key: queryKey, value: queryValue }],
+      })),
+    ];
   },
   async headers() {
     return [
