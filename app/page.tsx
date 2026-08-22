@@ -15,6 +15,7 @@ const localBusinessSchema = {
   name: site.name,
   url: site.url,
   telephone: site.phone,
+  email: site.email,
   areaServed: "Chicagoland",
   description: site.description,
 };
@@ -36,6 +37,7 @@ export default function Home() {
           <a href="#services">Services</a>
           <a href="/roofing-chicago/">Roofing</a>
           <a href="/projects/">Projects</a>
+          <a href="/resources/">Resources</a>
           <a href="/service-areas/">Service Areas</a>
           <a className="navCall" href={`tel:${site.phone}`}>Call now</a>
         </nav>
@@ -113,7 +115,7 @@ export default function Home() {
 
       <footer>
         <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>RESTORATION</small></span></div>
-        <p><a href="/projects/">Projects</a> · <a href="/service-areas/">Service Areas</a> · <a href="/estimate/">Request help</a></p>
+        <p><a href="/about/">About</a> · <a href="/projects/">Projects</a> · <a href="/resources/">Resources</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a></p>
         <p>© {new Date().getFullYear()} Intex Restoration</p>
       </footer>
     </main>
