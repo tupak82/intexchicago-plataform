@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import EstimateFlow from "./EstimateFlow";
 import { site } from "@/lib/site";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export const metadata: Metadata = {
   title: "Request Restoration or Roofing Help",
@@ -13,10 +14,7 @@ export default function EstimatePage() {
   return (
     <main className="estimatePage">
       <header className="estimateHeader">
-        <a className="brand" href="/" aria-label="Intex Restoration home">
-          <span className="brandMark">IX</span>
-          <span><strong>INTEX</strong><small>RESTORATION</small></span>
-        </a>
+        <BrandLogo href="/" label="Intex Chicago home" />
         <a className="navCall" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
       </header>
       <section className="estimateShell">
