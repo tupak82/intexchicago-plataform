@@ -13,7 +13,11 @@ const redirects = read("lib/legacy-redirects.ts");
 const sitemap = read("app/sitemap.ts");
 const robots = read("app/robots.ts");
 const site = read("lib/site.ts");
+const homepage = read("app/page.tsx");
 const leadRoute = read("app/api/leads/route.ts");
+const projectInput = read("lib/project-input.ts");
+const reviewInput = read("lib/review-input.ts");
+const reviewStore = read("lib/review-store.ts");
 const packageJson = JSON.parse(read("package.json"));
 const schema = read("db/schema.sql");
 
@@ -31,6 +35,8 @@ const criticalRoutes = [
   "app/contact/page.tsx",
   "app/estimate/page.tsx",
   "app/projects/page.tsx",
+  "app/projects/[slug]/page.tsx",
+  "app/reviews/page.tsx",
   "app/resources/page.tsx",
   "app/service-areas/page.tsx",
   "app/privacy/page.tsx",
@@ -38,8 +44,18 @@ const criticalRoutes = [
   "app/admin/page.tsx",
   "app/admin/leads/page.tsx",
   "app/admin/leads/[id]/page.tsx",
+  "app/admin/projects/page.tsx",
+  "app/admin/projects/new/page.tsx",
+  "app/admin/projects/[id]/page.tsx",
+  "app/admin/reviews/page.tsx",
+  "app/admin/reviews/new/page.tsx",
+  "app/admin/reviews/[id]/page.tsx",
   "app/api/leads/route.ts",
   "app/api/admin/leads/[id]/route.ts",
+  "app/api/admin/projects/route.ts",
+  "app/api/admin/projects/[id]/route.ts",
+  "app/api/admin/reviews/route.ts",
+  "app/api/admin/reviews/[id]/route.ts",
   "app/api/health/route.ts",
 ];
 for (const route of criticalRoutes) check(exists(route), `Missing critical route: ${route}`);
@@ -49,6 +65,10 @@ const criticalInfrastructure = [
   "lib/lead-store.ts",
   "lib/admin-leads.ts",
   "lib/admin-auth.ts",
+  "lib/project-store.ts",
+  "lib/project-input.ts",
+  "lib/review-store.ts",
+  "lib/review-input.ts",
   "db/schema.sql",
   "docs/HOSTINGER-DEPLOYMENT.md",
   "docs/ROLLBACK.md",
@@ -61,14 +81,22 @@ check(site.includes("+17738225892"), "Canonical Intex phone is missing from site
 check(sitemap.includes("/resources/"), "Resources hub must be included in sitemap.");
 check(sitemap.includes("/service-areas/"), "Service areas must be included in sitemap.");
 check(sitemap.includes("/privacy/"), "Privacy page must be included in sitemap.");
+check(sitemap.includes("listPublicProjects"), "Project sitemap entries must be driven by the project repository.");
+check(sitemap.includes("listPublicReviews"), "Review sitemap visibility must be driven by verified review data.");
 check(robots.includes('disallow: ["/admin/", "/api/"]'), "robots.ts must disallow admin and API crawling.");
 check(packageJson.dependencies?.mysql2, "mysql2 dependency is required for owned persistence.");
 check(schema.includes("CREATE TABLE IF NOT EXISTS intex_leads"), "Lead table is missing from database schema.");
 check(schema.includes("CREATE TABLE IF NOT EXISTS intex_projects"), "Projects table is missing from database schema.");
 check(schema.includes("CREATE TABLE IF NOT EXISTS intex_reviews"), "Reviews table is missing from database schema.");
+check(schema.includes("permission_to_display"), "Review schema must track display permission.");
 check(schema.includes("CREATE TABLE IF NOT EXISTS intex_content"), "CMS content table is missing from database schema.");
 check(leadRoute.includes("storeLead"), "Lead endpoint must attempt owned database persistence.");
 check(leadRoute.includes("lead_backend_not_configured"), "Lead endpoint must fail safely when no destination is configured.");
+check(projectInput.includes("published_project_requires_images"), "Project publishing must require verified before/after media fields.");
+check(reviewInput.includes("publish_requires_verification_and_permission"), "Review publishing must require verification and permission.");
+check(reviewStore.includes("published = 1 AND verified = 1 AND permission_to_display = 1"), "Public reviews must enforce the three-part publication gate.");
+check(homepage.includes("listPublicReviews"), "Homepage verified review section must use the review repository.");
+check(!homepage.includes("AggregateRating"), "Do not emit AggregateRating on the homepage without approved aggregate evidence.");
 
 const forbiddenClaims = ["4.9-star", "4.9 star", "30-minute response", "lifetime guarantee", "since 2009"];
 const publicFiles = ["app/page.tsx", "lib/site.ts", "lib/services.ts"];
@@ -84,4 +112,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, and owned persistence infrastructure checked.`);
+console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, CRM, projects, reviews, and owned persistence checked.`);
