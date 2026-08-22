@@ -1,3 +1,4 @@
+import "./storm-impact.css";
 import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
@@ -59,13 +60,14 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="roofHeroPanel stormStory" aria-label="Animated illustration showing hail damaging a Chicago roof and Intex restoring it">
+        <div className="roofHeroPanel stormStory" aria-label="Animated illustration showing severe hail damaging a Chicago roof and Intex restoring it">
           <div className="roofPanelTop"><span>INTEX STORM RESPONSE</span><b>CHICAGO</b></div>
           <div className="stormScene" aria-hidden="true">
             <div className="stormCloud stormCloudOne" />
             <div className="stormCloud stormCloudTwo" />
             <div className="lightning" />
             <div className="hail hail1" /><div className="hail hail2" /><div className="hail hail3" /><div className="hail hail4" /><div className="hail hail5" /><div className="hail hail6" /><div className="hail hail7" /><div className="hail hail8" /><div className="hail hail9" /><div className="hail hail10" />
+            <div className="damageAlert">SEVERE HAIL DAMAGE</div>
             <div className="house">
               <div className="chimney" />
               <div className="roofShell">
@@ -74,21 +76,24 @@ export default async function Home() {
                 <div className="roofCrack crackOne" />
                 <div className="roofCrack crackTwo" />
                 <div className="roofCrack crackThree" />
+                <div className="roofHole" />
               </div>
               <div className="houseBody">
                 <div className="window" /><div className="door" />
               </div>
             </div>
+            <div className="roofDebris debris1" /><div className="roofDebris debris2" /><div className="roofDebris debris3" /><div className="roofDebris debris4" /><div className="roofDebris debris5" /><div className="roofDebris debris6" />
+            <div className="waterLeak" />
             <div className="impact impactOne" /><div className="impact impactTwo" /><div className="impact impactThree" />
             <div className="intexRepair">
               <div className="repairBeam beamOne" /><div className="repairBeam beamTwo" /><div className="repairBeam beamThree" />
-              <div className="repairBadge">INTEX</div>
+              <div className="repairBadge">INTEX REPAIR</div>
               <div className="repairSweep" />
             </div>
-            <div className="sceneCaption captionStorm">HAIL IMPACT</div>
-            <div className="sceneCaption captionRepair">INTEX RESTORATION</div>
+            <div className="sceneCaption captionStorm">HAIL IMPACT · ROOF FAILURE</div>
+            <div className="sceneCaption captionRepair">INTEX RESTORATION · PROTECTED</div>
           </div>
-          <div className="roofPanelBottom"><strong>From impact to protected.</strong><span>Inspect · repair · restore</span></div>
+          <div className="roofPanelBottom"><strong>Hail hits hard. Intex fixes it.</strong><span>Inspect · repair · restore</span></div>
         </div>
       </section>
 
