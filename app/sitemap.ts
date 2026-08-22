@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { servicePages } from "@/lib/services";
 import { serviceAreas } from "@/lib/service-areas";
+import { localRoofingPages } from "@/lib/local-roofing";
 import { publishedResources } from "@/lib/resources";
 import { listPublicProjects } from "@/lib/project-store";
 import { listPublicReviews } from "@/lib/review-store";
@@ -17,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${site.url}/about/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
     { url: `${site.url}/contact/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
     { url: `${site.url}/privacy/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${site.url}/service-areas/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/service-areas/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/projects/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/resources/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     ...(publicReviews.length
@@ -38,8 +39,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${site.url}/service-areas/${area.slug}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.75,
     }));
+
+  const localRoofing: MetadataRoute.Sitemap = localRoofingPages.map((page) => ({
+    url: `${site.url}${page.url}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: page.serviceSlug === "roof-repair-chicago" || page.serviceSlug === "roof-replacement-chicago" ? 0.72 : 0.68,
+  }));
 
   const projects: MetadataRoute.Sitemap = publishedProjects.map((project) => ({
     url: `${site.url}/projects/${project.slug}/`,
@@ -55,5 +63,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  return [...staticRoutes, ...services, ...areas, ...projects, ...resources];
+  return [...staticRoutes, ...services, ...areas, ...localRoofing, ...projects, ...resources];
 }
