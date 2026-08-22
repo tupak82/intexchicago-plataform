@@ -35,7 +35,8 @@ export default function Home() {
         <nav aria-label="Primary navigation">
           <a href="#services">Services</a>
           <a href="/roofing-chicago/">Roofing</a>
-          <a href="#why-intex">Why Intex</a>
+          <a href="/projects/">Projects</a>
+          <a href="/service-areas/">Service Areas</a>
           <a className="navCall" href={`tel:${site.phone}`}>Call now</a>
         </nav>
       </header>
@@ -49,7 +50,7 @@ export default function Home() {
           <p className="heroLead">Restoration and roofing for homes and businesses throughout Chicagoland. One experienced team from the first assessment through the final detail.</p>
           <div className="heroActions">
             <a className="primaryButton" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
-            <a className="secondaryButton" href="#estimate">Get a free estimate <span>↗</span></a>
+            <a className="secondaryButton" href="/estimate/">Request an estimate <span>↗</span></a>
           </div>
           <div className="trustRow" aria-label="Service highlights">
             <span><b>Chicago</b> + Chicagoland</span>
@@ -102,17 +103,17 @@ export default function Home() {
         <div>
           <p className="kicker dark"><span /> Start here</p>
           <h2>Tell us what happened. We&apos;ll help you plan the next move.</h2>
-          <p>For active property damage, call now. For planned roofing or restoration work, request an estimate.</p>
+          <p>For active property damage, call now. For planned roofing or restoration work, use the guided request.</p>
         </div>
         <div className="estimateActions">
-          <a className="primaryButton light" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
-          <a className="textLink" href="mailto:info@intexchicago.com">info@intexchicago.com ↗</a>
+          <a className="primaryButton light" href="/estimate/">Start request</a>
+          <a className="textLink" href={`tel:${site.phone}`}>Call {site.phoneDisplay} ↗</a>
         </div>
       </section>
 
       <footer>
         <div className="brand footerBrand"><span className="brandMark">IX</span><span><strong>INTEX</strong><small>RESTORATION</small></span></div>
-        <p>Chicago restoration, roofing, and property services.</p>
+        <p><a href="/projects/">Projects</a> · <a href="/service-areas/">Service Areas</a> · <a href="/estimate/">Request help</a></p>
         <p>© {new Date().getFullYear()} Intex Restoration</p>
       </footer>
     </main>
