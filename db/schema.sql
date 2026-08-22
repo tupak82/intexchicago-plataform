@@ -52,11 +52,12 @@ CREATE TABLE IF NOT EXISTS intex_reviews (
   source_url VARCHAR(1024) NOT NULL DEFAULT '',
   reviewed_at DATE NULL,
   verified TINYINT(1) NOT NULL DEFAULT 0,
+  permission_to_display TINYINT(1) NOT NULL DEFAULT 0,
   published TINYINT(1) NOT NULL DEFAULT 0,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY idx_intex_reviews_publish (published, verified, updated_at)
+  KEY idx_intex_reviews_publish (published, verified, permission_to_display, updated_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS intex_content (
