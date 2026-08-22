@@ -1,0 +1,13 @@
+.resourceArticle { max-width: 980px; }
+.resourceArticle > section { padding: 0 0 48px; margin-bottom: 48px; border-bottom: 1px solid var(--line); }
+.resourceArticle h2 { margin: 0 0 18px; font: 700 clamp(28px, 3vw, 42px)/1.08 "Manrope", sans-serif; letter-spacing: -.035em; }
+.resourceArticle p { color: var(--muted); font-size: 16px; line-height: 1.8; }
+.resourceArticle ul { margin: 22px 0 0; padding-left: 22px; color: var(--muted); }
+.resourceArticle li { padding: 7px 0; line-height: 1.6; }
+.resourceNotice { margin-top: 20px; padding: 28px; background: white; border: 1px solid var(--line); }
+.resourceNotice strong { display: block; margin-bottom: 8px; font-family: "Manrope", sans-serif; }
+.resourceNotice p { margin: 0; font-size: 13px; }
+
+@media (max-width: 620px) {
+  .resourceArticle > section { padding-bottom: 34px; margin-bottom: 34px; }
+}
