@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import { publishedProjects } from "@/lib/projects";
 import { serviceAreas } from "@/lib/service-areas";
 import { servicePages } from "@/lib/services";
+import { publishedResources } from "@/lib/resources";
+import { publishableReviews } from "@/lib/reviews";
+import { legacyRedirects } from "@/lib/legacy-redirects";
+import { cmsCollections } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +36,10 @@ export default function AdminPage() {
         <article><span>Service routes</span><strong>{servicePages.length}</strong><small>SEO service pages configured</small></article>
         <article><span>Service areas</span><strong>{publishedAreas.length}</strong><small>Verified/indexable locations</small></article>
         <article><span>Projects</span><strong>{publishedProjects.length}</strong><small>Verified public case studies</small></article>
+        <article><span>Resources</span><strong>{publishedResources.length}</strong><small>Published educational guides</small></article>
+        <article><span>Verified reviews</span><strong>{publishableReviews.length}</strong><small>No fabricated review content</small></article>
+        <article><span>301 redirects</span><strong>{legacyRedirects.length}</strong><small>Verified WordPress routes mapped</small></article>
+        <article><span>CMS collections</span><strong>{cmsCollections.length}</strong><small>Platform data domains defined</small></article>
         <article><span>Lead backend</span><strong>{leadBackendReady ? "Ready" : "Needs config"}</strong><small>INTEX_LEADS_WEBHOOK_URL</small></article>
       </section>
 
@@ -42,7 +50,8 @@ export default function AdminPage() {
         </div>
         <ul>
           <li className={leadBackendReady ? "ready" : "pending"}>Lead persistence and notification destination</li>
-          <li className="pending">Legacy WordPress URL export and 301 redirect map</li>
+          <li className={legacyRedirects.length > 0 ? "ready" : "pending"}>First verified WordPress 301 redirect set</li>
+          <li className="pending">Full WordPress URL export and Search Console cross-check</li>
           <li className="pending">Claims, licensing, review rating and guarantee verification</li>
           <li className="pending">Project photo migration and permissions review</li>
           <li className="pending">Analytics / Search Console production configuration</li>
