@@ -1,0 +1,337 @@
+/* Contextual motion layer for the Intex Chicago roofing homepage.
+   Keep movement tied to roofing, inspection, protection and trust — not decoration. */
+
+/* Header: the call action carries a restrained inspection pulse and nav links trace in. */
+.siteHeader nav a:not(.navCall) {
+  position: relative;
+}
+.siteHeader nav a:not(.navCall)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -7px;
+  height: 1px;
+  background: currentColor;
+  opacity: .48;
+  transition: right .28s ease;
+}
+.siteHeader nav a:not(.navCall):hover::after,
+.siteHeader nav a:not(.navCall):focus-visible::after {
+  right: 0;
+}
+.navCall {
+  position: relative;
+  isolation: isolate;
+}
+.navCall::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(126,159,197,.56);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: intexCallPulse 4.8s ease-out infinite;
+}
+
+/* Hero copy arrives in the same order a customer reads it. */
+.roofHeroContent > .roofEyebrow { animation: intexHeroIn .65s .05s both cubic-bezier(.2,.8,.2,1); }
+.roofHeroContent > h1 { animation: intexHeroIn .82s .13s both cubic-bezier(.2,.8,.2,1); }
+.roofHeroContent > .roofHeroLead { animation: intexHeroIn .72s .25s both cubic-bezier(.2,.8,.2,1); }
+.roofHeroContent > .heroActions { animation: intexHeroIn .72s .34s both cubic-bezier(.2,.8,.2,1); }
+.roofTrustStrip span {
+  animation: intexTrustChip 5.8s ease-in-out infinite;
+}
+.roofTrustStrip span:nth-child(2) { animation-delay: .18s; }
+.roofTrustStrip span:nth-child(3) { animation-delay: .36s; }
+.roofTrustStrip span:nth-child(4) { animation-delay: .54s; }
+.roofTrustStrip span:nth-child(5) { animation-delay: .72s; }
+
+/* Proof bar: a subtle roof-line scan passes behind property types. */
+.roofProofBar {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.roofProofBar > * { position: relative; z-index: 2; }
+.roofProofBar::before {
+  content: "";
+  position: absolute;
+  left: -18%;
+  top: 50%;
+  width: 24%;
+  height: 140%;
+  background: linear-gradient(90deg, transparent, rgba(23,105,255,.12), rgba(255,255,255,.32), rgba(23,105,255,.08), transparent);
+  transform: translateY(-50%) skewX(-22deg);
+  animation: intexProofScan 7.6s ease-in-out infinite;
+  z-index: 1;
+}
+.roofProofBar div span {
+  position: relative;
+}
+.roofProofBar div span::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #1769ff;
+  opacity: .18;
+  transform: translateX(-50%) scale(.4);
+  animation: intexProofDot 5.4s ease-in-out infinite;
+}
+.roofProofBar div span:nth-child(2)::before { animation-delay: .25s; }
+.roofProofBar div span:nth-child(3)::before { animation-delay: .5s; }
+.roofProofBar div span:nth-child(4)::before { animation-delay: .75s; }
+
+/* Section headings reveal like an inspection moving down the page. */
+@supports (animation-timeline: view()) {
+  .roofSectionHeading,
+  .roofChicagoCopy,
+  .homeReviewsSection .sectionHeading,
+  .roofEstimateSection > div:first-child {
+    animation: intexSectionReveal both linear;
+    animation-timeline: view();
+    animation-range: entry 8% cover 31%;
+  }
+
+  .roofClimateGrid,
+  .roofProcessGrid,
+  .reviewGrid,
+  .estimateActions {
+    animation: intexSectionRise both linear;
+    animation-timeline: view();
+    animation-range: entry 6% cover 27%;
+  }
+}
+
+/* Service grid: card focus feels like a roof plan being selected. */
+.roofServiceCard {
+  transform-origin: 50% 100%;
+}
+.roofServiceCard::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 14px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(23,105,255,.58), transparent);
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform .36s ease, opacity .36s ease;
+}
+.roofServiceCard:hover::after,
+.roofServiceCard:focus-visible::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Chicago climate cards already animate by weather type; add a shared data readout pulse. */
+.roofClimateGrid article strong {
+  display: inline-block;
+  animation: intexClimateLabel 5.6s ease-in-out infinite;
+}
+.roofClimateGrid article:nth-child(2) strong { animation-delay: .4s; }
+.roofClimateGrid article:nth-child(3) strong { animation-delay: .8s; }
+.roofClimateGrid article:nth-child(4) strong { animation-delay: 1.2s; }
+
+/* Process cards: sequential status pulse reinforces Inspect → Explain → Build → Verify. */
+.roofProcessGrid article {
+  position: relative;
+  isolation: isolate;
+}
+.roofProcessGrid article::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4e9dff, transparent);
+  transform: scaleX(.12);
+  opacity: 0;
+  animation: intexProcessStatus 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.roofProcessGrid article:nth-child(2)::after { animation-delay: 1.5s; }
+.roofProcessGrid article:nth-child(3)::after { animation-delay: 3s; }
+.roofProcessGrid article:nth-child(4)::after { animation-delay: 4.5s; }
+
+/* Reviews: verified feedback receives a brief verification sweep instead of generic floating cards. */
+.reviewCard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.reviewCard > * { position: relative; z-index: 2; }
+.reviewCard::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -34%;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, rgba(23,105,255,.08), rgba(255,255,255,.7), rgba(23,105,255,.08), transparent);
+  transform: skewX(-18deg);
+  opacity: 0;
+  z-index: 1;
+  animation: intexReviewVerify 9s ease-in-out infinite;
+}
+.reviewCard:nth-child(2)::before { animation-delay: 1.1s; }
+.reviewCard:nth-child(3)::before { animation-delay: 2.2s; }
+.reviewCard blockquote::before {
+  content: "“";
+  display: inline-block;
+  margin-right: 5px;
+  color: #1769ff;
+  opacity: .18;
+  transform-origin: center;
+  animation: intexQuoteMark 6s ease-in-out infinite;
+}
+
+/* Estimate CTA: a measurement line sweeps across the section like a roof inspection scan. */
+.roofEstimateSection {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.roofEstimateSection > * { position: relative; z-index: 2; }
+.roofEstimateSection::before {
+  content: "";
+  position: absolute;
+  width: min(560px, 66vw);
+  aspect-ratio: 2.4 / 1;
+  right: -5%;
+  bottom: -34%;
+  border-top: 2px solid rgba(23,105,255,.16);
+  border-left: 1px solid rgba(23,105,255,.09);
+  transform: skewX(-34deg) rotate(-3deg);
+  z-index: 1;
+}
+.roofEstimateSection::after {
+  content: "";
+  position: absolute;
+  left: -18%;
+  top: 0;
+  width: 18%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(23,105,255,.08), rgba(23,105,255,.2), transparent);
+  transform: skewX(-18deg);
+  z-index: 1;
+  animation: intexEstimateMeasure 6.4s ease-in-out infinite;
+}
+.roofEstimateSection .primaryButton {
+  box-shadow: 0 0 0 0 rgba(23,105,255,0);
+  animation: intexEstimateButton 5s ease-in-out infinite;
+}
+
+/* Footer: a final protected-roof line settles into place. */
+.roofingHome > footer {
+  position: relative;
+  overflow: hidden;
+}
+.roofingHome > footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(126,159,197,.55), transparent);
+  transform-origin: left;
+  animation: intexFooterSeal 7s ease-in-out infinite;
+}
+
+@keyframes intexCallPulse {
+  0%, 62%, 100% { opacity: 0; transform: scale(1); }
+  72% { opacity: .7; transform: scale(1.02); }
+  88% { opacity: 0; transform: scale(1.09); }
+}
+@keyframes intexHeroIn {
+  from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes intexTrustChip {
+  0%, 66%, 100% { border-color: rgba(255,255,255,.12); color: #9fb0c2; transform: translateY(0); }
+  73% { border-color: rgba(126,159,197,.38); color: #d4e4f5; transform: translateY(-2px); }
+  81% { border-color: rgba(255,255,255,.12); color: #9fb0c2; transform: translateY(0); }
+}
+@keyframes intexProofScan {
+  0%, 15% { transform: translate(-20%, -50%) skewX(-22deg); opacity: 0; }
+  27% { opacity: 1; }
+  72% { opacity: .65; }
+  84%, 100% { transform: translate(570%, -50%) skewX(-22deg); opacity: 0; }
+}
+@keyframes intexProofDot {
+  0%, 66%, 100% { opacity: .12; transform: translateX(-50%) scale(.4); box-shadow: 0 0 0 0 rgba(23,105,255,0); }
+  74% { opacity: .8; transform: translateX(-50%) scale(1); box-shadow: 0 0 0 7px rgba(23,105,255,.08); }
+  82% { opacity: .18; transform: translateX(-50%) scale(.55); }
+}
+@keyframes intexSectionReveal {
+  from { opacity: .38; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes intexSectionRise {
+  from { opacity: .5; transform: translateY(36px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes intexClimateLabel {
+  0%, 68%, 100% { letter-spacing: normal; opacity: 1; }
+  75% { letter-spacing: .08em; opacity: .72; }
+  82% { letter-spacing: normal; opacity: 1; }
+}
+@keyframes intexProcessStatus {
+  0%, 8%, 100% { transform: scaleX(.12); opacity: 0; }
+  14% { transform: scaleX(.4); opacity: .55; }
+  25% { transform: scaleX(1); opacity: .9; }
+  34% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes intexReviewVerify {
+  0%, 62% { left: -34%; opacity: 0; }
+  68% { opacity: .72; }
+  82% { left: 116%; opacity: .28; }
+  86%, 100% { left: 116%; opacity: 0; }
+}
+@keyframes intexQuoteMark {
+  0%, 70%, 100% { opacity: .18; transform: scale(1); }
+  78% { opacity: .66; transform: scale(1.18); }
+  86% { opacity: .18; transform: scale(1); }
+}
+@keyframes intexEstimateMeasure {
+  0%, 13% { transform: translateX(-30%) skewX(-18deg); opacity: 0; }
+  24% { opacity: .7; }
+  72% { opacity: .48; }
+  84%, 100% { transform: translateX(760%) skewX(-18deg); opacity: 0; }
+}
+@keyframes intexEstimateButton {
+  0%, 68%, 100% { box-shadow: 0 0 0 0 rgba(23,105,255,0); transform: translateY(0); }
+  76% { box-shadow: 0 12px 32px rgba(23,105,255,.2); transform: translateY(-2px); }
+  84% { box-shadow: 0 0 0 0 rgba(23,105,255,0); transform: translateY(0); }
+}
+@keyframes intexFooterSeal {
+  0%, 20% { transform: scaleX(.15); opacity: .15; }
+  48%, 76% { transform: scaleX(1); opacity: .62; }
+  100% { transform: scaleX(.15); opacity: .15; }
+}
+
+@media (max-width: 760px) {
+  .roofTrustStrip span { animation-duration: 7s; }
+  .roofProofBar::before { animation-duration: 9s; }
+  .roofEstimateSection::before { width: 92vw; right: -38%; bottom: -12%; opacity: .65; }
+  .reviewCard::before { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofingHome *,
+  .roofingHome *::before,
+  .roofingHome *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .roofHeroContent > * { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
