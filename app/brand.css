@@ -1,0 +1,11 @@
+.brandOfficial { min-width: 0; }
+.brandLogoImage { display: block; width: auto; max-width: min(220px, 38vw); height: 52px; object-fit: contain; object-position: left center; }
+.brandFallback { display: flex; flex-direction: column; line-height: 1; }
+.brandFallback strong { font: 800 22px "Manrope", sans-serif; letter-spacing: .07em; }
+.brandFallback small { margin-top: 5px; color: #8290a1; font-size: 9px; font-weight: 700; letter-spacing: .28em; }
+.footerBrand.brandOfficial .brandLogoImage { height: 46px; }
+
+@media (max-width: 760px) {
+  .brandLogoImage { height: 42px; max-width: 180px; }
+  .footerBrand.brandOfficial .brandLogoImage { height: 40px; }
+}
