@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { serviceAreaBySlug, serviceAreas } from "@/lib/service-areas";
 import { serviceBySlug } from "@/lib/services";
+import { localRoofingPages, localRoofingPath, type LocalRoofingServiceSlug } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
 
 const roofingSlugs = [
@@ -12,6 +13,21 @@ const roofingSlugs = [
   "roof-inspection-chicago",
   "storm-damage-restoration-chicago",
 ] as const;
+
+const localizable = new Set<LocalRoofingServiceSlug>([
+  "roof-repair-chicago",
+  "roof-replacement-chicago",
+  "flat-roofing-chicago",
+  "commercial-roofing-chicago",
+]);
+
+function serviceHref(areaSlug: string, serviceSlug: string) {
+  if (localizable.has(serviceSlug as LocalRoofingServiceSlug)) {
+    const exists = localRoofingPages.some((page) => page.areaSlug === areaSlug && page.serviceSlug === serviceSlug);
+    if (exists) return localRoofingPath(areaSlug, serviceSlug as LocalRoofingServiceSlug);
+  }
+  return `/${serviceSlug}/`;
+}
 
 export function generateStaticParams() {
   return serviceAreas.filter((area) => area.indexable).map(({ slug }) => ({ slug }));
@@ -81,12 +97,12 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
       <section className="platformSection">
         <p className="kicker dark"><span /> Roofing services in {area.name}</p>
         <div className="platformGrid">
-          {roofingSlugs.map((slug) => serviceBySlug[slug]).filter(Boolean).map((service) => (
-            <a className="platformCard" href={`/${service.slug}/`} key={service.slug}>
+          {roofingSlugs.map((serviceSlug) => serviceBySlug[serviceSlug]).filter(Boolean).map((service) => (
+            <a className="platformCard" href={serviceHref(area.slug, service.slug)} key={service.slug}>
               <span>{service.eyebrow}</span>
               <h2>{service.name}</h2>
               <p>{service.description}</p>
-              <b>View roofing service →</b>
+              <b>View {service.name.toLowerCase()} in {area.name} →</b>
             </a>
           ))}
         </div>
