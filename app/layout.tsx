@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import "./globals.css";
 import "./service-pages.css";
 import "./platform-pages.css";
+import "./resource-pages.css";
 import "./estimate/estimate.css";
 
 export const metadata: Metadata = {
