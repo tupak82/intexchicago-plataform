@@ -60,17 +60,37 @@ export default async function Home() {
             <span>Roof repair</span><span>Roof replacement</span><span>Storm damage</span><span>Flat roofing</span><span>Commercial roofing</span>
           </div>
         </div>
-        <div className="roofHeroPanel" aria-hidden="true">
-          <div className="roofPanelTop"><span>INTEX ROOF SYSTEM</span><b>CHICAGO</b></div>
-          <div className="roofDiagram">
-            <div className="roofLine roofLineOne" />
-            <div className="roofLine roofLineTwo" />
-            <div className="roofLine roofLineThree" />
-            <div className="roofNode roofNodeOne">01</div>
-            <div className="roofNode roofNodeTwo">02</div>
-            <div className="roofNode roofNodeThree">03</div>
+
+        <div className="roofHeroPanel stormStory" aria-label="Animated illustration showing hail damaging a Chicago roof and Intex restoring it">
+          <div className="roofPanelTop"><span>INTEX STORM RESPONSE</span><b>CHICAGO</b></div>
+          <div className="stormScene" aria-hidden="true">
+            <div className="stormCloud stormCloudOne" />
+            <div className="stormCloud stormCloudTwo" />
+            <div className="lightning" />
+            <div className="hail hail1" /><div className="hail hail2" /><div className="hail hail3" /><div className="hail hail4" /><div className="hail hail5" /><div className="hail hail6" /><div className="hail hail7" /><div className="hail hail8" /><div className="hail hail9" /><div className="hail hail10" />
+            <div className="house">
+              <div className="chimney" />
+              <div className="roofShell">
+                <div className="roofDamaged" />
+                <div className="roofRestored" />
+                <div className="roofCrack crackOne" />
+                <div className="roofCrack crackTwo" />
+                <div className="roofCrack crackThree" />
+              </div>
+              <div className="houseBody">
+                <div className="window" /><div className="door" />
+              </div>
+            </div>
+            <div className="impact impactOne" /><div className="impact impactTwo" /><div className="impact impactThree" />
+            <div className="intexRepair">
+              <div className="repairBeam beamOne" /><div className="repairBeam beamTwo" /><div className="repairBeam beamThree" />
+              <div className="repairBadge">INTEX</div>
+              <div className="repairSweep" />
+            </div>
+            <div className="sceneCaption captionStorm">HAIL IMPACT</div>
+            <div className="sceneCaption captionRepair">INTEX RESTORATION</div>
           </div>
-          <div className="roofPanelBottom"><strong>Built for Chicago weather</strong><span>Wind · hail · snow · freeze/thaw</span></div>
+          <div className="roofPanelBottom"><strong>From impact to protected.</strong><span>Inspect · repair · restore</span></div>
         </div>
       </section>
 
