@@ -2,10 +2,16 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { servicePages } from "@/lib/services";
 import { serviceAreas } from "@/lib/service-areas";
-import { publishedProjects } from "@/lib/projects";
 import { publishedResources } from "@/lib/resources";
+import { listPublicProjects } from "@/lib/project-store";
+import { listPublicReviews } from "@/lib/review-store";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [publishedProjects, publicReviews] = await Promise.all([
+    listPublicProjects(),
+    listPublicReviews(),
+  ]);
+
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: site.url, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${site.url}/about/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
@@ -14,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/service-areas/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/projects/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/resources/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    ...(publicReviews.length
+      ? [{ url: `${site.url}/reviews/`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 }]
+      : []),
   ];
 
   const services: MetadataRoute.Sitemap = servicePages.map((service) => ({
