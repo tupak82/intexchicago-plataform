@@ -2,6 +2,7 @@ import "./roofing-realism.css";
 import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
+import { listPublicProjects } from "@/lib/project-store";
 
 const roofingServices = [
   { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair", mediaLabel: "Targeted shingle + flashing repair", href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
@@ -26,8 +27,9 @@ const localBusinessSchema = {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const reviews = await listPublicReviews();
+  const [reviews, projects] = await Promise.all([listPublicReviews(), listPublicProjects()]);
   const featuredReviews = reviews.slice(0, 3);
+  const featuredProject = projects.find((project) => project.beforeImage && project.afterImage) || projects[0];
 
   return (
     <main className="roofingHome">
@@ -73,6 +75,13 @@ export default async function Home() {
         <div><span>Residential</span><span>Commercial</span><span>Multifamily</span><span>Chicagoland</span></div>
       </section>
 
+      <section className="fieldTrustRail" aria-label="Intex roofing process commitments">
+        <article><span>01</span><div><strong>Photo-backed inspections</strong><small>See the condition, not just the sales pitch.</small></div></article>
+        <article><span>02</span><div><strong>Clear scope before work</strong><small>Repair, replacement and material decisions explained.</small></div></article>
+        <article><span>03</span><div><strong>Chicago roof types</strong><small>Shingle, flat, multifamily and commercial systems.</small></div></article>
+        <article><span>04</span><div><strong>Weather-first thinking</strong><small>Wind, hail, snow, drainage and freeze-thaw cycles.</small></div></article>
+      </section>
+
       <section className="roofServices" id="roofing-services">
         <div className="roofSectionHeading">
           <div><p className="roofEyebrow dark">Roofing, not generic contracting</p><h2>Six services. Six different jobsites.</h2></div>
@@ -105,6 +114,28 @@ export default async function Home() {
           <article><strong>FREEZE</strong><span>Expansion, contraction and membrane leak paths</span></article>
         </div>
       </section>
+
+      {featuredProject ? (
+        <section className="featuredRoofProject" aria-labelledby="featuredProjectTitle">
+          <div className="featuredProjectCopy">
+            <p className="roofEyebrow dark">Documented Intex work</p>
+            <h2 id="featuredProjectTitle">Before and after should speak for itself.</h2>
+            <p>{featuredProject.summary}</p>
+            <div className="projectFacts"><span>{featuredProject.service}</span><span>{featuredProject.propertyType}</span><span>{featuredProject.location}</span></div>
+            <a href={`/projects/${featuredProject.slug}/`}>View project details →</a>
+          </div>
+          <div className="beforeAfterProof">
+            <figure><div className="proofImageFrame"><img src={featuredProject.beforeImage} alt={`Before: ${featuredProject.title}`} /></div><figcaption><b>BEFORE</b><span>{featuredProject.problem}</span></figcaption></figure>
+            <figure><div className="proofImageFrame"><img src={featuredProject.afterImage} alt={`After: ${featuredProject.title}`} /></div><figcaption><b>AFTER</b><span>{featuredProject.outcome}</span></figcaption></figure>
+          </div>
+        </section>
+      ) : (
+        <section className="projectProofPlaceholder">
+          <div><p className="roofEyebrow dark">Real work only</p><h2>No fake portfolio.</h2></div>
+          <p>Project photography appears here only after the job, location details and image permissions are verified. Until then, Intex does not present stock imagery as completed Intex work.</p>
+          <a href="/projects/">View documented projects →</a>
+        </section>
+      )}
 
       <section className="roofProcessSection">
         <div className="roofSectionHeading lightText">
