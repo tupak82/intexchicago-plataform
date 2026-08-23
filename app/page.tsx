@@ -29,7 +29,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const [reviews, projects] = await Promise.all([listPublicReviews(), listPublicProjects()]);
   const featuredReviews = reviews.slice(0, 3);
-  const featuredProject = projects.find((project) => project.beforeImage && project.afterImage) || projects[0];
+  const featuredProject = projects.find((project) => project.beforeImage && project.afterImage) || null;
 
   return (
     <main className="roofingHome">
