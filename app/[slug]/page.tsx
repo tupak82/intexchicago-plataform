@@ -35,6 +35,15 @@ function relatedVisualType(slug: string) {
   return "roofing";
 }
 
+function relatedMicroCopy(type: string) {
+  if (type === "inspection") return "Find weak points before they become expensive failures.";
+  if (type === "replacement") return "A complete roofing system rebuilt for long-term protection.";
+  if (type === "repair") return "Stop active damage and restore the vulnerable part of the roof.";
+  if (type === "storm") return "Hail and wind response built around fast inspection and recovery.";
+  if (type === "commercial") return "Low-slope and commercial systems engineered around the building.";
+  return "Protect the full roofing system from the top down.";
+}
+
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = serviceBySlug[slug];
@@ -88,20 +97,23 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <AnimatedProcessSteps steps={service.process} ariaLabel={`${service.name} process`} />
         </div>
 
-        <div className="relatedServices">
-          <p className="kicker dark"><span /> Connected services</p>
-          <div className="relatedServicesHeading">
-            <h2>Related help</h2>
-            <p>Roofing systems work together. Explore the next service your property may need.</p>
+        <div className="relatedServices relatedServicesPremium">
+          <div className="relatedServicesIntro">
+            <div>
+              <p className="kicker dark"><span /> Connected roofing system</p>
+              <h2>One roof. Different problems. <em>One smarter next step.</em></h2>
+            </div>
+            <p>Do not treat roofing services like identical menu cards. Each one solves a different failure point in the building envelope. Explore the service that matches what your property is actually facing.</p>
           </div>
-          <div className="relatedGrid">
+
+          <div className="relatedGrid relatedGridPremium">
             {service.related.map((relatedSlug, index) => {
               const related = serviceBySlug[relatedSlug];
               if (!related) return null;
               const visualType = relatedVisualType(related.slug);
               return (
                 <a
-                  className="relatedCard"
+                  className={`relatedCard relatedCardPremium relatedCardPremium--${index + 1}`}
                   href={`/${related.slug}/`}
                   key={related.slug}
                   data-visual={visualType}
@@ -121,13 +133,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     <div className="relatedTool" />
                     <div className="relatedPulse" />
                   </div>
+
                   <div className="relatedCardTop">
                     <span className="relatedIndex">0{index + 1}</span>
-                    <span className="relatedExplore">Explore <b>↗</b></span>
+                    <span className="relatedTypeLabel">{visualType}</span>
                   </div>
+
                   <div className="relatedCardCopy">
                     <strong>{related.name}</strong>
-                    <small>{visualType === "inspection" ? "Detect issues early" : visualType === "replacement" ? "Rebuild for long-term protection" : visualType === "repair" ? "Stop damage before it spreads" : "Protect the full roofing system"}</small>
+                    <small>{relatedMicroCopy(visualType)}</small>
+                  </div>
+
+                  <div className="relatedCardAction">
+                    <span>Explore service</span>
+                    <b>↗</b>
                   </div>
                 </a>
               );
@@ -144,7 +163,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <p>Tell us what happened and where the property is located. For active emergencies, calling is the fastest way to reach the team.</p>
             <div className="heroActions">
               <a className="primaryButton" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
-              <a className="secondaryButton" href="mailto:info@intexchicago.com">Email Intex</a>
+              <a className="secondaryButton" href={`mailto:${site.email}`}>Email Intex</a>
             </div>
           </div>
         </div>
