@@ -1,16 +1,16 @@
 import "./storm-impact.css";
+import "./roofing-realism.css";
 import { BrandLogo } from "@/components/BrandLogo";
-import { ServiceCardAnimation } from "@/components/ServiceCardAnimation";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
 
 const roofingServices = [
-  { title: "Roof Repair", eyebrow: "Leaks + damage", motion: "repair" as const, href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
-  { title: "Roof Replacement", eyebrow: "Built for the next decade", motion: "replacement" as const, href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
-  { title: "Storm Damage", eyebrow: "Wind + hail response", motion: "storm" as const, href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
-  { title: "Flat Roofing", eyebrow: "Chicago property specialty", motion: "flat" as const, href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
-  { title: "Commercial Roofing", eyebrow: "Protect operations", motion: "commercial" as const, href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
-  { title: "Roof Inspections", eyebrow: "Know before you spend", motion: "inspection" as const, href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
+  { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair", mediaLabel: "Targeted shingle + flashing repair", href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
+  { title: "Roof Replacement", eyebrow: "Built for the next decade", media: "replacement", mediaLabel: "Tear-off + new shingle system", href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
+  { title: "Storm Damage", eyebrow: "Wind + hail response", media: "storm", mediaLabel: "Storm impact + damage response", href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
+  { title: "Flat Roofing", eyebrow: "Chicago property specialty", media: "flat", mediaLabel: "Membrane + low-slope roofing", href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
+  { title: "Commercial Roofing", eyebrow: "Protect operations", media: "commercial", mediaLabel: "Large-scale commercial roof work", href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
+  { title: "Roof Inspections", eyebrow: "Know before you spend", media: "inspection", mediaLabel: "Aerial + visual roof assessment", href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
 ];
 
 const localBusinessSchema = {
@@ -61,40 +61,11 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="roofHeroPanel stormStory" aria-label="Animated illustration showing severe hail damaging a Chicago roof and Intex restoring it">
-          <div className="roofPanelTop"><span>INTEX STORM RESPONSE</span><b>CHICAGO</b></div>
-          <div className="stormScene" aria-hidden="true">
-            <div className="stormCloud stormCloudOne" />
-            <div className="stormCloud stormCloudTwo" />
-            <div className="lightning" />
-            <div className="hail hail1" /><div className="hail hail2" /><div className="hail hail3" /><div className="hail hail4" /><div className="hail hail5" /><div className="hail hail6" /><div className="hail hail7" /><div className="hail hail8" /><div className="hail hail9" /><div className="hail hail10" />
-            <div className="damageAlert">SEVERE HAIL DAMAGE</div>
-            <div className="house">
-              <div className="chimney" />
-              <div className="roofShell">
-                <div className="roofDamaged" />
-                <div className="roofRestored" />
-                <div className="roofCrack crackOne" />
-                <div className="roofCrack crackTwo" />
-                <div className="roofCrack crackThree" />
-                <div className="roofHole" />
-              </div>
-              <div className="houseBody">
-                <div className="window" /><div className="door" />
-              </div>
-            </div>
-            <div className="roofDebris debris1" /><div className="roofDebris debris2" /><div className="roofDebris debris3" /><div className="roofDebris debris4" /><div className="roofDebris debris5" /><div className="roofDebris debris6" />
-            <div className="waterLeak" />
-            <div className="impact impactOne" /><div className="impact impactTwo" /><div className="impact impactThree" />
-            <div className="intexRepair">
-              <div className="repairBeam beamOne" /><div className="repairBeam beamTwo" /><div className="repairBeam beamThree" />
-              <div className="repairBadge">INTEX REPAIR</div>
-              <div className="repairSweep" />
-            </div>
-            <div className="sceneCaption captionStorm">HAIL IMPACT · ROOF FAILURE</div>
-            <div className="sceneCaption captionRepair">INTEX RESTORATION · PROTECTED</div>
-          </div>
-          <div className="roofPanelBottom"><strong>Hail hits hard. Intex fixes it.</strong><span>Inspect · repair · restore</span></div>
+        <div className="roofHeroPanel realRoofHero" aria-label="Professional roofing crew installing a residential roof">
+          <div className="heroPhoto" aria-hidden="true" />
+          <div className="roofPanelTop"><span>INTEX ROOFING CREW</span><b>CHICAGO</b></div>
+          <div className="realRoofBadge">INTEX RESTORATION · PROTECTED</div>
+          <div className="roofPanelBottom"><strong>Built on the roof. Proven in the weather.</strong><span>Inspect · repair · replace</span></div>
         </div>
       </section>
 
@@ -105,14 +76,14 @@ export default async function Home() {
 
       <section className="roofServices" id="roofing-services">
         <div className="roofSectionHeading">
-          <div><p className="roofEyebrow dark">Roofing, not generic contracting</p><h2>Everything starts with the roof.</h2></div>
-          <p>Intex is being rebuilt around the service that matters most: protecting Chicago properties from the top down. Restoration remains available when damage extends beyond the roof.</p>
+          <div><p className="roofEyebrow dark">Roofing, not generic contracting</p><h2>Six services. Six different jobsites.</h2></div>
+          <p>Every service is shown through the actual material, roof type and work involved—shingles, flashing, membrane, storm damage, commercial systems and inspections.</p>
         </div>
         <div className="roofServiceGrid">
           {roofingServices.map((service, index) => (
             <a className="roofServiceCard" href={service.href} key={service.title}>
               <div className="roofServiceMeta"><span>0{index + 1}</span><small>{service.eyebrow}</small></div>
-              <ServiceCardAnimation type={service.motion} />
+              <div className={`roofServiceMedia media-${service.media}`} aria-hidden="true"><span className="roofMediaLabel">{service.mediaLabel}</span></div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <b>Explore →</b>
@@ -129,10 +100,10 @@ export default async function Home() {
           <a href="/roofing-chicago/">Explore Chicago roofing services →</a>
         </div>
         <div className="roofClimateGrid" aria-label="Chicago roofing conditions">
-          <article><strong>WIND</strong><span>Edge, flashing and shingle vulnerability</span></article>
-          <article><strong>HAIL</strong><span>Impact damage and hidden wear</span></article>
-          <article><strong>SNOW</strong><span>Drainage, load and ice concerns</span></article>
-          <article><strong>FREEZE</strong><span>Expansion, contraction and leak paths</span></article>
+          <article><strong>WIND</strong><span>Lifted edges, flashing stress and shingle vulnerability</span></article>
+          <article><strong>HAIL</strong><span>Granule loss, impact marks and hidden wear</span></article>
+          <article><strong>SNOW</strong><span>Snow load, drainage and ice buildup at edges</span></article>
+          <article><strong>FREEZE</strong><span>Expansion, contraction and membrane leak paths</span></article>
         </div>
       </section>
 
@@ -142,22 +113,10 @@ export default async function Home() {
           <p>Leading roofing companies win trust by making the process understandable. Intex should do the same—from the first inspection through the final walkthrough.</p>
         </div>
         <div className="roofProcessGrid">
-          <article>
-            <div className="processMotion processInspect" aria-hidden="true"><i /><b /></div>
-            <span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p>
-          </article>
-          <article>
-            <div className="processMotion processExplain" aria-hidden="true"><i /></div>
-            <span>02</span><h3>Explain</h3><p>Separate what needs repair now from what can wait or be planned.</p>
-          </article>
-          <article>
-            <div className="processMotion processBuild" aria-hidden="true"><i /></div>
-            <span>03</span><h3>Build</h3><p>Complete the roofing scope with clear communication and documentation.</p>
-          </article>
-          <article>
-            <div className="processMotion processVerify" aria-hidden="true"><i /><b /></div>
-            <span>04</span><h3>Verify</h3><p>Review the completed work and leave the property protected.</p>
-          </article>
+          <article><div className="processMotion processInspect" aria-hidden="true"><i /><b /></div><span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p></article>
+          <article><div className="processMotion processExplain" aria-hidden="true"><i /></div><span>02</span><h3>Explain</h3><p>Separate what needs repair now from what can wait or be planned.</p></article>
+          <article><div className="processMotion processBuild" aria-hidden="true"><i /></div><span>03</span><h3>Build</h3><p>Complete the roofing scope with clear communication and documentation.</p></article>
+          <article><div className="processMotion processVerify" aria-hidden="true"><i /><b /></div><span>04</span><h3>Verify</h3><p>Review the completed work and leave the property protected.</p></article>
         </div>
       </section>
 
