@@ -1,0 +1,445 @@
+/* Premium connected-services redesign.
+   Intentionally breaks the old row of identical cards: the first service is a
+   cinematic feature panel while the remaining services become distinct system
+   modules with their own rhythm, proportions and motion language. */
+
+.relatedServicesPremium {
+  margin-top: 18px;
+  padding: clamp(24px, 4vw, 54px) 0 8px;
+}
+
+.relatedServicesIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .66fr);
+  gap: clamp(34px, 6vw, 84px);
+  align-items: end;
+  margin-bottom: clamp(30px, 5vw, 56px);
+}
+
+.relatedServicesIntro h2 {
+  max-width: 780px;
+  margin: 12px 0 0;
+  font: 720 clamp(40px, 5vw, 66px)/.98 "Manrope", sans-serif;
+  letter-spacing: -.055em;
+}
+
+.relatedServicesIntro h2 em {
+  display: block;
+  color: var(--blue);
+  font-style: normal;
+}
+
+.relatedServicesIntro > p {
+  max-width: 470px;
+  margin: 0 0 4px;
+  color: #637387;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.relatedGridPremium {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, .78fr);
+  grid-template-rows: repeat(3, minmax(154px, auto));
+  gap: 16px;
+  background: transparent;
+}
+
+.relatedCardPremium {
+  --card-accent: #3b9dff;
+  min-height: 0;
+  border-radius: 22px;
+  border: 1px solid rgba(111, 153, 195, .22);
+  padding: 24px 26px;
+  box-shadow: 0 20px 48px rgba(7, 20, 35, .10);
+  background:
+    radial-gradient(circle at 88% 15%, color-mix(in srgb, var(--card-accent) 26%, transparent), transparent 34%),
+    linear-gradient(135deg, #102943 0%, #0a1728 52%, #06111e 100%);
+  transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease, border-color .45s ease;
+}
+
+.relatedCardPremium:nth-child(1) {
+  grid-row: 1 / span 3;
+  min-height: 494px;
+  padding: 34px;
+  border-radius: 30px;
+}
+
+.relatedCardPremium:nth-child(2),
+.relatedCardPremium:nth-child(3),
+.relatedCardPremium:nth-child(4) {
+  min-height: 154px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.relatedCardPremium:nth-child(2) { --card-accent: #4db7ff; }
+.relatedCardPremium:nth-child(3) { --card-accent: #8fd6ff; }
+.relatedCardPremium:nth-child(4) { --card-accent: #5f8cff; }
+
+.relatedCardPremium[data-visual="repair"] { --card-accent: #58b7ff; }
+.relatedCardPremium[data-visual="replacement"] { --card-accent: #6ed0ff; }
+.relatedCardPremium[data-visual="inspection"] { --card-accent: #9ee7ff; }
+.relatedCardPremium[data-visual="storm"] { --card-accent: #83a5ff; }
+.relatedCardPremium[data-visual="commercial"] { --card-accent: #4b93ff; }
+
+.relatedCardPremium::before {
+  opacity: .3;
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle at 64% 35%, #000 0, rgba(0,0,0,.76) 35%, transparent 76%);
+}
+
+.relatedCardPremium::after {
+  background: linear-gradient(118deg, transparent 20%, rgba(255,255,255,.13) 48%, transparent 72%);
+}
+
+.relatedCardPremium .relatedCardTop,
+.relatedCardPremium .relatedCardCopy,
+.relatedCardPremium .relatedCardAction {
+  position: relative;
+  z-index: 5;
+}
+
+.relatedCardPremium .relatedCardTop {
+  align-self: start;
+  grid-column: 1;
+}
+
+.relatedCardPremium:nth-child(1) .relatedCardTop {
+  width: 100%;
+}
+
+.relatedCardPremium .relatedIndex {
+  color: rgba(225,239,255,.56) !important;
+  font-size: 11px;
+}
+
+.relatedTypeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #d9ecff;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: 9px;
+}
+
+.relatedTypeLabel::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 14px var(--card-accent);
+}
+
+.relatedCardPremium .relatedCardCopy {
+  grid-column: 1;
+  align-self: end;
+  max-width: 100%;
+}
+
+.relatedCardPremium:nth-child(1) .relatedCardCopy {
+  max-width: 72%;
+  margin-top: auto;
+  margin-bottom: 32px;
+}
+
+.relatedCardPremium .relatedCardCopy strong {
+  font-size: clamp(24px, 2.7vw, 36px);
+}
+
+.relatedCardPremium:nth-child(1) .relatedCardCopy strong {
+  font-size: clamp(42px, 5.2vw, 68px);
+  line-height: .95;
+}
+
+.relatedCardPremium .relatedCardCopy small {
+  max-width: 390px;
+  margin-top: 8px;
+  color: #9bb1c8;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.relatedCardPremium:nth-child(1) .relatedCardCopy small {
+  margin-top: 16px;
+  color: #b5c5d6;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.relatedCardAction {
+  grid-column: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  align-self: end;
+  color: #dcecff;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.relatedCardAction b {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.07);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), background .3s ease;
+}
+
+.relatedCardPremium:nth-child(1) .relatedCardAction {
+  font-size: 11px;
+}
+
+.relatedCardPremium .relatedVisual {
+  opacity: .92;
+}
+
+.relatedCardPremium:nth-child(1) .relatedSkyGlow {
+  width: 420px;
+  height: 420px;
+  right: -80px;
+  top: -110px;
+}
+
+.relatedCardPremium:nth-child(1) .relatedRoof {
+  width: 280px;
+  height: 180px;
+  top: 116px;
+  left: auto;
+  right: 34px;
+  transform: none;
+}
+
+.relatedCardPremium:nth-child(1) .relatedRoofLeft,
+.relatedCardPremium:nth-child(1) .relatedRoofRight {
+  width: 152px;
+  height: 14px;
+  top: 56px;
+}
+
+.relatedCardPremium:nth-child(1) .relatedRoofBase {
+  left: 48px;
+  right: 48px;
+  bottom: 20px;
+  height: 86px;
+}
+
+.relatedCardPremium:nth-child(1) .relatedScan {
+  left: auto;
+  right: 44px;
+  width: 300px;
+  top: 92px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedVisual {
+  inset: 0 0 0 auto;
+  width: 168px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedSkyGlow {
+  width: 160px;
+  height: 160px;
+  right: -30px;
+  top: -44px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedRoof {
+  width: 106px;
+  height: 72px;
+  top: 42px;
+  left: 50%;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedRoofLeft,
+.relatedCardPremium:nth-child(n+2) .relatedRoofRight {
+  width: 59px;
+  height: 7px;
+  top: 25px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedRoofBase {
+  left: 20px;
+  right: 20px;
+  bottom: 8px;
+  height: 34px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedScan {
+  left: 22px;
+  right: 18px;
+  top: 34px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedPulse {
+  top: 48px;
+}
+
+.relatedCardPremium:nth-child(n+2) .relatedTool {
+  top: 72px;
+}
+
+.relatedCardPremium:hover {
+  transform: translateY(-8px) scale(1.008);
+  border-color: color-mix(in srgb, var(--card-accent) 58%, transparent);
+  box-shadow: 0 34px 74px rgba(4,17,31,.22), 0 0 0 1px color-mix(in srgb, var(--card-accent) 18%, transparent);
+}
+
+.relatedCardPremium:hover .relatedCardAction b {
+  transform: rotate(45deg) scale(1.08);
+  background: var(--card-accent);
+}
+
+.relatedCardPremium:nth-child(2):hover { transform: translate3d(8px,-4px,0); }
+.relatedCardPremium:nth-child(3):hover { transform: translate3d(-5px,-5px,0); }
+.relatedCardPremium:nth-child(4):hover { transform: translate3d(8px,-4px,0); }
+
+@media (max-width: 960px) {
+  .relatedServicesIntro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .relatedServicesIntro > p { max-width: 620px; }
+
+  .relatedGridPremium {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .relatedCardPremium:nth-child(1) {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 410px;
+  }
+
+  .relatedCardPremium:nth-child(n+2) {
+    min-height: 230px;
+    display: flex;
+  }
+}
+
+@media (max-width: 660px) {
+  .relatedServicesPremium {
+    margin-inline: -4px;
+    padding-top: 18px;
+  }
+
+  .relatedServicesIntro {
+    margin-bottom: 26px;
+  }
+
+  .relatedServicesIntro h2 {
+    font-size: clamp(38px, 12vw, 52px);
+  }
+
+  .relatedGridPremium {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .relatedCardPremium,
+  .relatedCardPremium:nth-child(1),
+  .relatedCardPremium:nth-child(n+2) {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 290px;
+    padding: 24px;
+    border-radius: 22px;
+    display: flex;
+  }
+
+  .relatedCardPremium:nth-child(1) {
+    min-height: 390px;
+  }
+
+  .relatedCardPremium:nth-child(2) {
+    min-height: 320px;
+  }
+
+  .relatedCardPremium:nth-child(3) {
+    min-height: 276px;
+    border-radius: 22px 22px 54px 22px;
+  }
+
+  .relatedCardPremium:nth-child(4) {
+    min-height: 334px;
+    border-radius: 54px 22px 22px 22px;
+  }
+
+  .relatedCardPremium:nth-child(1) .relatedCardCopy,
+  .relatedCardPremium .relatedCardCopy {
+    max-width: 82%;
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  .relatedCardPremium:nth-child(1) .relatedCardCopy strong {
+    font-size: clamp(38px, 13vw, 54px);
+  }
+
+  .relatedCardPremium .relatedCardCopy strong {
+    font-size: clamp(30px, 10vw, 42px);
+  }
+
+  .relatedCardPremium:nth-child(n+2) .relatedVisual {
+    inset: 0;
+    width: 100%;
+  }
+
+  .relatedCardPremium:nth-child(n+2) .relatedRoof {
+    width: 150px;
+    height: 96px;
+    top: 70px;
+    left: auto;
+    right: 18px;
+    transform: none;
+  }
+
+  .relatedCardPremium:nth-child(n+2) .relatedRoofLeft,
+  .relatedCardPremium:nth-child(n+2) .relatedRoofRight {
+    width: 84px;
+    height: 9px;
+    top: 32px;
+  }
+
+  .relatedCardPremium:nth-child(n+2) .relatedRoofBase {
+    left: 28px;
+    right: 28px;
+    bottom: 12px;
+    height: 44px;
+  }
+
+  .relatedCardPremium:nth-child(n+2) .relatedScan {
+    left: auto;
+    right: 20px;
+    width: 180px;
+    top: 58px;
+  }
+
+  .relatedCardPremium:hover,
+  .relatedCardPremium:nth-child(2):hover,
+  .relatedCardPremium:nth-child(3):hover,
+  .relatedCardPremium:nth-child(4):hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .relatedCardPremium,
+  .relatedCardPremium *,
+  .relatedCardPremium::before,
+  .relatedCardPremium::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
