@@ -7,6 +7,7 @@ import "./globals.css";
 import "./brand.css";
 import "./roofing-home.css";
 import "./roofing-service-visuals.css";
+import "./service-visual-layout.css";
 import "./climate-animations.css";
 import "./process-animations.css";
 import "./home-experience-animations.css";
