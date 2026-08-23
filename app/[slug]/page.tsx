@@ -26,6 +26,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function relatedVisualType(slug: string) {
+  if (slug.includes("repair")) return "repair";
+  if (slug.includes("replacement")) return "replacement";
+  if (slug.includes("inspection")) return "inspection";
+  if (slug.includes("storm") || slug.includes("hail")) return "storm";
+  if (slug.includes("commercial") || slug.includes("flat")) return "commercial";
+  return "roofing";
+}
+
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = serviceBySlug[slug];
@@ -81,11 +90,47 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
         <div className="relatedServices">
           <p className="kicker dark"><span /> Connected services</p>
-          <h2>Related help</h2>
+          <div className="relatedServicesHeading">
+            <h2>Related help</h2>
+            <p>Roofing systems work together. Explore the next service your property may need.</p>
+          </div>
           <div className="relatedGrid">
-            {service.related.map((relatedSlug) => {
+            {service.related.map((relatedSlug, index) => {
               const related = serviceBySlug[relatedSlug];
-              return related ? <a className="relatedCard" href={`/${related.slug}/`} key={related.slug}><span>Explore</span>{related.name}</a> : null;
+              if (!related) return null;
+              const visualType = relatedVisualType(related.slug);
+              return (
+                <a
+                  className="relatedCard"
+                  href={`/${related.slug}/`}
+                  key={related.slug}
+                  data-visual={visualType}
+                  style={{ "--related-index": index } as React.CSSProperties}
+                >
+                  <div className="relatedVisual" aria-hidden="true">
+                    <div className="relatedSkyGlow" />
+                    <div className="relatedScan" />
+                    <div className="relatedRoof">
+                      <i className="relatedRoofLeft" />
+                      <i className="relatedRoofRight" />
+                      <i className="relatedRoofBase" />
+                    </div>
+                    <div className="relatedParticles">
+                      <i /><i /><i /><i /><i />
+                    </div>
+                    <div className="relatedTool" />
+                    <div className="relatedPulse" />
+                  </div>
+                  <div className="relatedCardTop">
+                    <span className="relatedIndex">0{index + 1}</span>
+                    <span className="relatedExplore">Explore <b>↗</b></span>
+                  </div>
+                  <div className="relatedCardCopy">
+                    <strong>{related.name}</strong>
+                    <small>{visualType === "inspection" ? "Detect issues early" : visualType === "replacement" ? "Rebuild for long-term protection" : visualType === "repair" ? "Stop damage before it spreads" : "Protect the full roofing system"}</small>
+                  </div>
+                </a>
+              );
             })}
           </div>
         </div>
