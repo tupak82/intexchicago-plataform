@@ -1,4 +1,3 @@
-import "./storm-impact.css";
 import "./roofing-realism.css";
 import { BrandLogo } from "@/components/BrandLogo";
 import { site } from "@/lib/site";
