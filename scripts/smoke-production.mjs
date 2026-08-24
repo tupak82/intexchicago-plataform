@@ -9,6 +9,7 @@ const routes = [
   "/estimate/",
   "/projects/",
   "/resources/",
+  "/restoration/",
   "/service-areas/",
   "/roofing-chicago/",
   "/roof-repair-chicago/",
