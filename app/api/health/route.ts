@@ -8,10 +8,12 @@ export async function GET() {
   const database = await databasePing();
   const webhookConfigured = Boolean(process.env.INTEX_LEADS_WEBHOOK_URL);
   const leadBackendReady = database.reachable || webhookConfigured;
+  const status = leadBackendReady ? "healthy" : "degraded";
 
   return NextResponse.json(
     {
-      ok: true,
+      ok: leadBackendReady,
+      status,
       service: "intexchicago-platform",
       version: "0.3.0",
       readiness: {
@@ -26,6 +28,7 @@ export async function GET() {
       },
     },
     {
+      status: leadBackendReady ? 200 : 503,
       headers: { "cache-control": "no-store" },
     },
   );
