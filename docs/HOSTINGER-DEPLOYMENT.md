@@ -13,6 +13,7 @@ Required before production:
 - CI typecheck, platform validation, and production build are green.
 - Hostinger MySQL is created and `db/schema.sql` has been applied.
 - Database credentials are configured as private environment variables.
+- `npm run preflight:preview` passes in the deployed environment.
 - Lead success and failure paths are tested end to end.
 - Admin login, lead CRM, project CMS, and review CMS are tested against the production database.
 - `INTEX_ADMIN_PASSWORD` and `INTEX_ADMIN_SESSION_SECRET` are strong production secrets if admin is enabled.
@@ -65,9 +66,22 @@ INTEX_ADMIN_SESSION_SECRET=<long random secret if enabled>
 
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=<approved Search Console token when ready>
 NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=<approved GA measurement ID when ready>
+NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=<approved GTM container ID when ready>
 ```
 
 Admin should remain disabled until authentication and database access have been tested in the deployed environment.
+
+## Preview preflight
+
+After the environment variables are configured and `db/schema.sql` has been applied, run:
+
+```bash
+npm run preflight:preview
+```
+
+The command is intentionally strict. It fails when neither MySQL nor the approved lead webhook is configured, when MySQL cannot be reached, when required tables are missing, or when admin is enabled without its required secrets. Analytics and Search Console variables are reported but remain optional for preview.
+
+A passing preflight confirms environment readiness; it does not replace the HTTP smoke test after the app is running.
 
 ## Lead acceptance rule
 
@@ -88,10 +102,17 @@ Admin should remain disabled until authentication and database access have been 
 
 ## Preview validation before domain mapping
 
-Validate the Hostinger preview URL before touching DNS/domain routing:
+Validate the Hostinger preview URL before touching DNS/domain routing. First confirm `/api/health` returns HTTP 200 with `status: "healthy"`; a 503 `degraded` response means the web app is running but the lead backend is not ready.
+
+Then validate:
 
 - `/`
 - `/roofing-chicago/`
+- `/roof-repair-chicago/`
+- `/roof-replacement-chicago/`
+- `/flat-roofing-chicago/`
+- `/commercial-roofing-chicago/`
+- `/roof-inspection-chicago/`
 - `/water-damage-restoration-chicago/`
 - `/fire-damage-restoration-chicago/`
 - `/storm-damage-restoration-chicago/`
@@ -99,6 +120,7 @@ Validate the Hostinger preview URL before touching DNS/domain routing:
 - `/commercial-restoration-chicago/`
 - `/trauma-biohazard-cleaning-chicago/`
 - `/insurance-claims/`
+- `/service-areas/`
 - `/service-areas/chicago/`
 - `/projects/`
 - `/resources/`
@@ -107,7 +129,15 @@ Validate the Hostinger preview URL before touching DNS/domain routing:
 - `/contact/`
 - `/privacy/`
 - `/estimate/`
+- `/sitemap.xml`
+- `/robots.txt`
 - `/api/health`
+
+Run the automated HTTP pass against the preview hostname:
+
+```bash
+INTEX_SMOKE_BASE_URL=https://<hostinger-preview-host> npm run smoke:production
+```
 
 When admin is enabled and authenticated, also validate:
 
@@ -127,17 +157,19 @@ Also test every verified legacy redirect in `lib/legacy-redirects.ts`, including
 
 1. Freeze WordPress content changes during final validation.
 2. Take final WordPress filesystem/database backup.
-3. Confirm the Hostinger preview deployment is healthy.
-4. Submit a test lead and confirm it appears in MySQL and `/admin/leads/`.
-5. Confirm lead failure behavior by temporarily testing an unavailable destination in a controlled preview environment.
-6. Create one draft project, confirm draft is not public, then validate publication with approved test media.
-7. Create one review test record and confirm the verification/permission publication gate.
-8. Confirm verified redirects on the preview/deployment host where possible.
-9. Map `intexchicago.com` to the Node.js application.
-10. Verify HTTPS and canonical host behavior.
-11. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, CMS, and redirects.
-12. Submit/refresh sitemap in Search Console.
-13. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
+3. Confirm `npm run preflight:preview` passes against the configured environment.
+4. Confirm the Hostinger preview deployment is healthy at `/api/health`.
+5. Run `INTEX_SMOKE_BASE_URL=https://<hostinger-preview-host> npm run smoke:production`.
+6. Submit a test lead and confirm it appears in MySQL and `/admin/leads/`.
+7. Confirm lead failure behavior by temporarily testing an unavailable destination in a controlled preview environment.
+8. Create one draft project, confirm draft is not public, then validate publication with approved test media.
+9. Create one review test record and confirm the verification/permission publication gate.
+10. Confirm verified redirects on the preview/deployment host where possible.
+11. Map `intexchicago.com` to the Node.js application.
+12. Verify HTTPS and canonical host behavior.
+13. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, CMS, and redirects.
+14. Submit/refresh sitemap in Search Console.
+15. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
 
 ## Important
 
