@@ -20,7 +20,7 @@ export default function SiteChrome() {
         <BrandLogo href="/" label="Intex Chicago home" />
         <nav aria-label="Primary navigation">
           <Link href="/roofing-chicago/">Roofing</Link>
-          <Link href="/water-damage-restoration-chicago/">Restoration</Link>
+          <Link href="/restoration/">Restoration</Link>
           <Link href="/projects/">Projects</Link>
           <Link href="/service-areas/">Service Areas</Link>
           <Link href="/contact/">Contact</Link>
@@ -43,6 +43,7 @@ export default function SiteChrome() {
           </div>
           <div>
             <strong>Restoration</strong>
+            <Link href="/restoration/">All Restoration Services</Link>
             <Link href="/water-damage-restoration-chicago/">Water Damage</Link>
             <Link href="/fire-damage-restoration-chicago/">Fire & Smoke</Link>
             <Link href="/mold-remediation-chicago/">Mold Remediation</Link>
