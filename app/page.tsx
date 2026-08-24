@@ -40,10 +40,10 @@ export default async function Home() {
         <BrandLogo href="#top" label="Intex Chicago Roofing home" />
         <nav aria-label="Primary navigation">
           <a href="#roofing-services">Roofing</a>
-          <a href="/storm-damage-restoration-chicago/">Storm Damage</a>
+          <a href="/water-damage-restoration-chicago/">Restoration</a>
           <a href="/projects/">Projects</a>
-          {featuredReviews.length ? <a href="/reviews/">Reviews</a> : null}
           <a href="/service-areas/">Service Areas</a>
+          <a href="/contact/">Contact</a>
           <a className="navCall" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
         </nav>
       </header>
@@ -132,7 +132,7 @@ export default async function Home() {
         </section>
       ) : (
         <section className="projectProofPlaceholder">
-          <div><p className="roofEyebrow dark">Real work only</p><h2>No fake portfolio.</h2></div>
+          <div><p className="roofEyebrow dark">Real work only</p><h2>Documented projects only.</h2></div>
           <p>Project photography appears here only after the job, location details and image permissions are verified. Until then, Intex does not present stock imagery as completed Intex work.</p>
           <a href="/projects/">View documented projects →</a>
         </section>
@@ -141,7 +141,7 @@ export default async function Home() {
       <section className="roofProcessSection">
         <div className="roofSectionHeading lightText">
           <div><p className="roofEyebrow">A simpler roofing process</p><h2>No contractor maze. Just clear next steps.</h2></div>
-          <p>Leading roofing companies win trust by making the process understandable. Intex should do the same—from the first inspection through the final walkthrough.</p>
+          <p>A roofing project is easier to navigate when the inspection, scope, work and final review are clearly separated. Intex keeps each step visible so property owners know what is happening and why.</p>
         </div>
         <div className="roofProcessGrid">
           <article><div className="processMotion processInspect" aria-hidden="true"><i /><b /></div><span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p></article>
@@ -175,10 +175,40 @@ export default async function Home() {
         <div className="estimateActions"><a className="primaryButton" href="/estimate/">Request an estimate</a><a className="roofPhoneLink" href={`tel:${site.phone}`}>{site.phoneDisplay} ↗</a></div>
       </section>
 
-      <footer>
-        <BrandLogo href="/" label="Intex Chicago Roofing home" className="footerBrand" />
-        <p><a href="/roof-repair-chicago/">Roof Repair</a> · <a href="/roof-replacement-chicago/">Roof Replacement</a> · <a href="/flat-roofing-chicago/">Flat Roofing</a> · <a href="/commercial-roofing-chicago/">Commercial Roofing</a> · <a href="/service-areas/">Service Areas</a> · <a href="/contact/">Contact</a></p>
-        <p><a href={`mailto:${site.email}`}>{site.email}</a> · <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
+      <footer className="siteFooter homeSiteFooter">
+        <div className="siteFooterBrand">
+          <BrandLogo href="/" label="Intex Chicago home" className="footerBrand" />
+          <p>Roofing and property restoration for Chicago and Chicagoland.</p>
+        </div>
+        <div className="siteFooterLinks">
+          <div>
+            <strong>Roofing</strong>
+            <a href="/roof-repair-chicago/">Roof Repair</a>
+            <a href="/roof-replacement-chicago/">Roof Replacement</a>
+            <a href="/flat-roofing-chicago/">Flat Roofing</a>
+            <a href="/commercial-roofing-chicago/">Commercial Roofing</a>
+          </div>
+          <div>
+            <strong>Restoration</strong>
+            <a href="/water-damage-restoration-chicago/">Water Damage</a>
+            <a href="/fire-damage-restoration-chicago/">Fire & Smoke</a>
+            <a href="/mold-remediation-chicago/">Mold Remediation</a>
+            <a href="/commercial-restoration-chicago/">Commercial Restoration</a>
+          </div>
+          <div>
+            <strong>Intex</strong>
+            <a href="/about/">About</a>
+            <a href="/projects/">Projects</a>
+            <a href="/service-areas/">Service Areas</a>
+            <a href="/resources/">Resources</a>
+            <a href="/contact/">Contact</a>
+          </div>
+        </div>
+        <div className="siteFooterContact">
+          <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href="/estimate/">Start a request →</a>
+        </div>
       </footer>
     </main>
   );
