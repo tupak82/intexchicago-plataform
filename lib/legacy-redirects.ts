@@ -22,7 +22,7 @@ export const legacyRedirects: LegacyRedirect[] = [
   { source: "/mold-cleanup-remediation/", destination: "/mold-remediation-chicago/", permanent: true, note: "Verified legacy navigation route: Mold Cleanup & Remediation" },
   { source: "/side-navigation/insuranceclaim/", destination: "/insurance-claims/", permanent: true, note: "Verified legacy navigation route: Insurance Claim" },
   { source: "/side-navigation/commercialservices/", destination: "/commercial-restoration-chicago/", permanent: true, note: "Verified legacy navigation route: Commercial Services" },
-  { source: "/side-navigation/roof-repair/", destination: "/roofing-chicago/", permanent: true, note: "Verified legacy navigation route: Roof Repair" },
+  { source: "/side-navigation/roof-repair/", destination: "/roof-repair-chicago/", permanent: true, note: "Verified legacy navigation route: Roof Repair; preserve service-specific search intent" },
   { source: "/why-us/", destination: "/about/", permanent: true, note: "Verified legacy About Intex Restoration route" },
 ];
 
