@@ -2,25 +2,16 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ADMIN_COOKIE, validAdminSession } from "@/lib/admin-auth";
 import { isLeadStatus, updateAdminLead } from "@/lib/admin-leads";
+import { isTrustedSameOriginRequest } from "@/lib/request-security";
 
 export const runtime = "nodejs";
-
-function sameOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  if (!origin) return true;
-  try {
-    return new URL(origin).host === new URL(request.url).host;
-  } catch {
-    return false;
-  }
-}
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const cookieStore = await cookies();
   if (!validAdminSession(cookieStore.get(ADMIN_COOKIE)?.value)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   }
-  if (!sameOrigin(request)) {
+  if (!isTrustedSameOriginRequest(request)) {
     return NextResponse.json({ ok: false, error: "invalid_origin" }, { status: 403 });
   }
 
