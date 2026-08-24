@@ -1,4 +1,9 @@
-import "./service-card-animation.css";
+import { CommercialRoofAnimation } from "./service-animations/CommercialRoofAnimation";
+import { FlatRoofTPOAnimation } from "./service-animations/FlatRoofTPOAnimation";
+import { HailDamageAnimation } from "./service-animations/HailDamageAnimation";
+import { RoofInspectionAnimation } from "./service-animations/RoofInspectionAnimation";
+import { RoofRepairAnimation } from "./service-animations/RoofRepairAnimation";
+import { RoofReplacementAnimation } from "./service-animations/RoofReplacementAnimation";
 
 type ServiceAnimationType =
   | "repair"
@@ -8,33 +13,15 @@ type ServiceAnimationType =
   | "commercial"
   | "inspection";
 
+/**
+ * Compact card dispatcher. Each service renders its dedicated animation module;
+ * this component intentionally contains no shared roof scene or shared keyframes.
+ */
 export function ServiceCardAnimation({ type }: { type: ServiceAnimationType }) {
-  return (
-    <div className={`serviceMotion serviceMotion--${type}`} aria-hidden="true">
-      <div className="serviceMotionSky">
-        <span className="serviceCloud serviceCloudA" />
-        <span className="serviceCloud serviceCloudB" />
-      </div>
-
-      <div className="serviceHouse">
-        <span className="serviceWall" />
-        <span className="serviceRoof serviceRoofBase" />
-        <span className="serviceRoof serviceRoofFinish" />
-        <span className="serviceWindow" />
-      </div>
-
-      <span className="serviceTool" />
-      <span className="servicePatch" />
-      <span className="serviceMembrane" />
-      <span className="serviceHail hailA" />
-      <span className="serviceHail hailB" />
-      <span className="serviceHail hailC" />
-      <span className="serviceHail hailD" />
-      <span className="serviceSpark sparkA" />
-      <span className="serviceSpark sparkB" />
-      <span className="serviceScan" />
-      <span className="serviceLens" />
-      <span className="serviceStatus" />
-    </div>
-  );
+  if (type === "repair") return <RoofRepairAnimation compact />;
+  if (type === "replacement") return <RoofReplacementAnimation compact />;
+  if (type === "storm") return <HailDamageAnimation compact />;
+  if (type === "flat") return <FlatRoofTPOAnimation compact />;
+  if (type === "commercial") return <CommercialRoofAnimation compact />;
+  return <RoofInspectionAnimation compact />;
 }
