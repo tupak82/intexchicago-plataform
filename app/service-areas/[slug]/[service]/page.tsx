@@ -69,8 +69,8 @@ export default async function LocalRoofingServicePage({ params }: { params: Prom
       <section className="serviceBody">
         <div className="serviceSplit">
           <div>
-            <p className="kicker dark"><span /> Local roofing context</p>
-            <h2>Built around the property, not a generic city page.</h2>
+            <p className="kicker dark"><span /> Roofing in {page.area.name}</p>
+            <h2>The right plan starts with the roof system and what the property is showing.</h2>
             <p>{page.area.roofingContext}</p>
           </div>
           <div>
@@ -80,15 +80,15 @@ export default async function LocalRoofingServicePage({ params }: { params: Prom
         </div>
 
         <div className="serviceProcess">
-          <p className="kicker dark"><span /> When this service makes sense</p>
-          <h2>Start with condition and urgency.</h2>
+          <p className="kicker dark"><span /> When {page.service.name.toLowerCase()} makes sense</p>
+          <h2>Look at condition, urgency and the pattern of damage.</h2>
           <p>{copy.decision}</p>
           <AnimatedProcessSteps steps={page.service.problems.slice(0, 4)} ariaLabel={`${page.service.name} warning signs`} />
         </div>
 
         <div className="serviceProcess">
-          <p className="kicker dark"><span /> What happens next</p>
-          <h2>A clear roofing process.</h2>
+          <p className="kicker dark"><span /> From inspection to next step</p>
+          <h2>What to expect from the {page.service.name.toLowerCase()} process.</h2>
           <AnimatedProcessSteps steps={page.service.process} ariaLabel={`${page.service.name} process`} />
         </div>
 
