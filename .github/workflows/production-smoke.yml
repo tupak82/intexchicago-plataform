@@ -6,7 +6,7 @@ on:
       base_url:
         description: "Hostinger preview or production base URL"
         required: true
-        default: "https://intexchicago.com"
+        default: "https://midnightblue-dove-445193.hostingersite.com"
         type: string
 
 permissions:
