@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import SiteMotion from "@/components/SiteMotion";
+import SiteChrome from "@/components/SiteChrome";
 import MobileActionBar from "@/components/MobileActionBar";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -20,6 +21,7 @@ import "./mobile-premium.css";
 import "./desktop-premium.css";
 import "./related-services-premium.css";
 import "./service-visual-layout.css";
+import "./site-chrome.css";
 import "./reviews/reviews.css";
 import "./admin/admin.css";
 import "./estimate/estimate.css";
@@ -78,6 +80,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         ) : null}
         <AnalyticsTracker />
         <SiteMotion />
+        <SiteChrome />
         {children}
         <MobileActionBar />
         {googleTagManagerId ? (
