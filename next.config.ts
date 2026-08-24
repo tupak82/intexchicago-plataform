@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
+      {
+        source: "/:path*",
+        destination: "https://intexchicago.com/:path*",
+        permanent: true,
+        has: [{ type: "host" as const, value: "www.intexchicago.com" }],
+      },
       ...legacyRedirects.map(({ source, destination, permanent }) => ({
         source,
         destination,
