@@ -3,18 +3,9 @@ import { NextResponse } from "next/server";
 import { ADMIN_COOKIE, validAdminSession } from "@/lib/admin-auth";
 import { updateReview } from "@/lib/review-store";
 import { parseReviewInput } from "@/lib/review-input";
+import { isTrustedSameOriginRequest } from "@/lib/request-security";
 
 export const runtime = "nodejs";
-
-function sameOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  if (!origin) return true;
-  try {
-    return new URL(origin).host === new URL(request.url).host;
-  } catch {
-    return false;
-  }
-}
 
 function adminRedirect(request: Request, path: string) {
   return NextResponse.redirect(new URL(path, request.url), 303);
@@ -25,7 +16,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   if (!validAdminSession(cookieStore.get(ADMIN_COOKIE)?.value)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   }
-  if (!sameOrigin(request)) {
+  if (!isTrustedSameOriginRequest(request)) {
     return NextResponse.json({ ok: false, error: "invalid_origin" }, { status: 403 });
   }
 
