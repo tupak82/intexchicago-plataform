@@ -65,6 +65,7 @@ const criticalInfrastructure = [
   "lib/lead-store.ts",
   "lib/admin-leads.ts",
   "lib/admin-auth.ts",
+  "lib/request-security.ts",
   "lib/project-store.ts",
   "lib/project-input.ts",
   "lib/review-store.ts",
@@ -75,6 +76,19 @@ const criticalInfrastructure = [
   "docs/CLAIMS-VERIFICATION.md",
 ];
 for (const file of criticalInfrastructure) check(exists(file), `Missing critical infrastructure: ${file}`);
+
+const adminMutationRoutes = [
+  "app/api/admin/leads/[id]/route.ts",
+  "app/api/admin/projects/route.ts",
+  "app/api/admin/projects/[id]/route.ts",
+  "app/api/admin/reviews/route.ts",
+  "app/api/admin/reviews/[id]/route.ts",
+];
+for (const file of adminMutationRoutes) {
+  const content = read(file);
+  check(content.includes("isTrustedSameOriginRequest"), `Admin mutation must use shared same-origin protection: ${file}`);
+  check(!content.includes("if (!origin) return true"), `Admin mutation must not trust missing Origin headers: ${file}`);
+}
 
 check(site.includes("info@intexchicago.com"), "Canonical Intex email is missing from site config.");
 check(site.includes("+17738225892"), "Canonical Intex phone is missing from site config.");
@@ -103,7 +117,7 @@ const publicFiles = ["app/page.tsx", "lib/site.ts", "lib/services.ts"];
 for (const file of publicFiles) {
   const content = read(file).toLowerCase();
   for (const claim of forbiddenClaims) {
-    check(!content.includes(claim.toLowerCase()), `Unverified claim \"${claim}\" found in ${file}.`);
+    check(!content.includes(claim.toLowerCase()), `Unverified claim "${claim}" found in ${file}.`);
   }
 }
 
@@ -112,4 +126,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, CRM, projects, reviews, and owned persistence checked.`);
+console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, CRM, projects, reviews, admin origin guards, and owned persistence checked.`);
