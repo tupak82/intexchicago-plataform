@@ -32,15 +32,19 @@ const initialLead: LeadDraft = {
 };
 
 const serviceOptions = [
-  "Roofing / roof leak",
+  "Roof leak / roof repair",
+  "Roof replacement",
+  "Storm / hail damage roofing",
+  "Flat roof / TPO roofing",
+  "Commercial roofing",
+  "Roof inspection",
   "Water damage",
   "Fire / smoke damage",
-  "Storm / hail damage",
   "Mold concern",
-  "Commercial restoration",
-  "Trauma / biohazard cleanup",
   "Other property damage",
 ];
+
+const propertyOptions = ["Single-family home", "Multi-family property", "Commercial property"];
 
 export default function EstimateFlow() {
   const [step, setStep] = useState(0);
@@ -52,15 +56,18 @@ export default function EstimateFlow() {
 
   const update = <K extends keyof LeadDraft>(key: K, value: LeadDraft[K]) => {
     setLead((current) => ({ ...current, [key]: value }));
+    if (status === "error") setStatus("idle");
   };
+
+  const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim());
 
   const canContinue = () => {
     if (step === 0) return Boolean(lead.service);
     if (step === 1) return Boolean(lead.emergency);
     if (step === 2) return Boolean(lead.propertyType && /^\d{5}(-\d{4})?$/.test(lead.zip.trim()));
-    if (step === 3) return Boolean(lead.name.trim() && lead.phone.trim());
+    if (step === 3) return Boolean(lead.name.trim() && lead.phone.trim()) && (!lead.email.trim() || hasValidEmail);
     if (step === 4) return Boolean(lead.description.trim());
-    if (step === 5) return lead.consent;
+    if (step === 5) return lead.consent && (lead.preferredContact !== "email" || hasValidEmail);
     return false;
   };
 
@@ -87,7 +94,7 @@ export default function EstimateFlow() {
       <section className="estimateCard estimateSuccess" aria-live="polite">
         <p className="estimateEyebrow">Request received</p>
         <h2>Thanks, {lead.name.split(" ")[0] || "there"}.</h2>
-        <p>Your request was delivered to Intex. For an active emergency, call now rather than waiting for an online response.</p>
+        <p>Your request was delivered to Intex. If the property is actively taking on water or has an unsafe opening, call now rather than waiting for an online response.</p>
         <a className="estimatePrimary" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
       </section>
     );
@@ -123,24 +130,24 @@ export default function EstimateFlow() {
       {step === 1 && (
         <fieldset>
           <legend>Is this happening right now?</legend>
-          <p>This helps separate urgent property damage from planned work.</p>
+          <p>This helps separate active property damage from planned roofing work.</p>
           <div className="estimateChoices twoCol">
-            {["Yes — active emergency", "No — planned / stable"].map((option) => (
+            {["Yes — active property damage", "No — planned / stable"].map((option) => (
               <label key={option} className={lead.emergency === option ? "selected" : ""}>
                 <input type="radio" name="emergency" value={option} checked={lead.emergency === option} onChange={() => update("emergency", option)} />
                 <span>{option}</span>
               </label>
             ))}
           </div>
-          {lead.emergency.startsWith("Yes") && <div className="estimateEmergency">For active leaks, fire, storm openings, or unsafe conditions: <a href={`tel:${site.phone}`}>call {site.phoneDisplay} now</a>.</div>}
+          {lead.emergency.startsWith("Yes") && <div className="estimateEmergency">For active leaks, storm openings, fire damage or unsafe conditions: <a href={`tel:${site.phone}`}>call {site.phoneDisplay}</a>.</div>}
         </fieldset>
       )}
 
       {step === 2 && (
         <fieldset>
           <legend>What type of property is it?</legend>
-          <div className="estimateChoices twoCol">
-            {["Residential", "Commercial"].map((option) => (
+          <div className="estimateChoices">
+            {propertyOptions.map((option) => (
               <label key={option} className={lead.propertyType === option ? "selected" : ""}>
                 <input type="radio" name="propertyType" value={option} checked={lead.propertyType === option} onChange={() => update("propertyType", option)} />
                 <span>{option}</span>
@@ -157,7 +164,7 @@ export default function EstimateFlow() {
           <div className="estimateFields">
             <label className="estimateField">Name<input autoComplete="name" value={lead.name} onChange={(e) => update("name", e.target.value)} placeholder="Your name" /></label>
             <label className="estimateField">Phone<input inputMode="tel" autoComplete="tel" value={lead.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(773) 555-0123" /></label>
-            <label className="estimateField">Email <span>optional</span><input type="email" autoComplete="email" value={lead.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" /></label>
+            <label className="estimateField">Email <span>optional unless you prefer email</span><input type="email" autoComplete="email" value={lead.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" /></label>
           </div>
         </fieldset>
       )}
@@ -165,7 +172,7 @@ export default function EstimateFlow() {
       {step === 4 && (
         <fieldset>
           <legend>Tell us what happened.</legend>
-          <p>A few useful details are enough: where the damage is, when you noticed it, and what is changing.</p>
+          <p>A few useful details are enough: where the problem is, when you noticed it, and what is changing.</p>
           <label className="estimateField"><textarea rows={6} value={lead.description} onChange={(e) => update("description", e.target.value)} placeholder="Example: Water started coming through the second-floor ceiling after last night's storm..." /></label>
         </fieldset>
       )}
@@ -174,13 +181,18 @@ export default function EstimateFlow() {
         <fieldset>
           <legend>How should we contact you?</legend>
           <div className="estimateChoices twoCol">
-            {["phone", "email"].map((option) => (
-              <label key={option} className={lead.preferredContact === option ? "selected" : ""}>
-                <input type="radio" name="preferredContact" value={option} checked={lead.preferredContact === option} onChange={() => update("preferredContact", option)} />
-                <span>{option === "phone" ? "Phone / text" : "Email"}</span>
-              </label>
-            ))}
+            <label className={lead.preferredContact === "phone" ? "selected" : ""}>
+              <input type="radio" name="preferredContact" value="phone" checked={lead.preferredContact === "phone"} onChange={() => update("preferredContact", "phone")} />
+              <span>Phone / text</span>
+            </label>
+            <label className={lead.preferredContact === "email" ? "selected" : ""}>
+              <input type="radio" name="preferredContact" value="email" checked={lead.preferredContact === "email"} onChange={() => update("preferredContact", "email")} />
+              <span>Email</span>
+            </label>
           </div>
+          {lead.preferredContact === "email" && !hasValidEmail && (
+            <div className="estimateEmergency" role="alert">Please go back one step and add a valid email address, or choose Phone / text.</div>
+          )}
           <label className="estimateConsent">
             <input type="checkbox" checked={lead.consent} onChange={(e) => update("consent", e.target.checked)} />
             <span>I agree that Intex may contact me about this request using the information I provided. See the <a href="/privacy/" target="_blank" rel="noreferrer">Privacy Policy</a>.</span>
