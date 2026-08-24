@@ -8,7 +8,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "validate": "node scripts/validate-platform.mjs",
-    "verify": "npm run typecheck && npm run validate && npm run build",
+    "verify": "npm run typecheck && npm run validate && node --check scripts/preflight-preview.mjs && npm run build",
     "preflight:preview": "node scripts/preflight-preview.mjs",
     "smoke:production": "node scripts/smoke-production.mjs"
   },
