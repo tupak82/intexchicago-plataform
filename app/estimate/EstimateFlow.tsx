@@ -17,20 +17,6 @@ type LeadDraft = {
   website: string;
 };
 
-const initialLead: LeadDraft = {
-  service: "",
-  emergency: "",
-  propertyType: "",
-  zip: "",
-  name: "",
-  phone: "",
-  email: "",
-  description: "",
-  preferredContact: "phone",
-  consent: false,
-  website: "",
-};
-
 const serviceOptions = [
   "Roof leak / roof repair",
   "Roof replacement",
@@ -41,14 +27,35 @@ const serviceOptions = [
   "Water damage",
   "Fire / smoke damage",
   "Mold concern",
+  "Trauma / biohazard cleanup",
+  "Insurance claim documentation",
+  "Commercial restoration",
   "Other property damage",
-];
+] as const;
+
+export type EstimateServiceOption = (typeof serviceOptions)[number];
 
 const propertyOptions = ["Single-family home", "Multi-family property", "Commercial property"];
 
-export default function EstimateFlow() {
+function createInitialLead(initialService?: EstimateServiceOption): LeadDraft {
+  return {
+    service: initialService || "",
+    emergency: "",
+    propertyType: "",
+    zip: "",
+    name: "",
+    phone: "",
+    email: "",
+    description: "",
+    preferredContact: "phone",
+    consent: false,
+    website: "",
+  };
+}
+
+export default function EstimateFlow({ initialService }: { initialService?: EstimateServiceOption }) {
   const [step, setStep] = useState(0);
-  const [lead, setLead] = useState<LeadDraft>(initialLead);
+  const [lead, setLead] = useState<LeadDraft>(() => createInitialLead(initialService));
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const totalSteps = 6;
@@ -80,7 +87,7 @@ export default function EstimateFlow() {
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...lead, sourcePage: window.location.pathname }),
+        body: JSON.stringify({ ...lead, sourcePage: `${window.location.pathname}${window.location.search}` }),
       });
       if (!response.ok) throw new Error("Lead submission failed");
       setStatus("success");
