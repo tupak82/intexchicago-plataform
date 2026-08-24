@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EstimateFlow from "./EstimateFlow";
+import EstimateFlow, { type EstimateServiceOption } from "./EstimateFlow";
 import { site } from "@/lib/site";
 import { BrandLogo } from "@/components/BrandLogo";
 
@@ -10,7 +10,32 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function EstimatePage() {
+const serviceParamMap: Record<string, EstimateServiceOption> = {
+  "roof-repair-chicago": "Roof leak / roof repair",
+  "roof-replacement-chicago": "Roof replacement",
+  "storm-damage-restoration-chicago": "Storm / hail damage roofing",
+  "flat-roofing-chicago": "Flat roof / TPO roofing",
+  "commercial-roofing-chicago": "Commercial roofing",
+  "roof-inspection-chicago": "Roof inspection",
+  "water-damage-restoration-chicago": "Water damage",
+  "fire-damage-restoration-chicago": "Fire / smoke damage",
+  "mold-remediation-chicago": "Mold concern",
+  "trauma-biohazard-cleaning-chicago": "Trauma / biohazard cleanup",
+  "insurance-claims": "Insurance claim documentation",
+  "commercial-restoration-chicago": "Commercial restoration",
+};
+
+type EstimatePageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function EstimatePage({ searchParams }: EstimatePageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const rawService = Array.isArray(resolvedSearchParams.service)
+    ? resolvedSearchParams.service[0]
+    : resolvedSearchParams.service;
+  const initialService = rawService ? serviceParamMap[rawService] : undefined;
+
   return (
     <main className="estimatePage">
       <header className="estimateHeader">
@@ -23,7 +48,7 @@ export default function EstimatePage() {
           <h1>Start with the problem. We&apos;ll organize the details.</h1>
           <p>A short step-by-step request designed for phones, emergencies, and planned roofing work.</p>
         </div>
-        <EstimateFlow />
+        <EstimateFlow initialService={initialService} />
       </section>
     </main>
   );
