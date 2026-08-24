@@ -16,8 +16,8 @@ export default function ServiceAreasPage() {
       <section className="platformHero">
         <div className="platformBreadcrumbs"><a href="/">Home</a> / Service Areas</div>
         <p className="kicker"><span /> Chicago + Chicagoland roofing</p>
-        <h1>Local roofing coverage built around real service areas.</h1>
-        <p>Intex provides roofing support across Chicago and selected Chicagoland communities. Each area page connects homeowners and property owners directly to roof repair, replacement, flat roofing, commercial roofing, inspections and storm-damage help.</p>
+        <h1>Roofing help matched to the property and the neighborhood.</h1>
+        <p>Intex provides roofing support across Chicago and selected Chicagoland communities, with service pages that connect local conditions to roof repair, replacement, flat roofing, commercial roofing, inspections and storm-damage needs.</p>
         <div className="heroActions">
           <a className="primaryButton" href="/estimate/?service=roofing">Request a roofing estimate</a>
           <a className="secondaryButton" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
@@ -30,7 +30,7 @@ export default function ServiceAreasPage() {
             <p className="kicker dark"><span /> Service areas</p>
             <h2>Find roofing help near your property.</h2>
           </div>
-          <p>We publish location pages only where the platform has useful, differentiated roofing content. The goal is local relevance—not hundreds of duplicated SEO pages.</p>
+          <p>Each published area page focuses on the roofing issues and service paths that matter for that part of Chicago or Chicagoland.</p>
         </div>
         <div className="platformGrid">
           {publishedAreas.map((area) => (
@@ -47,7 +47,7 @@ export default function ServiceAreasPage() {
       <section className="platformSection platformSplit">
         <div>
           <p className="kicker dark"><span /> Core roofing services</p>
-          <h2>One roofing system, multiple local entry points.</h2>
+          <h2>One roofing team, multiple ways to solve the problem.</h2>
         </div>
         <ul className="platformList">
           <li><a href="/roof-repair-chicago/">Roof Repair</a></li>
