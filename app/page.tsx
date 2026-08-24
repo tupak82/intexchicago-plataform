@@ -1,16 +1,17 @@
 import "./roofing-realism.css";
 import { BrandLogo } from "@/components/BrandLogo";
+import { ServiceCardAnimation } from "@/components/ServiceCardAnimation";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
 import { listPublicProjects } from "@/lib/project-store";
 
 const roofingServices = [
-  { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair", mediaLabel: "Targeted shingle + flashing repair", href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
-  { title: "Roof Replacement", eyebrow: "Built for the next decade", media: "replacement", mediaLabel: "Tear-off + new shingle system", href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
-  { title: "Storm Damage", eyebrow: "Wind + hail response", media: "storm", mediaLabel: "Storm impact + damage response", href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
-  { title: "Flat Roofing", eyebrow: "Chicago property specialty", media: "flat", mediaLabel: "Membrane + low-slope roofing", href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
-  { title: "Commercial Roofing", eyebrow: "Protect operations", media: "commercial", mediaLabel: "Large-scale commercial roof work", href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
-  { title: "Roof Inspections", eyebrow: "Know before you spend", media: "inspection", mediaLabel: "Aerial + visual roof assessment", href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
+  { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair" as const, href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
+  { title: "Roof Replacement", eyebrow: "Built for the next decade", media: "replacement" as const, href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
+  { title: "Storm Damage", eyebrow: "Wind + hail response", media: "storm" as const, href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
+  { title: "Flat Roofing", eyebrow: "Chicago property specialty", media: "flat" as const, href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
+  { title: "Commercial Roofing", eyebrow: "Protect operations", media: "commercial" as const, href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
+  { title: "Roof Inspections", eyebrow: "Know before you spend", media: "inspection" as const, href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
 ];
 
 const localBusinessSchema = {
@@ -91,7 +92,7 @@ export default async function Home() {
           {roofingServices.map((service, index) => (
             <a className="roofServiceCard" href={service.href} key={service.title}>
               <div className="roofServiceMeta"><span>0{index + 1}</span><small>{service.eyebrow}</small></div>
-              <div className={`roofServiceMedia media-${service.media}`} aria-hidden="true"><span className="roofMediaLabel">{service.mediaLabel}</span></div>
+              <div className="roofServiceMedia"><ServiceCardAnimation type={service.media} /></div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <b>Explore →</b>
@@ -104,14 +105,14 @@ export default async function Home() {
         <div className="roofChicagoCopy">
           <p className="roofEyebrow">Designed around Chicago</p>
           <h2>Your roof is a climate system, not just shingles.</h2>
-          <p>Chicago roofing has to handle heat, hail, wind, heavy rain, snow loads and repeated freeze-thaw cycles. Our roofing experience and recommendations are framed around those conditions—not a one-size-fits-all national script.</p>
+          <p>Chicago averages more than 38 inches of snow a year, and repeated freeze-thaw cycles can create ice dams at roof edges. Hail season is most active from May through August, and recent Chicagoland storms have produced hail larger than two inches. Much of that damage is not obvious from the street, which is why inspection should focus on the roof surface plus objective soft-metal evidence on gutters, vents and exposed equipment.</p>
           <a href="/roofing-chicago/">Explore Chicago roofing services →</a>
         </div>
         <div className="roofClimateGrid" aria-label="Chicago roofing conditions">
           <article><strong>WIND</strong><span>Lifted edges, flashing stress and shingle vulnerability</span></article>
-          <article><strong>HAIL</strong><span>Granule loss, impact marks and hidden wear</span></article>
-          <article><strong>SNOW</strong><span>Snow load, drainage and ice buildup at edges</span></article>
-          <article><strong>FREEZE</strong><span>Expansion, contraction and membrane leak paths</span></article>
+          <article><strong>HAIL</strong><span>Bruising, granule loss and soft-metal impact evidence</span></article>
+          <article><strong>SNOW</strong><span>38+ inches yearly, with drainage and ice-dam risk at roof edges</span></article>
+          <article><strong>FREEZE</strong><span>Repeated melt and refreeze cycles can drive water beneath vulnerable roofing</span></article>
         </div>
       </section>
 
