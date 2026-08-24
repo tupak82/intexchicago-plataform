@@ -1,6 +1,6 @@
 # Intex Chicago Legacy URL Inventory
 
-Last verified: 2026-08-22
+Last verified: 2026-08-24
 
 This inventory records WordPress routes observed directly from the live `intexchicago.com` navigation or confirmed in the public search index. It is a migration source of truth, not a guessed URL list.
 
@@ -14,14 +14,21 @@ This inventory records WordPress routes observed directly from the live `intexch
 | `/mold-cleanup-remediation/` | `/mold-remediation-chicago/` | 301 |
 | `/side-navigation/insuranceclaim/` | `/insurance-claims/` | 301 |
 | `/side-navigation/commercialservices/` | `/commercial-restoration-chicago/` | 301 |
-| `/side-navigation/roof-repair/` | `/roofing-chicago/` | 301 |
+| `/side-navigation/roof-repair/` | `/roof-repair-chicago/` | 301; preserve specific roof-repair intent |
 | `/why-us/` | `/about/` | 301 |
 | `/contact/` | `/contact/` | Preserve canonical path |
 | `/` | `/` | Preserve canonical path |
+
+## 2026-08-24 public verification
+
+- The live public domain is still serving the legacy WordPress installation.
+- The public homepage still contains injected casino/spam content after the legitimate Intex content; this is evidence that the legacy install must be treated as compromised.
+- Search results continue to expose `/why-us/`, `/mold-cleanup-remediation/`, and the indexed `/?page_id=12534` trauma/biohazard URL.
+- Legacy marketing copy also exposes unverified claims such as ratings, founding-year language, lifetime-guarantee language, and response-time claims. Those claims are intentionally not carried into the new platform unless separately verified.
 
 ## Important migration notes
 
 - Do not redirect every unknown WordPress URL to the homepage. Unknown valuable URLs must be mapped to the closest relevant replacement.
 - Preserve `/contact/` because it exists on the legacy site and now has a clean replacement at the same path.
 - Continue expanding this inventory from the WordPress export, Search Console, analytics, server logs, and any indexed URLs found before cutover.
-- The legacy homepage currently contains unrelated spam/casino text after legitimate Intex content. Do not migrate that injected content or any unknown scripts that produced it.
+- Do not migrate injected content, unknown scripts, or unsupported claims from the compromised WordPress installation.
