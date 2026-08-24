@@ -5,6 +5,10 @@ const routes = [
   "/about/",
   "/contact/",
   "/estimate/",
+  "/projects/",
+  "/reviews/",
+  "/resources/",
+  "/service-areas/",
   "/roofing-chicago/",
   "/roof-repair-chicago/",
   "/roof-replacement-chicago/",
@@ -12,6 +16,12 @@ const routes = [
   "/flat-roofing-chicago/",
   "/commercial-roofing-chicago/",
   "/roof-inspection-chicago/",
+  "/water-damage-restoration-chicago/",
+  "/fire-damage-restoration-chicago/",
+  "/mold-remediation-chicago/",
+  "/commercial-restoration-chicago/",
+  "/trauma-biohazard-cleaning-chicago/",
+  "/insurance-claims/",
   "/sitemap.xml",
   "/robots.txt",
   "/api/health",
@@ -52,8 +62,13 @@ async function checkRoute(path) {
       try {
         const health = JSON.parse(body);
         if (!health || typeof health !== "object") throw new Error("invalid health payload");
-      } catch {
-        console.error(`FAIL invalid /api/health payload at ${url}`);
+        if (health.ok !== true || health.status !== "healthy" || health.readiness?.leadBackend !== true) {
+          console.error(`FAIL unhealthy /api/health payload at ${url}`);
+          failures += 1;
+          return;
+        }
+      } catch (error) {
+        console.error(`FAIL invalid /api/health payload at ${url}: ${error instanceof Error ? error.message : String(error)}`);
         failures += 1;
         return;
       }
