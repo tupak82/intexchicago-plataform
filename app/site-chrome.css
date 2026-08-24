@@ -1,0 +1,39 @@
+.siteHeaderGlobal { position: absolute; }
+
+.siteFooter {
+  padding: 54px clamp(24px, 5vw, 76px);
+  display: grid;
+  grid-template-columns: 1.1fr 2fr .9fr;
+  gap: 56px;
+  align-items: start;
+  background: #050d18;
+  color: #74869a;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.siteFooterBrand { display: grid; gap: 18px; }
+.siteFooterBrand p { margin: 0; max-width: 310px; line-height: 1.65; font-size: 12px; }
+.siteFooterLinks { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; }
+.siteFooterLinks > div { display: grid; gap: 12px; }
+.siteFooterLinks strong { color: white; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+.siteFooterLinks a, .siteFooterContact a { font-size: 12px; line-height: 1.4; }
+.siteFooter a:hover { color: white; }
+.siteFooterContact { display: grid; gap: 14px; justify-items: start; }
+.siteFooterContact a:first-child { color: white; font: 700 18px/1.2 "Manrope", sans-serif; }
+.siteFooterContact a:last-child { margin-top: 10px; color: white; background: var(--blue); padding: 13px 16px; border-radius: 999px; font-weight: 700; }
+
+@media (max-width: 1080px) {
+  .siteFooter { grid-template-columns: 1fr 1.6fr; }
+  .siteFooterContact { grid-column: 1 / -1; grid-template-columns: repeat(3,auto); align-items: center; }
+  .siteFooterContact a:last-child { margin-top: 0; }
+}
+
+@media (max-width: 760px) {
+  .siteHeaderGlobal nav a:not(.navCall) { display: none; }
+  .siteFooter { grid-template-columns: 1fr; gap: 34px; padding: 46px 20px calc(112px + env(safe-area-inset-bottom)); }
+  .siteFooterLinks { grid-template-columns: 1fr 1fr; gap: 28px 22px; }
+  .siteFooterContact { grid-column: auto; grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .siteFooterLinks { grid-template-columns: 1fr; }
+}
