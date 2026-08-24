@@ -1,0 +1,31 @@
+name: Production Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Hostinger preview or production base URL"
+        required: true
+        default: "https://intexchicago.com"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run production smoke test
+        env:
+          INTEX_SMOKE_BASE_URL: ${{ inputs.base_url }}
+        run: npm run smoke:production
