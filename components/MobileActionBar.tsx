@@ -3,18 +3,18 @@ import { site } from "@/lib/site";
 
 export default function MobileActionBar() {
   return (
-    <aside className="mobileActionBar" aria-label="Quick roofing actions">
+    <aside className="mobileActionBar" aria-label="Quick Intex actions">
       <a className="mobileActionCall" href={`tel:${site.phone}`} aria-label={`Call Intex Chicago at ${site.phoneDisplay}`}>
         <span className="mobileActionIcon" aria-hidden="true">☎</span>
         <span>
-          <small>24/7 roofing help</small>
+          <small>Talk to Intex</small>
           <strong>Call now</strong>
         </span>
       </a>
-      <Link className="mobileActionEstimate" href="/estimate">
+      <Link className="mobileActionEstimate" href="/estimate/">
         <span>
-          <small>Fast response</small>
-          <strong>Free estimate</strong>
+          <small>Roofing + restoration</small>
+          <strong>Start request</strong>
         </span>
         <span className="mobileActionArrow" aria-hidden="true">↗</span>
       </Link>
