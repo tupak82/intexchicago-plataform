@@ -34,6 +34,7 @@ const criticalRoutes = [
   "app/about/page.tsx",
   "app/contact/page.tsx",
   "app/estimate/page.tsx",
+  "app/restoration/page.tsx",
   "app/projects/page.tsx",
   "app/projects/[slug]/page.tsx",
   "app/reviews/page.tsx",
@@ -93,6 +94,7 @@ for (const file of adminMutationRoutes) {
 check(site.includes("info@intexchicago.com"), "Canonical Intex email is missing from site config.");
 check(site.includes("+17738225892"), "Canonical Intex phone is missing from site config.");
 check(sitemap.includes("/resources/"), "Resources hub must be included in sitemap.");
+check(sitemap.includes("/restoration/"), "Restoration hub must be included in sitemap.");
 check(sitemap.includes("/service-areas/"), "Service areas must be included in sitemap.");
 check(sitemap.includes("/privacy/"), "Privacy page must be included in sitemap.");
 check(sitemap.includes("listPublicProjects"), "Project sitemap entries must be driven by the project repository.");
@@ -110,6 +112,8 @@ check(projectInput.includes("published_project_requires_images"), "Project publi
 check(reviewInput.includes("publish_requires_verification_and_permission"), "Review publishing must require verification and permission.");
 check(reviewStore.includes("published = 1 AND verified = 1 AND permission_to_display = 1"), "Public reviews must enforce the three-part publication gate.");
 check(homepage.includes("listPublicReviews"), "Homepage verified review section must use the review repository.");
+check(homepage.includes('href="/restoration/"'), "Homepage Restoration navigation must point to the restoration hub.");
+check(!homepage.includes("Photo-backed inspections"), "Do not publish photo-backed inspection claims without verified operational evidence.");
 check(!homepage.includes("AggregateRating"), "Do not emit AggregateRating on the homepage without approved aggregate evidence.");
 
 const forbiddenClaims = ["4.9-star", "4.9 star", "30-minute response", "lifetime guarantee", "since 2009"];
@@ -126,4 +130,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, CRM, projects, reviews, admin origin guards, and owned persistence checked.`);
+console.log(`Platform validation passed: ${redirectSources.length} legacy redirects, ${criticalRoutes.length} critical routes, restoration hub, CRM, projects, reviews, admin origin guards, and owned persistence checked.`);
