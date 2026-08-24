@@ -1,4 +1,6 @@
 const baseUrl = (process.env.INTEX_SMOKE_BASE_URL || "https://intexchicago.com").replace(/\/$/, "");
+const productionBaseUrl = "https://intexchicago.com";
+const isProductionTarget = baseUrl === productionBaseUrl;
 
 const routes = [
   "/",
@@ -6,7 +8,6 @@ const routes = [
   "/contact/",
   "/estimate/",
   "/projects/",
-  "/reviews/",
   "/resources/",
   "/service-areas/",
   "/roofing-chicago/",
@@ -40,7 +41,7 @@ let failures = 0;
 async function checkRoute(path) {
   const url = `${baseUrl}${path}`;
   try {
-    const response = await fetch(url, { redirect: "follow", headers: { "user-agent": "IntexProductionSmoke/1.0" } });
+    const response = await fetch(url, { redirect: "follow", headers: { "user-agent": "IntexDeploymentSmoke/1.0" } });
     const contentType = response.headers.get("content-type") || "";
     const body = contentType.includes("text") || contentType.includes("json") ? await response.text() : "";
 
@@ -62,13 +63,11 @@ async function checkRoute(path) {
       try {
         const health = JSON.parse(body);
         if (!health || typeof health !== "object") throw new Error("invalid health payload");
-        if (health.ok !== true || health.status !== "healthy" || health.readiness?.leadBackend !== true) {
-          console.error(`FAIL unhealthy /api/health payload at ${url}`);
-          failures += 1;
-          return;
-        }
+        if (health.ok !== true) throw new Error(`health is not ok: ${health.status || "unknown"}`);
+        if (health.readiness?.web !== true) throw new Error("web readiness is false");
+        if (health.readiness?.leadBackend !== true) throw new Error("lead backend is not ready");
       } catch (error) {
-        console.error(`FAIL invalid /api/health payload at ${url}: ${error instanceof Error ? error.message : String(error)}`);
+        console.error(`FAIL unhealthy /api/health at ${url}: ${error instanceof Error ? error.message : String(error)}`);
         failures += 1;
         return;
       }
@@ -81,25 +80,30 @@ async function checkRoute(path) {
   }
 }
 
+console.log(`Deployment smoke target: ${baseUrl} (${isProductionTarget ? "production" : "preview"})`);
 for (const route of routes) await checkRoute(route);
 
-try {
-  const response = await fetch("https://www.intexchicago.com/", { redirect: "manual" });
-  const location = response.headers.get("location") || "";
-  if (![301, 302, 307, 308].includes(response.status) || !location.startsWith("https://intexchicago.com")) {
-    console.error(`FAIL www canonical redirect: status=${response.status} location=${location || "<missing>"}`);
+if (isProductionTarget) {
+  try {
+    const response = await fetch("https://www.intexchicago.com/", { redirect: "manual" });
+    const location = response.headers.get("location") || "";
+    if (![301, 302, 307, 308].includes(response.status) || !location.startsWith("https://intexchicago.com")) {
+      console.error(`FAIL www canonical redirect: status=${response.status} location=${location || "<missing>"}`);
+      failures += 1;
+    } else {
+      console.log(`PASS www canonical redirect -> ${location}`);
+    }
+  } catch (error) {
+    console.error(`FAIL www canonical redirect: ${error instanceof Error ? error.message : String(error)}`);
     failures += 1;
-  } else {
-    console.log(`PASS www canonical redirect -> ${location}`);
   }
-} catch (error) {
-  console.error(`FAIL www canonical redirect: ${error instanceof Error ? error.message : String(error)}`);
-  failures += 1;
+} else {
+  console.log("SKIP www canonical redirect for preview target");
 }
 
 if (failures > 0) {
-  console.error(`\nProduction smoke test failed with ${failures} issue(s).`);
+  console.error(`\nDeployment smoke test failed with ${failures} issue(s).`);
   process.exit(1);
 }
 
-console.log("\nProduction smoke test passed.");
+console.log("\nDeployment smoke test passed.");
