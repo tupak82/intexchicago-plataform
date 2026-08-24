@@ -8,7 +8,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "validate": "node scripts/validate-platform.mjs",
-    "verify": "npm run typecheck && npm run validate && npm run build"
+    "verify": "npm run typecheck && npm run validate && npm run build",
+    "smoke:production": "node scripts/smoke-production.mjs"
   },
   "dependencies": {
     "mysql2": "^3.14.5",
