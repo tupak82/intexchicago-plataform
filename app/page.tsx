@@ -40,7 +40,7 @@ export default async function Home() {
         <BrandLogo href="#top" label="Intex Chicago Roofing home" />
         <nav aria-label="Primary navigation">
           <a href="#roofing-services">Roofing</a>
-          <a href="/water-damage-restoration-chicago/">Restoration</a>
+          <a href="/restoration/">Restoration</a>
           <a href="/projects/">Projects</a>
           <a href="/service-areas/">Service Areas</a>
           <a href="/contact/">Contact</a>
@@ -77,7 +77,7 @@ export default async function Home() {
       </section>
 
       <section className="fieldTrustRail" aria-label="Intex roofing process commitments">
-        <article><span>01</span><div><strong>Photo-backed inspections</strong><small>See the condition, not just the sales pitch.</small></div></article>
+        <article><span>01</span><div><strong>Clear inspection findings</strong><small>Understand the visible condition before deciding what comes next.</small></div></article>
         <article><span>02</span><div><strong>Clear scope before work</strong><small>Repair, replacement and material decisions explained.</small></div></article>
         <article><span>03</span><div><strong>Chicago roof types</strong><small>Shingle, flat, multifamily and commercial systems.</small></div></article>
         <article><span>04</span><div><strong>Weather-first thinking</strong><small>Wind, hail, snow, drainage and freeze-thaw cycles.</small></div></article>
@@ -190,6 +190,7 @@ export default async function Home() {
           </div>
           <div>
             <strong>Restoration</strong>
+            <a href="/restoration/">All Restoration Services</a>
             <a href="/water-damage-restoration-chicago/">Water Damage</a>
             <a href="/fire-damage-restoration-chicago/">Fire & Smoke</a>
             <a href="/mold-remediation-chicago/">Mold Remediation</a>
