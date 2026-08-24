@@ -133,11 +133,21 @@ Then validate:
 - `/robots.txt`
 - `/api/health`
 
-Run the automated HTTP pass against the preview hostname:
+Run the automated HTTP pass against the preview hostname locally or from any shell with Node 22:
 
 ```bash
 INTEX_SMOKE_BASE_URL=https://<hostinger-preview-host> npm run smoke:production
 ```
+
+Or use GitHub Actions without shell access:
+
+1. Open **Actions** in `tupak82/intexchicago-plataform`.
+2. Choose **Preview / Production Smoke**.
+3. Run the workflow.
+4. Paste the Hostinger preview base URL into `base_url`.
+5. The workflow must finish green before domain mapping.
+
+The smoke script automatically detects whether the supplied base URL is the production hostname. Preview targets skip the `www.intexchicago.com` canonical redirect check, while production still requires it. Both preview and production require `/api/health` to report `ok: true`, web readiness, and a ready lead backend.
 
 When admin is enabled and authenticated, also validate:
 
@@ -159,7 +169,7 @@ Also test every verified legacy redirect in `lib/legacy-redirects.ts`, including
 2. Take final WordPress filesystem/database backup.
 3. Confirm `npm run preflight:preview` passes against the configured environment.
 4. Confirm the Hostinger preview deployment is healthy at `/api/health`.
-5. Run `INTEX_SMOKE_BASE_URL=https://<hostinger-preview-host> npm run smoke:production`.
+5. Run the **Preview / Production Smoke** workflow against the preview hostname and require a green result.
 6. Submit a test lead and confirm it appears in MySQL and `/admin/leads/`.
 7. Confirm lead failure behavior by temporarily testing an unavailable destination in a controlled preview environment.
 8. Create one draft project, confirm draft is not public, then validate publication with approved test media.
@@ -167,9 +177,10 @@ Also test every verified legacy redirect in `lib/legacy-redirects.ts`, including
 10. Confirm verified redirects on the preview/deployment host where possible.
 11. Map `intexchicago.com` to the Node.js application.
 12. Verify HTTPS and canonical host behavior.
-13. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, CMS, and redirects.
-14. Submit/refresh sitemap in Search Console.
-15. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
+13. Run the same smoke workflow against `https://intexchicago.com` and require the `www` canonical redirect check to pass.
+14. Smoke-test phone, email, estimate flow, sitemap, robots, admin login, CMS, and redirects.
+15. Submit/refresh sitemap in Search Console.
+16. Monitor 404s, lead delivery, logs, indexing, and conversion paths.
 
 ## Important
 
