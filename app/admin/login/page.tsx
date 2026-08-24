@@ -9,6 +9,12 @@ export const metadata: Metadata = {
 export default async function AdminLoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
   const configured = adminConfigured();
+  const errorMessage =
+    error === "rate_limited"
+      ? "Too many sign-in attempts. Try again later."
+      : error
+        ? "Incorrect password."
+        : "";
 
   return (
     <main className="adminPage">
@@ -23,7 +29,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
               Admin password
               <input name="password" type="password" autoComplete="current-password" required />
             </label>
-            {error && <p className="adminLoginError">Incorrect password.</p>}
+            {errorMessage && <p className="adminLoginError">{errorMessage}</p>}
             <button type="submit">Sign in</button>
           </form>
         )}
