@@ -1,0 +1,174 @@
+/* Roofing-first homepage core. This layer intentionally overrides earlier experimental homepage treatments. */
+
+.roofingHome .roofHero {
+  min-height: 760px;
+}
+
+.roofingHome .roofHeroContent { max-width: 760px; }
+.roofingHome .roofHero h1 { max-width: 820px; }
+
+.roofProblemStrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: #fff;
+  border-top: 1px solid rgba(10, 32, 54, .12);
+  border-bottom: 1px solid rgba(10, 32, 54, .12);
+}
+
+.roofProblemStrip a {
+  min-height: 128px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  color: #07111f;
+  text-decoration: none;
+  border-right: 1px solid rgba(10, 32, 54, .1);
+  transition: background .2s ease, color .2s ease;
+}
+.roofProblemStrip a:last-child { border-right: 0; }
+.roofProblemStrip a:hover { background: #0b1b2c; color: #fff; }
+.roofProblemStrip small { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
+.roofProblemStrip strong { font: 700 clamp(20px, 2vw, 28px)/1.05 "Manrope", sans-serif; letter-spacing: -.04em; }
+.roofProblemStrip span { font-size: 12px; line-height: 1.5; opacity: .72; }
+
+.roofServicesCore,
+.roofProofCore,
+.roofProcessCore,
+.roofLocalCore,
+.homeReviewsSection,
+.roofEstimateSection {
+  padding-left: clamp(24px, 5vw, 76px);
+  padding-right: clamp(24px, 5vw, 76px);
+}
+
+.roofServicesCore { padding-top: 96px; padding-bottom: 110px; background: #f4f1ea; }
+.roofServicesCore .roofSectionHeading { margin-bottom: 44px; }
+.roofServicesCore .roofServiceGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+.roofServicesCore .roofServiceCard {
+  min-height: 390px !important;
+  padding: 26px !important;
+  display: grid !important;
+  grid-template-rows: auto 150px auto 1fr auto !important;
+  gap: 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(15,42,68,.12) !important;
+  background: #fff !important;
+  color: #07111f !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.roofServicesCore .roofServiceCard:hover { border-color: rgba(23,105,255,.45) !important; box-shadow: 0 18px 45px rgba(7,17,31,.08) !important; }
+.roofServicesCore .roofServiceMedia { min-height: 150px; border-radius: 8px; overflow: hidden; background: #0b1b2c; }
+.roofServicesCore .roofServiceCard h3 { margin: 0; font: 700 28px/1 "Manrope", sans-serif; letter-spacing: -.04em; }
+.roofServicesCore .roofServiceCard p { margin: 0; color: #5c6975; line-height: 1.6; }
+.roofServicesCore .roofServiceCard b { font-size: 12px; }
+
+.roofStormCore {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  min-height: 390px;
+  background: #091827;
+  color: #fff;
+}
+.roofStormCopy { padding: clamp(48px, 6vw, 88px); }
+.roofStormCopy h2 { margin: 14px 0 22px; max-width: 760px; font: 700 clamp(42px, 5vw, 74px)/.95 "Manrope", sans-serif; letter-spacing: -.055em; }
+.roofStormCopy p { max-width: 690px; color: #aebdcb; font-size: 17px; line-height: 1.65; }
+.roofStormCopy a { display: inline-flex; margin-top: 20px; color: #fff; font-weight: 800; text-decoration: none; }
+.roofStormVisual {
+  min-height: 390px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #102a44, #07111f);
+}
+.roofStormVisual::before {
+  content: "";
+  position: absolute;
+  inset: 12% 8% 18%;
+  clip-path: polygon(50% 0, 100% 62%, 88% 62%, 88% 100%, 12% 100%, 12% 62%, 0 62%);
+  background: repeating-linear-gradient(168deg, #27445f 0 14px, #1d344a 14px 28px);
+}
+.roofStormVisual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 68% 24%, rgba(91,170,255,.28), transparent 30%), repeating-linear-gradient(110deg, transparent 0 42px, rgba(255,255,255,.04) 43px, transparent 44px 84px);
+}
+
+.roofProofCore { padding-top: 96px; padding-bottom: 96px; background: #fff; }
+.roofProofCore .featuredRoofProject,
+.roofProofCore .projectProofPlaceholder { padding: 0 !important; margin: 0 !important; background: transparent !important; }
+
+.roofProcessCore { padding-top: 96px; padding-bottom: 96px; background: #0a1826; color: #fff; }
+.roofProcessCore .roofSectionHeading { margin-bottom: 40px; }
+.roofProcessCore .roofProcessGrid { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 1px !important; background: rgba(255,255,255,.12); }
+.roofProcessCore .roofProcessGrid article {
+  min-height: 310px !important;
+  padding: 28px !important;
+  background: #0d2032 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+}
+.roofProcessCore .roofProcessGrid article > span { color: #6bb9ff; }
+.roofProcessCore .roofProcessGrid h3 { font-size: 30px; }
+.roofProcessCore .roofProcessGrid p { color: #aebdcb; }
+.roofProcessCore .processMotion { opacity: .42; }
+
+.roofLocalCore {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(42px, 7vw, 110px);
+  align-items: start;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  background: #eef3f6;
+}
+.roofLocalCore h2 { margin: 14px 0 22px; font: 700 clamp(42px, 5vw, 70px)/.96 "Manrope", sans-serif; letter-spacing: -.055em; color: #07111f; }
+.roofLocalCore > div > p { color: #5c6975; line-height: 1.7; font-size: 16px; }
+.roofLocalList { display: grid; border-top: 1px solid rgba(9,32,55,.16); }
+.roofLocalList article { padding: 22px 0; display: grid; grid-template-columns: 150px 1fr; gap: 24px; border-bottom: 1px solid rgba(9,32,55,.16); }
+.roofLocalList strong { color: #07111f; font-size: 15px; }
+.roofLocalList span { color: #5c6975; line-height: 1.55; font-size: 14px; }
+
+@media (max-width: 980px) {
+  .roofProblemStrip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .roofProblemStrip a:nth-child(2) { border-right: 0; }
+  .roofProblemStrip a:nth-child(-n+2) { border-bottom: 1px solid rgba(10,32,54,.1); }
+  .roofServicesCore .roofServiceGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .roofStormCore { grid-template-columns: 1fr; }
+  .roofStormVisual { min-height: 280px; }
+  .roofProcessCore .roofProcessGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .roofLocalCore { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .roofingHome .roofHero { min-height: auto !important; }
+  .roofProblemStrip { grid-template-columns: 1fr; }
+  .roofProblemStrip a { min-height: 112px; border-right: 0; border-bottom: 1px solid rgba(10,32,54,.1); }
+  .roofProblemStrip a:last-child { border-bottom: 0; }
+  .roofServicesCore,
+  .roofProofCore,
+  .roofProcessCore,
+  .roofLocalCore { padding-left: 18px; padding-right: 18px; }
+  .roofServicesCore { padding-top: 72px; padding-bottom: 76px; }
+  .roofServicesCore .roofServiceGrid { grid-template-columns: 1fr !important; }
+  .roofServicesCore .roofServiceCard { min-height: 360px !important; }
+  .roofStormCopy { padding: 54px 20px; }
+  .roofStormCopy h2 { font-size: clamp(40px, 12vw, 58px); }
+  .roofProcessCore { padding-top: 72px; padding-bottom: 72px; }
+  .roofProcessCore .roofProcessGrid { grid-template-columns: 1fr !important; }
+  .roofProcessCore .roofProcessGrid article { min-height: 250px !important; }
+  .roofLocalCore { padding-top: 72px; padding-bottom: 72px; gap: 34px; }
+  .roofLocalList article { grid-template-columns: 1fr; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofServicesCore .roofServiceCard,
+  .roofProblemStrip a { transition: none !important; }
+}
