@@ -1,0 +1,334 @@
+/* Chicago climate section — weather intelligence field.
+   Replaces the old four-equal-card treatment with a single atmospheric system
+   where each hazard occupies a different position, scale and motion language. */
+
+.roofChicagoSection {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 76% 22%, rgba(58, 139, 255, .18), transparent 30%),
+    radial-gradient(circle at 64% 84%, rgba(130, 206, 255, .08), transparent 32%),
+    linear-gradient(135deg, #071522 0%, #0a2034 54%, #07121e 100%);
+}
+
+.roofChicagoSection::before {
+  content: "CHICAGO WEATHER / ROOF LOAD";
+  position: absolute;
+  right: clamp(24px, 5vw, 76px);
+  top: 28px;
+  z-index: 0;
+  color: rgba(182, 216, 246, .2);
+  font: 760 8px/1 "Manrope", sans-serif;
+  letter-spacing: .22em;
+}
+
+.roofChicagoSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(117, 171, 218, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 171, 218, .045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 72% 50%, #000, transparent 66%);
+}
+
+.roofChicagoCopy {
+  position: relative;
+  z-index: 4;
+}
+
+.roofChicagoCopy h2 {
+  max-width: 720px;
+  color: #f4f8fc;
+  text-wrap: balance;
+}
+
+.roofChicagoCopy > p:not(.roofEyebrow) {
+  color: #a8b8c8;
+}
+
+.roofChicagoCopy > a {
+  color: #d9edff;
+  border-bottom-color: rgba(126, 198, 255, .38);
+}
+
+.roofClimateGrid {
+  position: relative;
+  min-height: 610px;
+  display: block !important;
+  overflow: hidden;
+  border: 1px solid rgba(118, 172, 220, .15);
+  border-radius: 34px 34px 92px 34px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(67, 151, 255, .10), transparent 36%),
+    linear-gradient(180deg, rgba(19, 45, 70, .72), rgba(7, 19, 31, .48));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 34px 90px rgba(1, 8, 16, .24);
+}
+
+/* Central roof system — the hazards orbit this, instead of living in boxes. */
+.roofClimateGrid::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 310px;
+  height: 190px;
+  transform: translate(-50%, -46%);
+  clip-path: polygon(50% 0, 100% 46%, 91% 46%, 91% 100%, 9% 100%, 9% 46%, 0 46%);
+  background:
+    repeating-linear-gradient(168deg, #26445f 0 12px, #1c354d 12px 24px);
+  filter: drop-shadow(0 28px 28px rgba(0,0,0,.32));
+  opacity: .92;
+}
+
+.roofClimateGrid::after {
+  content: "ROOF SYSTEM";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 92px);
+  color: rgba(189, 221, 248, .44);
+  font: 760 8px/1 "Manrope", sans-serif;
+  letter-spacing: .22em;
+}
+
+.roofClimateGrid article {
+  position: absolute;
+  z-index: 4;
+  width: min(44%, 250px);
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #edf7ff;
+}
+
+.roofClimateGrid article strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 9px;
+  color: #f6fbff;
+  font: 760 clamp(25px, 2.7vw, 42px)/.9 "Manrope", sans-serif;
+  letter-spacing: -.045em;
+}
+
+.roofClimateGrid article strong::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #63c6ff;
+  box-shadow: 0 0 0 5px rgba(99, 198, 255, .1), 0 0 22px rgba(99, 198, 255, .6);
+}
+
+.roofClimateGrid article span {
+  display: block;
+  max-width: 230px;
+  color: #8fa7bb;
+  font-size: 11px;
+  line-height: 1.58;
+}
+
+.roofClimateGrid article::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(92, 184, 255, .75), transparent);
+  transform-origin: left;
+  animation: climateTrace 3.6s ease-in-out infinite;
+}
+
+.roofClimateGrid article:nth-child(1) {
+  left: 7%;
+  top: 10%;
+}
+.roofClimateGrid article:nth-child(1)::after {
+  left: 8px;
+  top: 78px;
+  width: 190px;
+  transform: rotate(20deg);
+}
+
+.roofClimateGrid article:nth-child(2) {
+  right: 6%;
+  top: 14%;
+  text-align: right;
+}
+.roofClimateGrid article:nth-child(2) strong { justify-content: flex-end; }
+.roofClimateGrid article:nth-child(2) strong::before { order: 2; }
+.roofClimateGrid article:nth-child(2) span { margin-left: auto; }
+.roofClimateGrid article:nth-child(2)::after {
+  right: 2px;
+  top: 82px;
+  width: 178px;
+  transform-origin: right;
+  transform: rotate(-23deg);
+  background: linear-gradient(90deg, transparent, rgba(117, 213, 255, .8));
+  animation-delay: .7s;
+}
+
+.roofClimateGrid article:nth-child(3) {
+  left: 8%;
+  bottom: 9%;
+}
+.roofClimateGrid article:nth-child(3) strong::before { background: #d9efff; box-shadow: 0 0 0 5px rgba(217,239,255,.08), 0 0 22px rgba(217,239,255,.5); }
+.roofClimateGrid article:nth-child(3)::after {
+  left: 8px;
+  bottom: 75px;
+  width: 184px;
+  transform: rotate(-17deg);
+  animation-delay: 1.15s;
+}
+
+.roofClimateGrid article:nth-child(4) {
+  right: 7%;
+  bottom: 10%;
+  text-align: right;
+}
+.roofClimateGrid article:nth-child(4) strong { justify-content: flex-end; }
+.roofClimateGrid article:nth-child(4) strong::before { order: 2; background: #9bc8ff; }
+.roofClimateGrid article:nth-child(4) span { margin-left: auto; }
+.roofClimateGrid article:nth-child(4)::after {
+  right: 0;
+  bottom: 76px;
+  width: 174px;
+  transform-origin: right;
+  transform: rotate(19deg);
+  background: linear-gradient(90deg, transparent, rgba(117, 180, 255, .76));
+  animation-delay: 1.7s;
+}
+
+/* Hazard-specific atmospheric cues. */
+.roofClimateGrid article:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: -18px;
+  width: 116px;
+  height: 14px;
+  border-top: 2px solid rgba(116, 203, 255, .6);
+  border-radius: 50%;
+  filter: blur(.2px);
+  animation: climateWind 2.8s ease-in-out infinite;
+}
+
+.roofClimateGrid article:nth-child(2) {
+  --hail-dot: radial-gradient(circle, #d8f1ff 0 34%, transparent 38%);
+  background-image: var(--hail-dot) !important;
+  background-size: 22px 22px !important;
+  background-position: 100% 0 !important;
+}
+
+.roofClimateGrid article:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -18px;
+  width: 150px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(218,240,255,.34), transparent 70%);
+  filter: blur(3px);
+  animation: climateSnow 3.4s ease-in-out infinite;
+}
+
+.roofClimateGrid article:nth-child(4)::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+  width: 110px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #95c9ff);
+  box-shadow: 0 0 14px rgba(111, 186, 255, .7);
+  animation: climateFreeze 2.4s ease-in-out infinite;
+}
+
+@keyframes climateTrace {
+  0%, 20% { opacity: .15; scale: .25 1; }
+  50%, 75% { opacity: .9; scale: 1 1; }
+  100% { opacity: .18; scale: .35 1; }
+}
+
+@keyframes climateWind {
+  0%,100% { transform: translateX(-5px) scaleX(.8); opacity: .25; }
+  50% { transform: translateX(24px) scaleX(1.15); opacity: .9; }
+}
+
+@keyframes climateSnow {
+  0%,100% { transform: scaleX(.72); opacity: .22; }
+  50% { transform: scaleX(1.08); opacity: .7; }
+}
+
+@keyframes climateFreeze {
+  0%,100% { transform: scaleX(.35); opacity: .25; }
+  55% { transform: scaleX(1); opacity: 1; }
+}
+
+@media (max-width: 980px) {
+  .roofClimateGrid { min-height: 560px; }
+  .roofClimateGrid::before { width: 270px; height: 166px; }
+  .roofClimateGrid article { width: min(43%, 220px); }
+}
+
+@media (max-width: 760px) {
+  .roofChicagoSection {
+    padding-top: 88px !important;
+    padding-bottom: 88px !important;
+  }
+
+  .roofClimateGrid {
+    min-height: 700px;
+    margin-top: 38px;
+    border-radius: 26px 26px 68px 26px;
+  }
+
+  .roofClimateGrid::before {
+    width: 230px;
+    height: 142px;
+  }
+
+  .roofClimateGrid::after {
+    transform: translate(-50%, 72px);
+  }
+
+  .roofClimateGrid article {
+    width: 44%;
+  }
+
+  .roofClimateGrid article strong {
+    font-size: clamp(25px, 8vw, 34px);
+  }
+
+  .roofClimateGrid article span {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .roofClimateGrid article:nth-child(1) { left: 6%; top: 7%; }
+  .roofClimateGrid article:nth-child(2) { right: 6%; top: 9%; }
+  .roofClimateGrid article:nth-child(3) { left: 6%; bottom: 7%; }
+  .roofClimateGrid article:nth-child(4) { right: 6%; bottom: 8%; }
+
+  .roofClimateGrid article::after { width: 118px !important; }
+}
+
+@media (max-width: 420px) {
+  .roofClimateGrid { min-height: 650px; }
+  .roofClimateGrid::before { width: 190px; height: 118px; }
+  .roofClimateGrid article { width: 46%; }
+  .roofClimateGrid article strong { font-size: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofClimateGrid article::before,
+  .roofClimateGrid article::after { animation: none !important; }
+}
