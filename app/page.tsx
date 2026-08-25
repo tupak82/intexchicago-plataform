@@ -6,12 +6,12 @@ import { listPublicReviews } from "@/lib/review-store";
 import { listPublicProjects } from "@/lib/project-store";
 
 const roofingServices = [
-  { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair" as const, href: "/roof-repair-chicago/", description: "Targeted repairs for leaks, flashing failures, missing shingles, punctures and weather-related roof damage." },
-  { title: "Roof Replacement", eyebrow: "Built for the next decade", media: "replacement" as const, href: "/roof-replacement-chicago/", description: "Full replacement planning for aging or heavily damaged roofing systems, with clear options and scope." },
-  { title: "Storm Damage", eyebrow: "Wind + hail response", media: "storm" as const, href: "/storm-damage-restoration-chicago/", description: "Roof inspections, temporary protection and restoration support after severe Chicagoland weather." },
-  { title: "Flat Roofing", eyebrow: "Chicago property specialty", media: "flat" as const, href: "/flat-roofing-chicago/", description: "Solutions for flat and low-slope roofs common across Chicago homes, multifamily buildings and commercial properties." },
-  { title: "Commercial Roofing", eyebrow: "Protect operations", media: "commercial" as const, href: "/commercial-roofing-chicago/", description: "Roofing support for commercial buildings, property managers, facilities and multi-unit properties." },
-  { title: "Roof Inspections", eyebrow: "Know before you spend", media: "inspection" as const, href: "/roof-inspection-chicago/", description: "A clear assessment of visible roof conditions so you can understand what needs attention now and what can wait." },
+  { title: "Roof Repair", eyebrow: "Leaks + damage", media: "repair" as const, href: "/roof-repair-chicago/", description: "Targeted repairs for active leaks, flashing failures, missing shingles, punctures and weather-related damage." },
+  { title: "Roof Replacement", eyebrow: "Full roofing systems", media: "replacement" as const, href: "/roof-replacement-chicago/", description: "Complete roof replacement for aging or heavily damaged systems, with clear material and scope options." },
+  { title: "Storm Damage", eyebrow: "Wind + hail response", media: "storm" as const, href: "/storm-damage-restoration-chicago/", description: "Inspection, temporary protection and repair planning after hail, wind and severe Chicagoland weather." },
+  { title: "Flat Roofing", eyebrow: "Low-slope expertise", media: "flat" as const, href: "/flat-roofing-chicago/", description: "Flat and low-slope roofing solutions for Chicago homes, multifamily buildings and commercial properties." },
+  { title: "Commercial Roofing", eyebrow: "Protect your property", media: "commercial" as const, href: "/commercial-roofing-chicago/", description: "Roofing for commercial buildings, property managers, facilities and multi-unit properties." },
+  { title: "Roof Inspections", eyebrow: "Know what is wrong", media: "inspection" as const, href: "/roof-inspection-chicago/", description: "A clear roof assessment that identifies visible problems, likely causes and the next practical step." },
 ];
 
 const localBusinessSchema = {
@@ -51,11 +51,11 @@ export default async function Home() {
       <section className="roofHero" id="top">
         <div className="roofHeroBackdrop" aria-hidden="true" />
         <div className="roofHeroContent">
-          <p className="roofEyebrow">Chicago roofing specialists</p>
-          <h1>Chicago roofs take a beating. <em>We build them to fight back.</em></h1>
-          <p className="roofHeroLead">Roof repair, replacement, storm damage and commercial roofing for homeowners and property owners across Chicago and Chicagoland.</p>
+          <p className="roofEyebrow">Chicago roofing contractor</p>
+          <h1>Roof repair and replacement <em>built for Chicago weather.</em></h1>
+          <p className="roofHeroLead">Intex Chicago helps homeowners, property managers and commercial property owners with roof repairs, replacements, inspections, flat roofing and storm damage across Chicago and Chicagoland.</p>
           <div className="heroActions">
-            <a className="primaryButton" href="/estimate/">Get a roofing estimate</a>
+            <a className="primaryButton" href="/estimate/">Request a roofing estimate</a>
             <a className="secondaryButton" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
           </div>
           <div className="roofTrustStrip" aria-label="Roofing specialties">
@@ -65,28 +65,28 @@ export default async function Home() {
 
         <div className="roofHeroPanel realRoofHero" aria-label="Professional roofing crew installing a residential roof">
           <div className="heroPhoto" aria-hidden="true" />
-          <div className="roofPanelTop"><span>INTEX ROOFING CREW</span><b>CHICAGO</b></div>
-          <div className="realRoofBadge">INTEX RESTORATION · PROTECTED</div>
-          <div className="roofPanelBottom"><strong>Built on the roof. Proven in the weather.</strong><span>Inspect · repair · replace</span></div>
+          <div className="roofPanelTop"><span>INTEX ROOFING</span><b>CHICAGO</b></div>
+          <div className="realRoofBadge">ROOFING · REPAIR · RESTORATION</div>
+          <div className="roofPanelBottom"><strong>Inspect. Repair. Replace.</strong><span>Residential · commercial · multifamily</span></div>
         </div>
       </section>
 
       <section className="roofProofBar">
-        <p>Roofing-first expertise for Chicago properties.</p>
+        <p>Roofing services for Chicago homes and properties.</p>
         <div><span>Residential</span><span>Commercial</span><span>Multifamily</span><span>Chicagoland</span></div>
       </section>
 
-      <section className="fieldTrustRail" aria-label="Intex roofing process commitments">
-        <article><span>01</span><div><strong>Clear inspection findings</strong><small>Understand the visible condition before deciding what comes next.</small></div></article>
-        <article><span>02</span><div><strong>Clear scope before work</strong><small>Repair, replacement and material decisions explained.</small></div></article>
-        <article><span>03</span><div><strong>Chicago roof types</strong><small>Shingle, flat, multifamily and commercial systems.</small></div></article>
-        <article><span>04</span><div><strong>Weather-first thinking</strong><small>Wind, hail, snow, drainage and freeze-thaw cycles.</small></div></article>
+      <section className="fieldTrustRail" aria-label="Why property owners call Intex">
+        <article><span>01</span><div><strong>Roof inspections</strong><small>We start by identifying the visible condition and likely source of the problem.</small></div></article>
+        <article><span>02</span><div><strong>Clear repair scope</strong><small>You should know what needs repair, what can wait and what replacement would involve.</small></div></article>
+        <article><span>03</span><div><strong>Chicago roof systems</strong><small>Shingle, flat, low-slope, multifamily and commercial roofing.</small></div></article>
+        <article><span>04</span><div><strong>Storm damage response</strong><small>Support after wind, hail, snow, ice and other severe weather.</small></div></article>
       </section>
 
       <section className="roofServices" id="roofing-services">
         <div className="roofSectionHeading">
-          <div><p className="roofEyebrow dark">Roofing, not generic contracting</p><h2>Six services. Six different jobsites.</h2></div>
-          <p>Every service is shown through the actual material, roof type and work involved—shingles, flashing, membrane, storm damage, commercial systems and inspections.</p>
+          <div><p className="roofEyebrow dark">Roofing services</p><h2>What do you need help with?</h2></div>
+          <p>Choose the service that matches the problem you are seeing. If you are not sure, start with a roof inspection.</p>
         </div>
         <div className="roofServiceGrid">
           {roofingServices.map((service, index) => (
@@ -95,7 +95,7 @@ export default async function Home() {
               <div className="roofServiceMedia"><ServiceCardAnimation type={service.media} /></div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-              <b>Explore →</b>
+              <b>View service →</b>
             </a>
           ))}
         </div>
@@ -103,24 +103,24 @@ export default async function Home() {
 
       <section className="roofChicagoSection">
         <div className="roofChicagoCopy">
-          <p className="roofEyebrow">Designed around Chicago</p>
-          <h2>Your roof is a climate system, not just shingles.</h2>
-          <p>Chicago averages more than 38 inches of snow a year, and repeated freeze-thaw cycles can create ice dams at roof edges. Hail season is most active from May through August, and recent Chicagoland storms have produced hail larger than two inches. Much of that damage is not obvious from the street, which is why inspection should focus on the roof surface plus objective soft-metal evidence on gutters, vents and exposed equipment.</p>
-          <a href="/roofing-chicago/">Explore Chicago roofing services →</a>
+          <p className="roofEyebrow">Roofing in Chicago</p>
+          <h2>Chicago weather is hard on roofs.</h2>
+          <p>Wind can lift shingles and stress flashing. Hail can damage roof surfaces and exposed metal. Snow and ice can expose drainage problems, weak edges and vulnerable penetrations. A proper inspection looks at the roof system as a whole and helps determine whether the right next step is repair, maintenance or replacement.</p>
+          <a href="/roofing-chicago/">Learn about roofing in Chicago →</a>
         </div>
-        <div className="roofClimateGrid" aria-label="Chicago roofing conditions">
-          <article><strong>WIND</strong><span>Lifted edges, flashing stress and shingle vulnerability</span></article>
-          <article><strong>HAIL</strong><span>Bruising, granule loss and soft-metal impact evidence</span></article>
-          <article><strong>SNOW</strong><span>38+ inches yearly, with drainage and ice-dam risk at roof edges</span></article>
-          <article><strong>FREEZE</strong><span>Repeated melt and refreeze cycles can drive water beneath vulnerable roofing</span></article>
+        <div className="roofClimateGrid" aria-label="Common Chicago roofing problems">
+          <article><strong>WIND</strong><span>Lifted shingles, loose edges and flashing failures.</span></article>
+          <article><strong>HAIL</strong><span>Impact damage to shingles, vents, gutters and exposed metal.</span></article>
+          <article><strong>SNOW</strong><span>Added load, blocked drainage and water backup around vulnerable areas.</span></article>
+          <article><strong>ICE</strong><span>Freeze-thaw cycles and ice buildup can force water into weak roof details.</span></article>
         </div>
       </section>
 
       {featuredProject ? (
         <section className="featuredRoofProject" aria-labelledby="featuredProjectTitle">
           <div className="featuredProjectCopy">
-            <p className="roofEyebrow dark">Documented Intex work</p>
-            <h2 id="featuredProjectTitle">Before and after should speak for itself.</h2>
+            <p className="roofEyebrow dark">Recent Intex work</p>
+            <h2 id="featuredProjectTitle">See the problem. See the finished roof.</h2>
             <p>{featuredProject.summary}</p>
             <div className="projectFacts"><span>{featuredProject.service}</span><span>{featuredProject.propertyType}</span><span>{featuredProject.location}</span></div>
             <a href={`/projects/${featuredProject.slug}/`}>View project details →</a>
@@ -132,30 +132,30 @@ export default async function Home() {
         </section>
       ) : (
         <section className="projectProofPlaceholder">
-          <div><p className="roofEyebrow dark">Real work only</p><h2>Documented projects only.</h2></div>
-          <p>Project photography appears here only after the job, location details and image permissions are verified. Until then, Intex does not present stock imagery as completed Intex work.</p>
-          <a href="/projects/">View documented projects →</a>
+          <div><p className="roofEyebrow dark">Project gallery</p><h2>See completed roofing work.</h2></div>
+          <p>Visit the project section for documented roofing and restoration work as verified project photography is added to the platform.</p>
+          <a href="/projects/">View projects →</a>
         </section>
       )}
 
       <section className="roofProcessSection">
         <div className="roofSectionHeading lightText">
-          <div><p className="roofEyebrow">A simpler roofing process</p><h2>No contractor maze. Just clear next steps.</h2></div>
-          <p>A roofing project is easier to navigate when the inspection, scope, work and final review are clearly separated. Intex keeps each step visible so property owners know what is happening and why.</p>
+          <div><p className="roofEyebrow">How it works</p><h2>A straightforward roofing process.</h2></div>
+          <p>We inspect the roof, explain what we found, define the scope, complete the work and review the finished result with you.</p>
         </div>
         <div className="roofProcessGrid">
-          <article><div className="processMotion processInspect" aria-hidden="true"><i /><b /></div><span>01</span><h3>Inspect</h3><p>Understand the condition, urgency and source of the problem.</p></article>
-          <article><div className="processMotion processExplain" aria-hidden="true"><i /></div><span>02</span><h3>Explain</h3><p>Separate what needs repair now from what can wait or be planned.</p></article>
-          <article><div className="processMotion processBuild" aria-hidden="true"><i /></div><span>03</span><h3>Build</h3><p>Complete the roofing scope with clear communication and documentation.</p></article>
-          <article><div className="processMotion processVerify" aria-hidden="true"><i /><b /></div><span>04</span><h3>Verify</h3><p>Review the completed work and leave the property protected.</p></article>
+          <article><div className="processMotion processInspect" aria-hidden="true"><i /><b /></div><span>01</span><h3>Inspect</h3><p>Look at the roof condition, damage and likely source of the problem.</p></article>
+          <article><div className="processMotion processExplain" aria-hidden="true"><i /></div><span>02</span><h3>Scope</h3><p>Explain the recommended repair or replacement and what the work includes.</p></article>
+          <article><div className="processMotion processBuild" aria-hidden="true"><i /></div><span>03</span><h3>Roof</h3><p>Complete the approved roofing work with clear communication during the job.</p></article>
+          <article><div className="processMotion processVerify" aria-hidden="true"><i /><b /></div><span>04</span><h3>Final review</h3><p>Review the completed work and make sure the property is left protected.</p></article>
         </div>
       </section>
 
       {featuredReviews.length ? (
         <section className="homeReviewsSection" aria-labelledby="homeReviewsTitle">
           <div className="sectionHeading">
-            <div><p className="kicker dark"><span /> Verified customer feedback</p><h2 id="homeReviewsTitle">Trust should be visible.</h2></div>
-            <p>Only reviews with a verified source and confirmed permission to display are shown on the Intex platform.</p>
+            <div><p className="kicker dark"><span /> Customer reviews</p><h2 id="homeReviewsTitle">What customers say about Intex.</h2></div>
+            <p>Verified customer feedback displayed from approved review sources.</p>
           </div>
           <div className="reviewGrid">
             {featuredReviews.map((review) => (
@@ -166,13 +166,13 @@ export default async function Home() {
               </article>
             ))}
           </div>
-          <a className="homeReviewsLink" href="/reviews/">View verified reviews →</a>
+          <a className="homeReviewsLink" href="/reviews/">View all reviews →</a>
         </section>
       ) : null}
 
       <section className="roofEstimateSection">
-        <div><p className="roofEyebrow dark">Start with the roof</p><h2>Need a repair, replacement or inspection?</h2><p>Tell us what you are seeing and where the property is located. We will help you choose the right next step.</p></div>
-        <div className="estimateActions"><a className="primaryButton" href="/estimate/">Request an estimate</a><a className="roofPhoneLink" href={`tel:${site.phone}`}>{site.phoneDisplay} ↗</a></div>
+        <div><p className="roofEyebrow dark">Request an estimate</p><h2>Need a roof repair, replacement or inspection?</h2><p>Tell us what is happening with the roof and where the property is located. We will help you determine the right next step.</p></div>
+        <div className="estimateActions"><a className="primaryButton" href="/estimate/">Request a roofing estimate</a><a className="roofPhoneLink" href={`tel:${site.phone}`}>{site.phoneDisplay} ↗</a></div>
       </section>
 
       <footer className="siteFooter homeSiteFooter">
