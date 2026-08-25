@@ -31,6 +31,7 @@ import "./site-chrome.css";
 import "./reviews/reviews.css";
 import "./admin/admin.css";
 import "./estimate/estimate.css";
+import "./homepage-roofing-reset.css";
 
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
