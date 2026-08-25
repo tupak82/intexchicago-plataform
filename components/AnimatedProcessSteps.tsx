@@ -8,11 +8,11 @@ type AnimatedProcessStepsProps = {
 };
 
 export function AnimatedProcessSteps({ steps, ariaLabel = "Process steps" }: AnimatedProcessStepsProps) {
-  const gridRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const node = gridRef.current;
+    const node = railRef.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
@@ -22,7 +22,7 @@ export function AnimatedProcessSteps({ steps, ariaLabel = "Process steps" }: Ani
           observer.disconnect();
         }
       },
-      { threshold: 0.25, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" },
     );
 
     observer.observe(node);
@@ -31,25 +31,35 @@ export function AnimatedProcessSteps({ steps, ariaLabel = "Process steps" }: Ani
 
   return (
     <div
-      ref={gridRef}
-      className={`processGrid processGridAnimated${isVisible ? " is-visible" : ""}`}
+      ref={railRef}
+      className={`processGrid processGridAnimated processRailPremium${isVisible ? " is-visible" : ""}`}
       aria-label={ariaLabel}
     >
+      <div className="processRailTrack" aria-hidden="true">
+        <span className="processRailFill" />
+        <span className="processRailScanner" />
+      </div>
+
       {steps.map((step, index) => (
         <article
-          className="processStep processStepAnimated"
+          className="processStep processStepAnimated processRailStep"
           key={`${index}-${step}`}
-          style={{ "--step-index": index } as CSSProperties}
+          style={{ "--step-index": index, "--step-count": steps.length } as CSSProperties}
         >
-          <div className="processStepTop">
-            <strong className="processNumber" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </strong>
-            <span className="processProgress" aria-hidden="true">
-              <span />
-            </span>
+          <div className="processRailMarker" aria-hidden="true">
+            <strong>{String(index + 1).padStart(2, "0")}</strong>
+            <span />
           </div>
-          <h3>{step}</h3>
+
+          <div className="processRailCopy">
+            <small>{index === 0 ? "Assessment" : index === steps.length - 1 ? "Closeout" : `Phase ${String(index + 1).padStart(2, "0")}`}</small>
+            <h3>{step}</h3>
+          </div>
+
+          <div className="processRailSignal" aria-hidden="true">
+            <i />
+            <b>{index === steps.length - 1 ? "PROTECTED" : "IN PROGRESS"}</b>
+          </div>
         </article>
       ))}
     </div>
