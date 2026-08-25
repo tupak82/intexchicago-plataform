@@ -1,0 +1,259 @@
+/* Roofing-first homepage reset.
+   This file intentionally overrides the earlier experimental editorial layers on the homepage.
+   Goal: make the page read immediately as a professional Chicago roofing contractor site. */
+
+.roofingHome { background: #f5f7f9; color: #0b1b2b; }
+
+/* HERO — simple roofing value proposition + strong visual proof. */
+.roofingHome .roofHero {
+  min-height: 760px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr);
+  gap: clamp(40px, 5vw, 84px);
+  align-items: center;
+  padding: 130px clamp(28px, 5vw, 76px) 76px;
+  background: linear-gradient(135deg, #07111f 0%, #0a1e33 58%, #0d2946 100%);
+}
+.roofingHome .roofHeroBackdrop { opacity: .5; }
+.roofingHome .roofHeroContent { max-width: 760px; }
+.roofingHome .roofHero h1 {
+  max-width: 760px;
+  margin: 18px 0 24px;
+  font-size: clamp(56px, 5.5vw, 88px);
+  line-height: .96;
+  letter-spacing: -.055em;
+}
+.roofingHome .roofHero h1 em { color: #76baff; }
+.roofingHome .roofHeroLead { max-width: 650px; color: #c3d0dc; }
+.roofingHome .roofTrustStrip { margin-top: 28px; gap: 8px; }
+.roofingHome .roofTrustStrip span {
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.045);
+  color: #d7e2ec;
+}
+.roofingHome .roofHeroPanel {
+  min-height: 540px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 34px 80px rgba(0,0,0,.32);
+}
+
+/* PROOF — factual, compact, not decorative. */
+.roofingHome .roofProofBar {
+  padding: 20px clamp(28px, 5vw, 76px);
+  background: #fff;
+  border-bottom: 1px solid #dfe6ec;
+}
+.roofingHome .fieldTrustRail {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 0 clamp(28px, 5vw, 76px);
+  background: #fff;
+  border-bottom: 1px solid #dfe6ec;
+}
+.roofingHome .fieldTrustRail::before,
+.roofingHome .fieldTrustRail::after { display: none !important; }
+.roofingHome .fieldTrustRail article {
+  min-height: 142px;
+  padding: 28px 26px;
+  border: 0;
+  border-right: 1px solid #e3e9ef;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.roofingHome .fieldTrustRail article:last-child { border-right: 0; }
+.roofingHome .fieldTrustRail article::before,
+.roofingHome .fieldTrustRail article::after { display: none !important; }
+.roofingHome .fieldTrustRail article > span {
+  display: block;
+  margin-bottom: 10px;
+  color: #2f7fd3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.roofingHome .fieldTrustRail strong { color: #10243a; font-size: 16px; }
+.roofingHome .fieldTrustRail small { display: block; margin-top: 6px; color: #667789; line-height: 1.5; }
+
+/* SERVICES — six roofing services, easy to scan. */
+.roofingHome .roofServices {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 96px clamp(28px, 5vw, 76px);
+  background: #f5f7f9;
+}
+.roofingHome .roofSectionHeading { margin-bottom: 42px; }
+.roofingHome .roofSectionHeading h2 { max-width: 760px; }
+.roofingHome .roofServiceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.roofingHome .roofServiceCard,
+.roofingHome .roofServiceCard:nth-child(n) {
+  display: flex;
+  flex-direction: column;
+  min-height: 430px;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid #dbe4ec;
+  border-radius: 12px;
+  background: #fff;
+  color: #0b1b2b;
+  box-shadow: 0 16px 38px rgba(9,31,52,.07);
+  transform: none;
+}
+.roofingHome .roofServiceCard:nth-child(n)::before,
+.roofingHome .roofServiceCard:nth-child(n)::after { display: none !important; }
+.roofingHome .roofServiceMedia,
+.roofingHome .roofServiceCard:nth-child(n) .roofServiceMedia {
+  min-height: 190px;
+  margin: 10px 0 20px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #0b1d30;
+}
+.roofingHome .roofServiceCard h3 { font-size: clamp(28px, 2.2vw, 36px); color: #10243a; }
+.roofingHome .roofServiceCard p { color: #647586; line-height: 1.58; }
+.roofingHome .roofServiceCard > b { margin-top: auto; color: #126fd1; }
+.roofingHome .roofServiceCard:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(9,31,52,.11); }
+
+/* CHICAGO WEATHER — useful roofing context, no abstract dashboard. */
+.roofingHome .roofChicagoSection {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(50px, 7vw, 96px);
+  padding: 96px clamp(28px, 5vw, 76px);
+  background: #0a1827;
+  color: #fff;
+}
+.roofingHome .roofChicagoSection::before,
+.roofingHome .roofChicagoSection::after { display: none !important; }
+.roofingHome .roofChicagoCopy { align-self: center; }
+.roofingHome .roofChicagoCopy h2 { color: #fff; }
+.roofingHome .roofChicagoCopy p { color: #b4c2cf; }
+.roofingHome .roofChicagoCopy a { color: #80bfff; }
+.roofingHome .roofClimateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 12px;
+  min-height: 0;
+  border: 0;
+}
+.roofingHome .roofClimateGrid article,
+.roofingHome .roofClimateGrid article:nth-child(n) {
+  grid-row: auto;
+  min-height: 190px;
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 10px;
+  background: #10263c;
+  color: #fff;
+  box-shadow: none;
+}
+.roofingHome .roofClimateGrid article::before,
+.roofingHome .roofClimateGrid article::after { display: none !important; }
+.roofingHome .roofClimateGrid strong,
+.roofingHome .roofClimateGrid article:nth-child(1) strong { font-size: 30px; color: #77baff; }
+.roofingHome .roofClimateGrid span,
+.roofingHome .roofClimateGrid article:nth-child(1) span { max-width: none; color: #bdcad6; font-size: 13px; }
+
+/* REAL WORK — keep project proof prominent. */
+.roofingHome .featuredRoofProject,
+.roofingHome .projectProofPlaceholder {
+  padding: 96px clamp(28px, 5vw, 76px);
+  background: #fff;
+}
+
+/* PROCESS — straightforward homeowner journey, no sci-fi rail. */
+.roofingHome .roofProcessSection {
+  padding: 96px clamp(28px, 5vw, 76px);
+  background: #eef3f7;
+  color: #10243a;
+}
+.roofingHome .roofProcessSection::before,
+.roofingHome .roofProcessSection::after { display: none !important; }
+.roofingHome .roofProcessSection .lightText h2 { color: #10243a; }
+.roofingHome .roofProcessSection .lightText > p { color: #657587; }
+.roofingHome .roofProcessGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 38px;
+}
+.roofingHome .roofProcessGrid::before,
+.roofingHome .roofProcessGrid::after { display: none !important; }
+.roofingHome .roofProcessGrid article,
+.roofingHome .roofProcessGrid article:nth-child(n) {
+  min-height: 290px;
+  padding: 24px;
+  border: 1px solid #dbe4ec;
+  border-radius: 10px;
+  background: #fff;
+  color: #10243a;
+  box-shadow: none;
+  transform: none;
+}
+.roofingHome .roofProcessGrid article::before,
+.roofingHome .roofProcessGrid article::after { display: none !important; }
+.roofingHome .roofProcessGrid article > span { color: #2e7fd3; }
+.roofingHome .roofProcessGrid article > h3 { color: #10243a; }
+.roofingHome .roofProcessGrid article > p { color: #667789; }
+.roofingHome .processMotion { opacity: .33; transform: scale(.78); transform-origin: right bottom; }
+.roofingHome .roofProcessGrid article:hover { transform: translateY(-3px); background: #fff; }
+
+/* REVIEWS / CTA — simple trust and conversion. */
+.roofingHome .homeReviewsSection { padding: 96px clamp(28px, 5vw, 76px); background: #fff; }
+.roofingHome .reviewGrid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.roofingHome .reviewCard { border-radius: 10px; box-shadow: none; border: 1px solid #dbe4ec !important; }
+.roofingHome .roofEstimateSection { padding: 78px clamp(28px, 5vw, 76px); background: #0b1e31; color: #fff; }
+.roofingHome .roofEstimateSection h2 { color: #fff; }
+.roofingHome .roofEstimateSection p { color: #bcc8d4; }
+
+@media (max-width: 980px) {
+  .roofingHome .roofHero { grid-template-columns: 1fr; min-height: 0; }
+  .roofingHome .roofHeroPanel { min-height: 430px; }
+  .roofingHome .fieldTrustRail { grid-template-columns: 1fr 1fr; }
+  .roofingHome .fieldTrustRail article:nth-child(2) { border-right: 0; }
+  .roofingHome .roofServiceGrid { grid-template-columns: 1fr 1fr; }
+  .roofingHome .roofChicagoSection { grid-template-columns: 1fr; }
+  .roofingHome .roofProcessGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  .roofingHome .roofHero {
+    display: block;
+    padding: 118px 20px 56px !important;
+  }
+  .roofingHome .roofHero h1 { font-size: clamp(44px, 12.8vw, 62px) !important; }
+  .roofingHome .roofHeroPanel { min-height: 350px; margin-top: 38px; }
+  .roofingHome .roofProofBar { padding: 18px 20px; }
+  .roofingHome .fieldTrustRail { grid-template-columns: 1fr; padding: 0 20px; }
+  .roofingHome .fieldTrustRail article { min-height: 0; padding: 20px 0; border-right: 0; border-bottom: 1px solid #e3e9ef; }
+  .roofingHome .fieldTrustRail article:last-child { border-bottom: 0; }
+  .roofingHome .roofServices,
+  .roofingHome .roofChicagoSection,
+  .roofingHome .featuredRoofProject,
+  .roofingHome .projectProofPlaceholder,
+  .roofingHome .roofProcessSection,
+  .roofingHome .homeReviewsSection,
+  .roofingHome .roofEstimateSection { padding: 70px 20px !important; }
+  .roofingHome .roofServiceGrid,
+  .roofingHome .roofClimateGrid,
+  .roofingHome .roofProcessGrid,
+  .roofingHome .reviewGrid { grid-template-columns: 1fr; }
+  .roofingHome .roofServiceCard,
+  .roofingHome .roofServiceCard:nth-child(n) { min-height: 390px; border-radius: 10px; }
+  .roofingHome .roofClimateGrid article,
+  .roofingHome .roofClimateGrid article:nth-child(n) { min-height: 150px; border-radius: 9px; }
+  .roofingHome .roofProcessGrid article,
+  .roofingHome .roofProcessGrid article:nth-child(n) { min-height: 240px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roofingHome .roofServiceCard,
+  .roofingHome .roofProcessGrid article { transition: none !important; }
+}
