@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import SiteMotion from "@/components/SiteMotion";
-import SiteChrome from "@/components/SiteChrome";
+import SiteChrome, { SiteFooter } from "@/components/SiteChrome";
 import MobileActionBar from "@/components/MobileActionBar";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -90,6 +90,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteMotion />
         <SiteChrome />
         {children}
+        <SiteFooter />
         <MobileActionBar />
         {googleTagManagerId ? (
           <Script id="google-tag-manager" strategy="afterInteractive">
