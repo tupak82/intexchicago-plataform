@@ -3,20 +3,19 @@
    hero lighting sweeps across surfaces, cards react like layered roof systems,
    and divider lines travel like inspection scans. */
 
+/* Reveal below-the-fold sections only (see components/SiteMotion.tsx). No blur filter:
+   it was expensive to paint and made text unreadable mid-transition. */
 [data-intex-motion="ready"] {
   opacity: 0;
-  transform: translate3d(0, 26px, 0) scale(.992);
-  filter: blur(5px);
+  transform: translate3d(0, 18px, 0);
 }
 
 [data-intex-motion="visible"] {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0);
+  transform: translate3d(0, 0, 0);
   transition:
-    opacity .72s cubic-bezier(.2,.75,.2,1) var(--intex-motion-delay, 0ms),
-    transform .86s cubic-bezier(.16,1,.3,1) var(--intex-motion-delay, 0ms),
-    filter .7s ease var(--intex-motion-delay, 0ms);
+    opacity .6s cubic-bezier(.2,.75,.2,1) var(--intex-motion-delay, 0ms),
+    transform .7s cubic-bezier(.16,1,.3,1) var(--intex-motion-delay, 0ms);
 }
 
 [data-intex-hero-motion] {
@@ -39,7 +38,8 @@
 }
 
 [data-intex-hero-motion="visible"]::before {
-  animation: intexHeroWeatherLight 8.5s cubic-bezier(.2,.7,.2,1) infinite;
+  /* One pass only (was infinite): decorative motion should stop on its own (WCAG 2.2.2). */
+  animation: intexHeroWeatherLight 4.5s cubic-bezier(.2,.7,.2,1) 1 both;
 }
 
 /* Preserve each hero child's own positioning. Forcing position: relative here
@@ -75,7 +75,7 @@
   transform: scaleX(.12);
   opacity: .16;
   transform-origin: left center;
-  animation: intexInspectionLine 8s ease-in-out infinite;
+  animation: intexInspectionLine 4s ease-in-out 1 both;
 }
 
 /* Universal premium card behavior across inner pages. */

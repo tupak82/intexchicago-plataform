@@ -324,4 +324,6 @@
   .roofingHomeV2 .roofProofPlaceholderVisual span { min-height: 180px; }
   .roofingHomeV2 .roofFinalActions { display: grid; }
   .roofingHomeV2 .roofFooterV2 { grid-template-columns: 1fr; padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+  .roofingHomeV2 .roofFooterV2 a { min-height: 36px; }
+  .roofingHomeV2 .roofFooterV2 > div { gap: 4px; }
 }

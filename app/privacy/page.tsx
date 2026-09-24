@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -11,7 +12,7 @@ export default function PrivacyPage() {
   return (
     <main className="platformPage">
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Privacy</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Privacy", href: "/privacy/" }]} />
         <p className="kicker"><span /> Privacy</p>
         <h1>Clear rules for customer information.</h1>
         <p>This policy describes the information the Intex Chicago platform is designed to collect and how it is intended to be used.</p>

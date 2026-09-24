@@ -1,0 +1,69 @@
+/* Accessible mobile navigation (components/MobileMenu.tsx). */
+.mobileMenu { display: none; }
+.mobileMenuButton {
+  min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 0 12px; border: 1px solid rgba(255, 255, 255, .28); border-radius: 999px;
+  background: rgba(255, 255, 255, .06); color: #fff; font: 700 13px "DM Sans", sans-serif; cursor: pointer;
+}
+.mobileMenuButton:hover { background: rgba(255, 255, 255, .12); }
+.mobileMenuButton:focus-visible,
+.mobileMenuPanel a:focus-visible { outline: 2px solid #76baff; outline-offset: 2px; }
+.mobileMenuIcon { width: 18px; display: grid; gap: 4px; }
+.mobileMenuIcon span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
+.mobileMenuButton[aria-expanded="true"] .mobileMenuIcon span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mobileMenuButton[aria-expanded="true"] .mobileMenuIcon span:nth-child(2) { opacity: 0; }
+.mobileMenuButton[aria-expanded="true"] .mobileMenuIcon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.mobileMenuPanel {
+  position: fixed; z-index: 80; left: 0; right: 0; top: var(--mobile-menu-top, 78px);
+  max-height: calc(100dvh - var(--mobile-menu-top, 78px)); overflow-y: auto;
+  padding: 10px clamp(18px, 5vw, 40px) calc(28px + env(safe-area-inset-bottom));
+  background: #07111f; border-top: 1px solid rgba(255, 255, 255, .1); box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+}
+.mobileMenuPanel[hidden] { display: none; }
+.mobileMenuPanel ul { margin: 0; padding: 0; list-style: none; }
+.mobileMenuPanel li + li { border-top: 1px solid rgba(255, 255, 255, .08); }
+.mobileMenu .mobileMenuPanel nav a {
+  min-height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 !important;
+  color: #f2f6fa !important; font: 700 19px "Manrope", sans-serif !important; letter-spacing: -.02em; text-decoration: none;
+}
+.mobileMenu .mobileMenuPanel nav a::after { content: "→" !important; display: inline !important; position: static !important; height: auto !important; opacity: 1 !important; color: #76baff; font-size: 16px; background: none !important; }
+.mobileMenu .mobileMenuPanel nav a[aria-current="page"] { color: #76baff !important; }
+.mobileMenuActions { display: grid; gap: 10px; margin-top: 18px; }
+.mobileMenuActions a {
+  min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 10px;
+  font-weight: 700; font-size: 15px; text-decoration: none;
+}
+.mobileMenuEstimate { background: #1769ff; color: #fff; }
+.mobileMenuCall { border: 1px solid rgba(255, 255, 255, .3); color: #fff; }
+html.mobileMenuOpen, html.mobileMenuOpen body { overflow: hidden; }
+html.mobileMenuOpen .mobileActionBar { display: none !important; }
+
+@media (max-width: 1180px) {
+  .siteHeaderGlobal .mobileMenu { display: block; }
+  .siteHeaderGlobal { gap: 10px; }
+  .siteHeaderGlobal > nav { margin-left: auto; }
+}
+@media (max-width: 1100px) {
+  .roofingHomeV2 .roofTopbar .mobileMenu { display: block; }
+  .roofingHomeV2 .roofTopbar { gap: 10px; }
+  .roofingHomeV2 .roofTopCall { margin-left: auto; }
+  .roofingHomeV2 .roofTopbar { --mobile-menu-top: 88px; }
+}
+@media (max-width: 760px) {
+  .siteHeader .navCall { padding: 0 13px; font-size: 12px; }
+}
+@media (max-width: 600px) {
+  .roofingHomeV2 .roofTopbar { gap: 10px; }
+  .mobileMenuPanel { --mobile-menu-top: 76px; }
+}
+@media (max-width: 400px) {
+  .mobileMenuLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .mobileMenuButton { padding: 0; width: 44px; }
+}
+.navCallNumber { margin-left: .3em; }
+/* Header rules hide `nav a` on small screens; never let them hide the menu panel's links. */
+.mobileMenuPanel nav { display: block !important; margin: 0 !important; }
+.mobileMenuPanel nav a { display: flex !important; }
+@media (max-width: 420px) {
+  .navCallNumber { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

@@ -37,3 +37,9 @@
 @media (max-width: 420px) {
   .siteFooterLinks { grid-template-columns: 1fr; }
 }
+
+/* Tap targets (a11y pass): footer links get at least 32px of hit area on touch layouts. */
+@media (max-width: 760px) {
+  .siteFooterLinks > div { gap: 4px; }
+  .siteFooterLinks a, .siteFooterContact a { min-height: 32px; display: inline-flex; align-items: center; }
+}

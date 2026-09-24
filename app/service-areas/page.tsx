@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { serviceAreas } from "@/lib/service-areas";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Roofing Service Areas in Chicago & Chicagoland",
@@ -14,7 +15,7 @@ export default function ServiceAreasPage() {
   return (
     <main className="platformPage">
       <section className="platformHero">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Service Areas</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Service Areas", href: "/service-areas/" }]} />
         <p className="kicker"><span /> Chicago + Chicagoland roofing</p>
         <h1>Roofing help matched to the property and the neighborhood.</h1>
         <p>Intex provides roofing support across Chicago and selected Chicagoland communities, with service pages that connect local conditions to roof repair, replacement, flat roofing, commercial roofing, inspections and storm-damage needs.</p>

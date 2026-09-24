@@ -37,11 +37,12 @@ export default async function EstimatePage({ searchParams }: EstimatePageProps) 
   const initialService = rawService ? serviceParamMap[rawService] : undefined;
 
   return (
-    <main className="estimatePage">
+    <div className="estimatePage">
       <header className="estimateHeader">
         <BrandLogo href="/" label="Intex Chicago home" />
         <a className="navCall" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
       </header>
+      <main id="main-content" data-no-motion>
       <section className="estimateShell">
         <div className="estimateIntro">
           <p className="kicker"><span /> Restoration + roofing request</p>
@@ -50,6 +51,7 @@ export default async function EstimatePage({ searchParams }: EstimatePageProps) 
         </div>
         <EstimateFlow initialService={initialService} />
       </section>
-    </main>
+      </main>
+    </div>
   );
 }

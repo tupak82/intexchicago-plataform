@@ -42,8 +42,14 @@ export default function SiteMotion() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) return;
 
+    // Never hide hero content or anything already in the first viewport: hiding it
+    // (opacity 0 + transform until JS/IntersectionObserver runs) delayed LCP and made
+    // above-the-fold content flash in. Only below-the-fold sections animate in.
+    const foldLine = window.innerHeight * 0.92;
     const targets = Array.from(document.querySelectorAll<HTMLElement>(MOTION_SELECTOR)).filter(
-      (element) => !element.closest("[data-no-motion], .adminPage, [data-admin]")
+      (element) =>
+        !element.closest(`[data-no-motion], .adminPage, [data-admin], ${HERO_SELECTOR}, .roofHeroV2`) &&
+        element.getBoundingClientRect().top > foldLine
     );
 
     const heroTargets = Array.from(document.querySelectorAll<HTMLElement>(HERO_SELECTOR)).filter(

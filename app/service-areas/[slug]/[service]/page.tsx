@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { AnimatedProcessSteps } from "@/components/AnimatedProcessSteps";
 import { isLocalRoofingPage, localRoofingCopy, localRoofingPages } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export function generateStaticParams() {
   return localRoofingPages.map((page) => ({ slug: page.areaSlug, service: page.servicePathSlug }));
@@ -55,7 +56,7 @@ export default async function LocalRoofingServicePage({ params }: { params: Prom
 
       <section className="serviceHero">
         <div className="serviceHeroInner">
-          <div className="serviceBreadcrumbs"><a href="/">Home</a> / <a href="/service-areas/">Service Areas</a> / <a href={`/service-areas/${page.area.slug}/`}>{page.area.name}</a> / {page.service.name}</div>
+          <Breadcrumbs className="serviceBreadcrumbs" items={[{ name: "Service Areas", href: "/service-areas/" }, { name: page.area.name, href: `/service-areas/${page.area.slug}/` }, { name: page.service.name, href: `/service-areas/${page.area.slug}/${service}/` }]} />
           <p className="kicker"><span /> {page.service.name} · {page.area.name}, Illinois</p>
           <h1>{page.service.name} in {page.area.name}, IL</h1>
           <p className="serviceHeroLead">{copy.intent}</p>

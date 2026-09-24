@@ -5,12 +5,12 @@
 .estimateIntro h1 { font: 700 clamp(42px, 5vw, 72px)/1 "Manrope", sans-serif; letter-spacing: -.055em; margin: 20px 0; }
 .estimateIntro > p:last-child { color: #9fb0c1; line-height: 1.7; max-width: 520px; }
 .estimateCard { background: #f7f9fb; color: var(--ink); padding: clamp(24px, 4vw, 44px); border-radius: 18px; box-shadow: 0 26px 80px rgba(0,0,0,.24); min-height: 600px; }
-.estimateTopline { display: flex; justify-content: space-between; color: #697786; text-transform: uppercase; letter-spacing: .12em; font-size: 10px; font-weight: 700; }
+.estimateTopline { display: flex; justify-content: space-between; color: #56616e; text-transform: uppercase; letter-spacing: .12em; font-size: 10px; font-weight: 700; }
 .estimateProgress { height: 3px; background: #dce3e9; margin: 16px 0 34px; overflow: hidden; }
 .estimateProgress span { display: block; height: 100%; background: var(--blue); transition: width .25s ease; }
 .estimateCard fieldset { border: 0; padding: 0; margin: 0; }
 .estimateCard legend { font: 700 clamp(28px, 3vw, 40px)/1.08 "Manrope", sans-serif; letter-spacing: -.035em; margin-bottom: 12px; }
-.estimateCard fieldset > p { color: #687788; line-height: 1.6; margin-bottom: 24px; }
+.estimateCard fieldset > p { color: #56616e; line-height: 1.6; margin-bottom: 24px; }
 .estimateChoices { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .estimateChoices.twoCol { grid-template-columns: 1fr 1fr; }
 .estimateChoices label { display: block; border: 1px solid #d9e0e6; background: white; padding: 17px 18px; border-radius: 10px; cursor: pointer; transition: .2s ease; }
@@ -44,3 +44,7 @@
 .estimateFallbackActions .estimateBack { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #d9a88b; color: #7b3b17; background: #fff; }
 .estimateFallbackNote { font-size: 12px; opacity: .85; }
 @media (max-width: 600px) { .estimateFallbackActions a { flex: 1 1 100%; } }
+.estimateStepStatus:focus { outline: none; }
+.estimatePrimary[aria-disabled="true"] { opacity: .55; }
+.estimateStepError { min-height: 0; margin: 12px 0 0; color: #a3261b; font-size: 14px; font-weight: 700; line-height: 1.45; }
+.estimateStepError:empty { margin: 0; }

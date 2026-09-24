@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About Intex Chicago Roofing",
@@ -29,7 +30,7 @@ export default function AboutPage() {
   return (
     <main className="platformPage">
       <section className="platformHero">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / About</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "About", href: "/about/" }]} />
         <p className="kicker"><span /> About Intex Chicago</p>
         <h1>Roofing decisions should feel clear, not complicated.</h1>
         <p>Intex Chicago focuses on roofing and property restoration for residential and commercial properties across Chicago and Chicagoland. The experience starts with understanding the building, the failure point and the conditions around it — then choosing the right service for that specific problem.</p>

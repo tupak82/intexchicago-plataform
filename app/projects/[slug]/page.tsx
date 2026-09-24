@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BeforeAfter from "../BeforeAfter";
 import { getPublicProjectBySlug } from "@/lib/project-store";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +42,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     <main className="platformPage">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }} />
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / <a href="/projects/">Projects</a> / {project.title}</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Projects", href: "/projects/" }, { name: project.title, href: `/projects/${project.slug}/` }]} />
         <p className="kicker"><span /> {project.service} · {project.location}</p>
         <h1>{project.title}</h1>
         <p>{project.summary}</p>

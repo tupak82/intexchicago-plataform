@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
+import MobileMenu from "@/components/MobileMenu";
 import { site } from "@/lib/site";
 
 const hiddenPrefixes = ["/estimate", "/admin"];
@@ -23,8 +24,9 @@ export default function SiteChrome() {
         <Link href="/projects/">Projects</Link>
         <Link href="/service-areas/">Service Areas</Link>
         <Link href="/contact/">Contact</Link>
-        <a className="navCall" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
+        <a className="navCall" href={`tel:${site.phone}`}>Call <span className="navCallNumber">{site.phoneDisplay}</span></a>
       </nav>
+      <MobileMenu />
     </header>
   );
 }

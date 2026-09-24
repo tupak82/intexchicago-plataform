@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { RoofingServiceVisual, type ServiceVisualType } from "@/components/RoofingServiceVisual";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Property Restoration Services in Chicago",
@@ -85,7 +86,7 @@ export default function RestorationHubPage() {
       <section className="serviceHero">
         <div className="serviceHeroStage">
           <div className="serviceHeroInner">
-            <div className="serviceBreadcrumbs"><Link href="/">Home</Link> / Restoration</div>
+            <Breadcrumbs className="serviceBreadcrumbs" items={[{ name: "Restoration", href: "/restoration/" }]} />
             <p className="kicker"><span /> Chicago property restoration</p>
             <h1>Property damage can take different paths. Start with the one in front of you.</h1>
             <p className="serviceHeroLead">Water, fire, smoke, mold, storm, sensitive cleanup and commercial restoration support for Chicago and Chicagoland properties.</p>

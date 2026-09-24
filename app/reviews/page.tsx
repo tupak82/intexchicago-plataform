@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { listPublicReviews } from "@/lib/review-store";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,7 @@ export default async function ReviewsPage() {
   return (
     <main className="platformPage">
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Reviews</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Reviews", href: "/reviews/" }]} />
         <p className="kicker"><span /> Customer feedback</p>
         <h1>Feedback tied to a real source.</h1>
         <p>When a review appears here, the source is retained so visitors can understand where the feedback came from rather than seeing anonymous marketing quotes.</p>

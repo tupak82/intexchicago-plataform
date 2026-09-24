@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { site } from "@/lib/site";
 
 type LeadDraft = {
@@ -80,6 +80,10 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
   const [lead, setLead] = useState<LeadDraft>(() => createInitialLead(initialService));
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
+  const [showErrors, setShowErrors] = useState(false);
+  const stepHeadingRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
   const totalSteps = 6;
   const progress = useMemo(() => `${Math.min(step + 1, totalSteps)} / ${totalSteps}`, [step]);
 
@@ -87,6 +91,16 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
     setLead((current) => ({ ...current, [key]: value }));
     if (status === "error") setStatus("idle");
   };
+
+  // Move focus to the new step's heading so keyboard and screen-reader users land on it.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setShowErrors(false);
+    stepHeadingRef.current?.focus();
+  }, [step]);
 
   const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim());
 
@@ -100,9 +114,41 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
     return false;
   };
 
+  const stepError = (): string => {
+    if (step === 0) return lead.service ? "" : "Choose the service that is closest to what you need.";
+    if (step === 1) return lead.emergency ? "" : "Tell us whether this is happening right now.";
+    if (step === 2) {
+      if (!lead.propertyType) return "Choose the property type.";
+      return /^\d{5}(-\d{4})?$/.test(lead.zip.trim()) ? "" : "Enter a 5-digit ZIP code for the property.";
+    }
+    if (step === 3) {
+      if (!lead.name.trim()) return "Enter your name.";
+      if (!lead.phone.trim()) return "Enter a phone number so Intex can reach you.";
+      return !lead.email.trim() || hasValidEmail ? "" : "Check the email address, or leave it blank.";
+    }
+    if (step === 4) return lead.description.trim() ? "" : "Add a short description of what happened.";
+    if (step === 5) {
+      if (lead.preferredContact === "email" && !hasValidEmail) return "Add a valid email address in step 4, or choose Phone / text.";
+      return lead.consent ? "" : "Check the consent box so Intex can contact you about this request.";
+    }
+    return "";
+  };
+
+  const goNext = () => {
+    if (!canContinue()) {
+      setShowErrors(true);
+      return;
+    }
+    setStep((current) => Math.min(totalSteps - 1, current + 1));
+  };
+
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!canContinue() || status === "submitting") return;
+    if (status === "submitting") return;
+    if (!canContinue()) {
+      setShowErrors(true);
+      return;
+    }
     setStatus("submitting");
 
     try {
@@ -136,6 +182,10 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
         <span>{progress}</span>
       </div>
       <div className="estimateProgress"><span style={{ width: `${((step + 1) / totalSteps) * 100}%` }} /></div>
+
+      <div ref={stepHeadingRef} tabIndex={-1} className="estimateStepStatus">
+        <span className="srOnly">Step {Math.min(step + 1, totalSteps)} of {totalSteps}</span>
+      </div>
 
       <div className="estimateHoneypot" aria-hidden="true">
         <label>Website<input tabIndex={-1} autoComplete="off" value={lead.website} onChange={(e) => update("website", e.target.value)} /></label>
@@ -183,7 +233,7 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
               </label>
             ))}
           </div>
-          <label className="estimateField">Property ZIP code<input inputMode="numeric" autoComplete="postal-code" value={lead.zip} onChange={(e) => update("zip", e.target.value)} placeholder="60634" /></label>
+          <label className="estimateField">Property ZIP code<input inputMode="numeric" autoComplete="postal-code" required aria-required="true" maxLength={10} value={lead.zip} onChange={(e) => update("zip", e.target.value)} placeholder="60634" /></label>
         </fieldset>
       )}
 
@@ -191,8 +241,8 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
         <fieldset>
           <legend>How can Intex reach you?</legend>
           <div className="estimateFields">
-            <label className="estimateField">Name<input autoComplete="name" value={lead.name} onChange={(e) => update("name", e.target.value)} placeholder="Your name" /></label>
-            <label className="estimateField">Phone<input inputMode="tel" autoComplete="tel" value={lead.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(773) 555-0123" /></label>
+            <label className="estimateField">Name<input autoComplete="name" required aria-required="true" value={lead.name} onChange={(e) => update("name", e.target.value)} placeholder="Your name" /></label>
+            <label className="estimateField">Phone<input type="tel" inputMode="tel" autoComplete="tel" required aria-required="true" value={lead.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(773) 555-0123" /></label>
             <label className="estimateField">Email <span>optional unless you prefer email</span><input type="email" autoComplete="email" value={lead.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" /></label>
           </div>
         </fieldset>
@@ -202,7 +252,7 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
         <fieldset>
           <legend>Tell us what happened.</legend>
           <p>A few useful details are enough: where the problem is, when you noticed it, and what is changing.</p>
-          <label className="estimateField"><textarea rows={6} value={lead.description} onChange={(e) => update("description", e.target.value)} placeholder="Example: Water started coming through the second-floor ceiling after last night's storm..." /></label>
+          <label className="estimateField"><span className="srOnly">What happened</span><textarea rows={6} required aria-required="true" value={lead.description} onChange={(e) => update("description", e.target.value)} placeholder="Example: Water started coming through the second-floor ceiling after last night's storm..." /></label>
         </fieldset>
       )}
 
@@ -242,11 +292,14 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
       <div className="estimateNav">
         <button type="button" className="estimateBack" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0 || status === "submitting"}>Back</button>
         {step < totalSteps - 1 ? (
-          <button type="button" className="estimatePrimary" disabled={!canContinue()} onClick={() => setStep((current) => Math.min(totalSteps - 1, current + 1))}>Continue</button>
+          <button type="button" className="estimatePrimary" aria-disabled={!canContinue()} aria-describedby={showErrors && stepError() ? "estimate-step-error" : undefined} onClick={goNext}>Continue</button>
         ) : (
-          <button type="submit" className="estimatePrimary" disabled={!canContinue() || status === "submitting"}>{status === "submitting" ? "Sending…" : "Send request"}</button>
+          <button type="submit" className="estimatePrimary" aria-disabled={!canContinue()} aria-describedby={showErrors && stepError() ? "estimate-step-error" : undefined} disabled={status === "submitting"}>{status === "submitting" ? "Sending…" : "Send request"}</button>
         )}
       </div>
+      <p id="estimate-step-error" className="estimateStepError" role="alert">
+        {showErrors ? stepError() : ""}
+      </p>
     </form>
   );
 }

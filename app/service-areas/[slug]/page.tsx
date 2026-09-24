@@ -4,6 +4,7 @@ import { serviceAreaBySlug, serviceAreas } from "@/lib/service-areas";
 import { serviceBySlug } from "@/lib/services";
 import { localRoofingPages, localRoofingPath, type LocalRoofingServiceSlug } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const roofingSlugs = [
   "roof-repair-chicago",
@@ -72,7 +73,7 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       <section className="platformHero">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / <a href="/service-areas/">Service Areas</a> / {area.name}</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Service Areas", href: "/service-areas/" }, { name: area.name, href: `/service-areas/${area.slug}/` }]} />
         <p className="kicker"><span /> Roofing in {area.name}, Illinois</p>
         <h1>{area.title}</h1>
         <p>{area.intro}</p>

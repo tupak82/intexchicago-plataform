@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { resourceBySlug, publishedResources } from "@/lib/resources";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export function generateStaticParams() {
   return publishedResources.map(({ slug }) => ({ slug }));
@@ -45,7 +46,7 @@ export default async function ResourceArticlePage({ params }: { params: Promise<
     <main className="platformPage">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / <a href="/resources/">Resources</a> / {article.title}</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Resources", href: "/resources/" }, { name: article.title, href: `/resources/${article.slug}/` }]} />
         <p className="kicker"><span /> {article.category}</p>
         <h1>{article.title}</h1>
         <p>{article.description}</p>

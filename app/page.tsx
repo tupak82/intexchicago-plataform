@@ -1,6 +1,7 @@
 import "./roofing-realism.css";
 import "./homepage-v2.css";
 import { BrandLogo } from "@/components/BrandLogo";
+import MobileMenu from "@/components/MobileMenu";
 import { ServiceCardAnimation } from "@/components/ServiceCardAnimation";
 import { site } from "@/lib/site";
 import { listPublicReviews } from "@/lib/review-store";
@@ -42,7 +43,7 @@ export default async function Home() {
   const featuredProject = projects.find((project) => project.beforeImage && project.afterImage) || null;
 
   return (
-    <main className="roofingHome roofingHomeV2">
+    <div className="roofingHome roofingHomeV2">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <header className="roofTopbar">
@@ -54,9 +55,11 @@ export default async function Home() {
           <a href="/service-areas/">Service Areas</a>
           <a href="/contact/">Contact</a>
         </nav>
-        <a className="roofTopCall" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
+        <a className="roofTopCall" href={`tel:${site.phone}`}>Call <span className="navCallNumber">{site.phoneDisplay}</span></a>
+        <MobileMenu />
       </header>
 
+      <main id="main-content">
       <section className="roofHeroV2" id="top">
         <div className="roofHeroV2Media" aria-hidden="true"><span className="roofHeroSweep" /></div>
         <div className="roofHeroV2Overlay" />
@@ -182,6 +185,7 @@ export default async function Home() {
         <div><p className="roofMicro">START WITH THE ROOF</p><h2>Repair, replace or inspect?</h2><p>Tell Intex what is happening and where the property is located.</p></div>
         <div className="roofFinalActions"><a className="roofActionPrimary light" href="/estimate/">Request an estimate</a><a className="roofActionGhost" href={`tel:${site.phone}`}>{site.phoneDisplay} ↗</a></div>
       </section>
+      </main>
 
       <footer className="roofFooterV2">
         <div><BrandLogo href="/" label="Intex Chicago home" className="footerBrand" /><p>Roofing + property restoration for Chicago and Chicagoland.</p></div>
@@ -189,6 +193,6 @@ export default async function Home() {
         <div><strong>Intex</strong><a href="/projects/">Projects</a><a href="/service-areas/">Service Areas</a><a href="/contact/">Contact</a><a href="/restoration/">Restoration</a></div>
         <div className="roofFooterContact"><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><a href={`mailto:${site.email}`}>{site.email}</a></div>
       </footer>
-    </main>
+    </div>
   );
 }

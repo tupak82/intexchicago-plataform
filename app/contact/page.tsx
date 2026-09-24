@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Contact Intex Chicago Roofing",
@@ -35,7 +36,7 @@ export default function ContactPage() {
   return (
     <main className="platformPage">
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Contact</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Contact", href: "/contact/" }]} />
         <p className="kicker"><span /> Contact Intex Chicago</p>
         <h1>Start with what you are seeing at the property.</h1>
         <p>A leak, hail marks, missing shingles, an aging roof, flat-roof drainage or a larger restoration issue — choose the contact path that gives you the fastest way to explain the problem clearly.</p>

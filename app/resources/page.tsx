@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { publishedResources } from "@/lib/resources";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Roofing & Restoration Resources",
@@ -12,7 +13,7 @@ export default function ResourcesPage() {
   return (
     <main className="platformPage">
       <section className="platformHero compact">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Resources</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Resources", href: "/resources/" }]} />
         <p className="kicker"><span /> Roofing + restoration guides</p>
         <h1>Know what to look for before the problem gets more expensive.</h1>
         <p>Practical guidance for leaks, hail, roof damage, water intrusion, emergency documentation and the decisions Chicago property owners often need to make quickly.</p>

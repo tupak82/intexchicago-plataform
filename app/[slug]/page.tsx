@@ -4,6 +4,7 @@ import { AnimatedProcessSteps } from "@/components/AnimatedProcessSteps";
 import { RoofingServiceVisual, type ServiceVisualType } from "@/components/RoofingServiceVisual";
 import { site } from "@/lib/site";
 import { serviceBySlug, servicePages } from "@/lib/services";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export function generateStaticParams() { return servicePages.map(({ slug }) => ({ slug })); }
 
@@ -111,7 +112,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <section className="serviceHero">
       <div className="serviceHeroStage">
         <div className="serviceHeroInner">
-          <div className="serviceBreadcrumbs"><a href="/">Home</a> / {service.name}</div>
+          <Breadcrumbs className="serviceBreadcrumbs" items={[{ name: service.name, href: `/${service.slug}/` }]} />
           <p className="kicker"><span /> {service.eyebrow}</p>
           <h1>{service.title}</h1>
           <p className="serviceHeroLead">{service.description}</p>

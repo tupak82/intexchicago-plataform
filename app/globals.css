@@ -31,7 +31,7 @@ button, input, textarea, select { font: inherit; }
 .heroContent { align-self: center; max-width: 800px; position: relative; z-index: 4; }
 .kicker { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: #91a2b5; }
 .kicker span { display: block; width: 28px; height: 2px; background: var(--blue); }
-.kicker.dark { color: #667689; }
+.kicker.dark { color: #56616e; }
 .hero h1 { font: 700 clamp(58px, 7vw, 104px)/.92 "Manrope", sans-serif; letter-spacing: -.065em; max-width: 920px; margin: 30px 0 30px; }
 .hero h1 em { font-style: normal; color: #6f8fb5; }
 .heroLead { color: #a6b5c6; max-width: 650px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.65; }
@@ -131,3 +131,11 @@ footer a:hover { color: white; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Visually hidden text for screen readers (a11y pass). */
+.srOnly { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Breadcrumb trail (components/Breadcrumbs.tsx): keep the original inline look. */
+.breadcrumbNav ol { display: inline; margin: 0; padding: 0; list-style: none; }
+.breadcrumbNav li { display: inline; }
+.breadcrumbNav a { display: inline-block; padding-block: 6px; }

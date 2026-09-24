@@ -380,3 +380,8 @@
   .estimateHero::before,
   .reviewsHero::before { animation: none !important; }
 }
+
+/* No quick-action bar on /estimate and /admin: drop its reserved space. */
+@media (max-width: 760px) {
+  body:not(:has(.mobileActionBar)) { padding-bottom: 0; }
+}

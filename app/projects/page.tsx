@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { listPublicProjects } from "@/lib/project-store";
 import { site } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,7 @@ export default async function ProjectsPage() {
   return (
     <main className="platformPage">
       <section className="platformHero">
-        <div className="platformBreadcrumbs"><a href="/">Home</a> / Projects</div>
+        <Breadcrumbs className="platformBreadcrumbs" items={[{ name: "Projects", href: "/projects/" }]} />
         <p className="kicker"><span /> Documented work</p>
         <h1>See the problem, the work, and the finished result.</h1>
         <p>Project case studies focus on the conditions that mattered: what was damaged, what work was performed, what roofing or restoration system was used, and how the property was left when the job was complete.</p>
