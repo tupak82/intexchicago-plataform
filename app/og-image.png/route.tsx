@@ -42,9 +42,9 @@ export function GET() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2, maxWidth: 980 }}>
-            Roofing, storm damage &amp; property restoration
+            Roofing, storm damage & property restoration
           </div>
-          <div style={{ display: "flex", fontSize: 32, color: "#a9c3dd" }}>Chicago &amp; Chicagoland homes and businesses</div>
+          <div style={{ display: "flex", fontSize: 32, color: "#a9c3dd" }}>Chicago & Chicagoland homes and businesses</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 30 }}>
           <div style={{ display: "flex", color: "#72c7ff", fontWeight: 700 }}>{site.phoneDisplay}</div>
