@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
-
 import { ogImageSize } from "@/lib/seo";
 
 // Default social share image, generated at build time from the existing brand mark and brand
