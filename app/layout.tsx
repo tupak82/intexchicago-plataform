@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { DM_Sans, Manrope } from "next/font/google";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import SiteMotion from "@/components/SiteMotion";
 import SiteChrome, { SiteFooter } from "@/components/SiteChrome";
@@ -34,6 +35,10 @@ import "./estimate/estimate.css";
 import "./homepage-roofing-reset.css";
 import "./homepage-roofing-core.css";
 import "./mobile-menu.css";
+
+// Self-hosted at build time by next/font (no render-blocking request to fonts.googleapis.com).
+const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-dm-sans" });
+const manrope = Manrope({ subsets: ["latin"], weight: ["500", "600", "700", "800"], display: "swap", variable: "--font-manrope" });
 
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
@@ -78,7 +83,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
       <body>
         {googleTagManagerId ? (
           <noscript>
