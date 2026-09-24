@@ -53,6 +53,28 @@ function createInitialLead(initialService?: EstimateServiceOption): LeadDraft {
   };
 }
 
+function buildFallbackMailto(lead: LeadDraft): string {
+  const subject = `Estimate request: ${lead.service || "Roofing / restoration"}${lead.zip.trim() ? ` (${lead.zip.trim()})` : ""}`;
+  const body = [
+    "Hello Intex,",
+    "",
+    "The online estimate form could not send my request, so I am emailing it instead.",
+    "",
+    `Service: ${lead.service}`,
+    `Happening now: ${lead.emergency}`,
+    `Property type: ${lead.propertyType}`,
+    `ZIP code: ${lead.zip.trim()}`,
+    `Name: ${lead.name.trim()}`,
+    `Phone: ${lead.phone.trim()}`,
+    `Email: ${lead.email.trim() || "(not provided)"}`,
+    `Preferred contact: ${lead.preferredContact === "email" ? "Email" : "Phone / text"}`,
+    "",
+    "What happened:",
+    lead.description.trim(),
+  ].join("\n");
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export default function EstimateFlow({ initialService }: { initialService?: EstimateServiceOption }) {
   const [step, setStep] = useState(0);
   const [lead, setLead] = useState<LeadDraft>(() => createInitialLead(initialService));
@@ -84,7 +106,7 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
     setStatus("submitting");
 
     try {
-      const response = await fetch("/api/leads", {
+      const response = await fetch("/api/leads/", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...lead, sourcePage: `${window.location.pathname}${window.location.search}` }),
@@ -205,8 +227,13 @@ export default function EstimateFlow({ initialService }: { initialService?: Esti
             <span>I agree that Intex may contact me about this request using the information I provided. See the <a href="/privacy/" target="_blank" rel="noreferrer">Privacy Policy</a>.</span>
           </label>
           {status === "error" && (
-            <div className="estimateEmergency" role="alert">
-              We could not send this request online. Please call <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> instead.
+            <div className="estimateEmergency estimateFallback" role="alert">
+              <p>We could not send this request online. Your answers are still here &mdash; send them another way:</p>
+              <div className="estimateFallbackActions">
+                <a className="estimatePrimary" href={buildFallbackMailto(lead)}>Email this request</a>
+                <a className="estimateBack" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a>
+              </div>
+              <p className="estimateFallbackNote">The email button opens your mail app with your request pre-filled to {site.email}.</p>
             </div>
           )}
         </fieldset>

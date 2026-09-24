@@ -38,3 +38,9 @@
 .estimateEyebrow { color: var(--blue)!important; text-transform: uppercase; letter-spacing: .12em; font-size: 10px; font-weight: 800; }
 @media (max-width: 880px) { .estimateShell { grid-template-columns: 1fr; gap: 35px; } .estimateIntro { position: static; } }
 @media (max-width: 560px) { .estimateHeader { padding: 18px 20px; } .estimateHeader .brand small { display: none; } .estimateShell { padding: 45px 14px 70px; } .estimateIntro { padding: 0 6px; } .estimateCard { border-radius: 12px; min-height: 560px; } .estimateChoices.twoCol { grid-template-columns: 1fr; } }
+.estimateFallback p { margin: 0; }
+.estimateFallbackActions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 10px; }
+.estimateEmergency .estimateFallbackActions a { text-decoration: none; }
+.estimateFallbackActions .estimateBack { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #d9a88b; color: #7b3b17; background: #fff; }
+.estimateFallbackNote { font-size: 12px; opacity: .85; }
+@media (max-width: 600px) { .estimateFallbackActions a { flex: 1 1 100%; } }
