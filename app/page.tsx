@@ -1,4 +1,5 @@
 import "./roofing-realism.css";
+import "./homepage-v2.css";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ServiceCardAnimation } from "@/components/ServiceCardAnimation";
 import { site } from "@/lib/site";
