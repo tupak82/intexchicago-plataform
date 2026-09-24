@@ -1,4 +1,3 @@
-import "./roofing-realism.css";
 import "./homepage-v2.css";
 import { BrandLogo } from "@/components/BrandLogo";
 import MobileMenu from "@/components/MobileMenu";
@@ -57,7 +56,7 @@ export default async function Home() {
           <a href="/service-areas/">Service Areas</a>
           <a href="/contact/">Contact</a>
         </nav>
-        <a className="roofTopCall" href={`tel:${site.phone}`}>Call <span className="navCallNumber">{site.phoneDisplay}</span></a>
+        <a className="roofTopCall" href={`tel:${site.phone}`}>Call<span className="navCallNumber">&nbsp;{site.phoneDisplay}</span></a>
         <MobileMenu />
       </header>
 

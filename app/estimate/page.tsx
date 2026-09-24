@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import EstimateFlow, { type EstimateServiceOption } from "./EstimateFlow";
 import { site } from "@/lib/site";
 import { BrandLogo } from "@/components/BrandLogo";
+import "./estimate.css";
 
 export const metadata: Metadata = {
   title: "Request Restoration or Roofing Help",

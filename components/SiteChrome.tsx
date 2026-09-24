@@ -24,7 +24,7 @@ export default function SiteChrome() {
         <Link href="/projects/">Projects</Link>
         <Link href="/service-areas/">Service Areas</Link>
         <Link href="/contact/">Contact</Link>
-        <a className="navCall" href={`tel:${site.phone}`}>Call <span className="navCallNumber">{site.phoneDisplay}</span></a>
+        <a className="navCall" href={`tel:${site.phone}`}>Call<span className="navCallNumber">&nbsp;{site.phoneDisplay}</span></a>
       </nav>
       <MobileMenu />
     </header>

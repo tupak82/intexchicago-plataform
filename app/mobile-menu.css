@@ -60,7 +60,6 @@ html.mobileMenuOpen .mobileActionBar { display: none !important; }
   .mobileMenuLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .mobileMenuButton { padding: 0; width: 44px; }
 }
-.navCallNumber { margin-left: .3em; }
 /* Header rules hide `nav a` on small screens; never let them hide the menu panel's links. */
 .mobileMenuPanel nav { display: block !important; margin: 0 !important; }
 .mobileMenuPanel nav a { display: flex !important; }

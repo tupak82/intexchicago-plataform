@@ -43,3 +43,22 @@
   .siteFooterLinks > div { gap: 4px; }
   .siteFooterLinks a, .siteFooterContact a { min-height: 32px; display: inline-flex; align-items: center; }
 }
+
+/* Header/button interaction rules kept from stylesheets un-imported in Phase 2C
+   (cinematic-scroll.css, home-experience-animations.css, premium-interactions.css). */
+.siteHeader a:focus-visible { outline: 2px solid #8fc0ff; outline-offset: 4px; }
+.siteHeader nav a:not(.navCall) { position: relative; }
+.siteHeader nav a:not(.navCall)::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -7px; height: 1px;
+  background: currentColor; opacity: .48; transition: right .28s ease;
+}
+.siteHeader nav a:not(.navCall):hover::after,
+.siteHeader nav a:not(.navCall):focus-visible::after { right: 0; }
+.primaryButton, .secondaryButton, .navCall { transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease, background .22s ease; }
+.primaryButton:hover, .primaryButton:focus-visible,
+.secondaryButton:hover, .secondaryButton:focus-visible,
+.navCall:hover, .navCall:focus-visible { transform: translateY(-2px); }
+.primaryButton:active, .secondaryButton:active, .navCall:active { transform: translateY(0) scale(.985); }
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton, .secondaryButton, .navCall { transition-duration: .001ms !important; }
+}

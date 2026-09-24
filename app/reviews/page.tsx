@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { listPublicReviews } from "@/lib/review-store";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import "./reviews.css";
 
 export const dynamic = "force-dynamic";
 

@@ -6,15 +6,11 @@ import SiteMotion from "@/components/SiteMotion";
 import SiteChrome, { SiteFooter } from "@/components/SiteChrome";
 import MobileActionBar from "@/components/MobileActionBar";
 import { site } from "@/lib/site";
+// Global CSS only. Route-specific CSS lives with its route (estimate, admin, reviews);
+// old-homepage stylesheets that no longer match any rendered markup were un-imported (Phase 2C).
 import "./globals.css";
 import "./brand.css";
-import "./roofing-home.css";
-import "./climate-animations.css";
-import "./process-animations.css";
 import "./process-rail-premium.css";
-import "./home-experience-animations.css";
-import "./premium-interactions.css";
-import "./cinematic-scroll.css";
 import "./service-pages.css";
 import "./platform-pages.css";
 import "./resource-pages.css";
@@ -22,18 +18,8 @@ import "./site-motion.css";
 import "./mobile-premium.css";
 import "./desktop-premium.css";
 import "./related-services-premium.css";
-import "./home-services-editorial.css";
-import "./chicago-climate-editorial.css";
-import "./home-climate-editorial.css";
-import "./field-trust-editorial.css";
-import "./home-process-editorial.css";
 import "./service-visual-layout.css";
 import "./site-chrome.css";
-import "./reviews/reviews.css";
-import "./admin/admin.css";
-import "./estimate/estimate.css";
-import "./homepage-roofing-reset.css";
-import "./homepage-roofing-core.css";
 import "./mobile-menu.css";
 
 // Self-hosted at build time by next/font (no render-blocking request to fonts.googleapis.com).
