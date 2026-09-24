@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { resourceBySlug, publishedResources } from "@/lib/resources";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { defaultOgImages } from "@/lib/seo";
 
 export function generateStaticParams() {
   return publishedResources.map(({ slug }) => ({ slug }));
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: article.description,
     alternates: { canonical: `/resources/${article.slug}/` },
     openGraph: {
+      images: defaultOgImages,
       title: article.title,
       description: article.description,
       type: "article",

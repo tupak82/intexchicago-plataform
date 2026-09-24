@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { pageTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "About Intex Chicago Roofing",
+  title: pageTitle("About Intex Chicago Roofing"),
   description: "Learn how Intex Chicago approaches roofing, storm damage and property restoration for homes and businesses across Chicagoland.",
   alternates: { canonical: "/about/" },
 };

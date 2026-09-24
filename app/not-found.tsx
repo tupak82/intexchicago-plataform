@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import { site } from "@/lib/site";
+
+// 404s get their own title and a single robots directive (previously the homepage title plus
+// both "noindex" and the inherited "index, follow" were emitted).
+export const metadata: Metadata = {
+  title: "Page not found",
+  robots: null, // Next.js already emits <meta name="robots" content="noindex"> for 404s; drop the inherited "index, follow"
+};
 
 export default function NotFound() {
   return (

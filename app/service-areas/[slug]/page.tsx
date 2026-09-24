@@ -5,6 +5,7 @@ import { serviceBySlug } from "@/lib/services";
 import { localRoofingPages, localRoofingPath, type LocalRoofingServiceSlug } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { pageTitle, defaultOgImages } from "@/lib/seo";
 
 const roofingSlugs = [
   "roof-repair-chicago",
@@ -40,11 +41,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!area) return {};
   const canonical = `/service-areas/${area.slug}/`;
   return {
-    title: area.title,
+    title: pageTitle(area.title),
     description: area.description,
     alternates: { canonical },
     robots: { index: area.indexable, follow: true },
-    openGraph: { title: area.title, description: area.description, url: canonical, type: "website" },
+    openGraph: { images: defaultOgImages, title: area.title, description: area.description, url: canonical, type: "website" },
   };
 }
 

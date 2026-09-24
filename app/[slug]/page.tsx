@@ -5,6 +5,7 @@ import { RoofingServiceVisual, type ServiceVisualType } from "@/components/Roofi
 import { site } from "@/lib/site";
 import { serviceBySlug, servicePages } from "@/lib/services";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { defaultOgImages } from "@/lib/seo";
 
 export function generateStaticParams() { return servicePages.map(({ slug }) => ({ slug })); }
 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = serviceBySlug[slug];
   if (!service) return {};
   const canonical = `/${service.slug}/`;
-  return { title: service.title, description: service.description, alternates: { canonical }, openGraph: { title: service.title, description: service.description, url: canonical, type: "website" } };
+  return { title: service.title, description: service.description, alternates: { canonical }, openGraph: { images: defaultOgImages, title: service.title, description: service.description, url: canonical, type: "website" } };
 }
 
 function visualTypeForSlug(slug: string): ServiceVisualType {

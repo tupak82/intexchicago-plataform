@@ -21,6 +21,7 @@ import "./related-services-premium.css";
 import "./service-visual-layout.css";
 import "./site-chrome.css";
 import "./mobile-menu.css";
+import { defaultOgImages } from "@/lib/seo";
 
 // Self-hosted at build time by next/font (no render-blocking request to fonts.googleapis.com).
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-dm-sans" });
@@ -58,6 +59,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   openGraph: {
+    images: defaultOgImages,
     type: "website",
     locale: "en_US",
     url: site.url,
@@ -65,6 +67,7 @@ export const metadata: Metadata = {
     title: "Chicago Roofing Contractor | Intex Chicago Roofing",
     description: site.description,
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

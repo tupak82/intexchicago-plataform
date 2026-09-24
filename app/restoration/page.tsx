@@ -3,12 +3,14 @@ import Link from "next/link";
 import { RoofingServiceVisual, type ServiceVisualType } from "@/components/RoofingServiceVisual";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { defaultOgImages } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Property Restoration Services in Chicago",
   description: "Water, fire, mold, storm, trauma and commercial property restoration services for Chicago and Chicagoland properties.",
   alternates: { canonical: "/restoration/" },
   openGraph: {
+    images: defaultOgImages,
     title: "Property Restoration Services in Chicago",
     description: "Water, fire, mold, storm, trauma and commercial property restoration services for Chicago and Chicagoland properties.",
     url: "/restoration/",

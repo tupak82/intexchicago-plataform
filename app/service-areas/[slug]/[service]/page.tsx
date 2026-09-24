@@ -4,6 +4,7 @@ import { AnimatedProcessSteps } from "@/components/AnimatedProcessSteps";
 import { isLocalRoofingPage, localRoofingCopy, localRoofingPages } from "@/lib/local-roofing";
 import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { defaultOgImages } from "@/lib/seo";
 
 export function generateStaticParams() {
   return localRoofingPages.map((page) => ({ slug: page.areaSlug, service: page.servicePathSlug }));
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description,
     alternates: { canonical },
     robots: { index: true, follow: true },
-    openGraph: { title, description, url: canonical, type: "website" },
+    openGraph: { images: defaultOgImages, title, description, url: canonical, type: "website" },
   };
 }
 

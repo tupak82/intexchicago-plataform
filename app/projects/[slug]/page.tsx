@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import BeforeAfter from "../BeforeAfter";
 import { getPublicProjectBySlug } from "@/lib/project-store";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { defaultOgImages } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: project.summary,
     alternates: { canonical: `/projects/${project.slug}/` },
     openGraph: {
+      images: defaultOgImages,
       title: project.title,
       description: project.summary,
       url: `/projects/${project.slug}/`,
