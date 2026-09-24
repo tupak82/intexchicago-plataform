@@ -11,6 +11,8 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: true,
+  // Cap CDN stale-while-revalidate for ISR pages (default is ~1 year).
+  expireTime: 86400,
   compress: true,
   async redirects() {
     return [

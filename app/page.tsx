@@ -35,7 +35,9 @@ const localBusinessSchema = {
   description: site.description,
 };
 
-export const dynamic = "force-dynamic";
+// ISR instead of force-dynamic: serve a cached page and refresh verified reviews/projects
+// from the database at most every 5 minutes (lists fall back to static data if the DB is unavailable).
+export const revalidate = 300;
 
 export default async function Home() {
   const [reviews, projects] = await Promise.all([listPublicReviews(), listPublicProjects()]);
