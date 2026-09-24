@@ -15,6 +15,10 @@
   overflow: visible;
 }
 
+/* Keep the rail a single column at every width: the generic .processGrid breakpoints in
+   service-pages.css (2 columns on tablet) otherwise squeeze each step into a narrow cell. */
+.processGrid.processRailPremium { grid-template-columns: 1fr; }
+
 .processRailTrack {
   position: absolute;
   left: 37px;
