@@ -10,6 +10,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  trailingSlash: true,
   compress: true,
   async redirects() {
     return [
